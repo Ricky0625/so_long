@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 14:57:44 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/09/06 16:44:31 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/09/07 14:22:24 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ t_game	*game_init(int ac, char **av)
 		ft_putstr_fd(RED"[ERROR]: Invalid Usage!\n"DEF, 2);
 		exit(EXIT_FAILURE);
 	}
-	game = malloc(sizeof(t_game)); // TODO need to free this!
+	game = malloc(sizeof(t_game));
 	init_metadata(game);
 	file = av[ac - 1];
 	map_validator(game, file);

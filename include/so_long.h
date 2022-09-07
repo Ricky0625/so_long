@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 15:32:55 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/09/06 21:06:32 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/09/07 14:34:42 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,9 @@ typedef struct s_window {
  * size	: width & height of the map
 **/
 typedef struct s_map {
+	char		*raw;
 	char		**map;
+	char		*file;
 	t_vector	size;
 }	t_map;
 
@@ -82,10 +84,10 @@ t_game	*game_init(int ac, char **av);
 
 // Map Validator
 void	map_validator(t_game *game, char *file);
-void	check_map_format(t_game *game, char **map);
+void	check_map_format(t_game *game);
 
 // Map utils
-void	is_rectangular(char **map, int width);
+void	is_rectangular(t_game *game);
 void	get_entity(t_game *game, char ch);
 void	find_entity(t_vector *loc, char **map, char enty);
 char	**copy_map(t_game *game, char **map);
@@ -93,5 +95,9 @@ char	**copy_map(t_game *game, char **map);
 // Pathfinder
 void	show_path(char **map); // for testing purpose
 void	fill_map(t_vector *start, char **map);
+
+// free
+void	free_map(char **map);
+void	free_game(t_game *game);
 
 #endif

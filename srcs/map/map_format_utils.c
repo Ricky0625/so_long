@@ -6,22 +6,27 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 14:56:13 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/09/06 21:17:52 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/09/07 14:38:40 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/so_long.h"
 
-void	is_rectangular(char **map, int width)
+void	is_rectangular(t_game *game)
 {
-	int	len;
+	int		len;
+	int		width;
+	char	**map;
 
+	width = game->map_data.size.x;
+	map = game->map_data.map;
 	while (*map != NULL)
 	{
 		len = ft_strlen(*(map++));
 		if (len != width)
 		{
 			ft_putstr_fd(RED"[ERROR]: Map not rectangular!\n"DEF, 2);
+			free_game(game);
 			exit(2);
 		}
 	}
@@ -42,6 +47,7 @@ void	get_entity(t_game *game, char ch)
 	else
 	{
 		ft_putstr_fd(RED"[ERROR]: Invalid character found!\n"DEF, 2);
+		free_game(game);
 		exit(2);
 	}
 }
@@ -74,12 +80,10 @@ void	find_entity(t_vector *loc, char **map, char enty)
 char	**copy_map(t_game *game, char **map)
 {
 	int		i;
-	int		width;
 	int		height;
 	char	**copy;
 
 	i = 0;
-	width = game->map_data.size.x;
 	height = game->map_data.size.y;
 	copy = malloc(sizeof(char *) * (height + 1));
 	if (copy == NULL)

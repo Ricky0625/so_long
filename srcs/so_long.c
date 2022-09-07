@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.c                                             :+:      :+:    :+:   */
+/*   so_long.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 15:21:27 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/09/06 16:59:31 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/09/07 13:06:42 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,14 @@
  * 
  * Have a function that's dedicated to print error message and quit
  * ./so_long --help to show manual
+ * Have a function to free the game upon exit
 **/
 int	main(int ac, char **av)
 {
-	game_init(ac, av);
+	t_game	*game;
+
+	game = game_init(ac, av);
+	free_map(game->map_data.map);
+	free(game);
 	return (0);
 }

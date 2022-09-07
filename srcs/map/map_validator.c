@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 14:05:05 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/09/06 15:33:05 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/09/07 14:36:13 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,16 +28,19 @@
  * 	  meaning it's not a valid file extension.
  * 4. When it's not a valid file extension, output error msg and exit.
 **/
-static void	check_map_name(char *file)
+static void	check_map_name(t_game *game)
 {
+	char	*file;
 	char	*fe;
 	size_t	cmp_len;
 
+	file = game->map_data.file;
 	fe = ft_strrchr(file, '.');
 	cmp_len = ft_strlen(FILE_EXT);
 	if (ft_strlen(fe) > cmp_len || ft_strncmp(fe, FILE_EXT, cmp_len) != 0)
 	{
 		ft_putstr_fd(RED"[ERROR]: File extension not supported!\n"DEF, 2);
+		free(game);
 		exit(2);
 	}
 }
@@ -95,6 +98,7 @@ static void	get_map_size(t_game *game, char *raw)
 	if (raw == NULL)
 	{
 		ft_putstr_fd(RED"[ERROR]: Empty map!\n", 2);
+		free(game->map_data.raw);
 		exit(EXIT_FAILURE);
 	}
 	while (*raw != '\n' && *raw != '\0')
@@ -131,18 +135,21 @@ void	map_validator(t_game *game, char *file)
 	char	*raw;
 	char	**map;
 
-	check_map_name(file);
+	game->map_data.file = file;
+	check_map_name(game);
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
 	{
 		ft_putstr_fd(RED"[ERROR]: File does not exist!\n"DEF, 2);
+		free(game);
 		exit(2);
 	}
 	raw = get_raw_map(fd);
+	game->map_data.raw = raw;
 	get_map_size(game, raw);
 	map = ft_split(raw, '\n');
-	check_map_format(game, map);
+	game->map_data.map = map;
+	check_map_format(game);
 	close(fd);
-	printf("width: %d, height: %d\n",
-		game->map_data.size.x, game->map_data.size.y);
+	free(raw);
 }

@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 14:28:25 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/09/06 21:28:30 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/09/07 14:40:00 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ void	check_extra_newline(t_game *game, char **map)
 		if (map[i] == NULL && i < height)
 		{
 			ft_putstr_fd(RED"[ERROR]: Invalid map!\n"DEF, 2);
+			free_game(game);
 			exit(2);
 		}
 		i++;
@@ -61,7 +62,7 @@ void	check_wall(t_game *game, char **map)
 
 	width = game->map_data.size.x;
 	height = game->map_data.size.y;
-	is_rectangular(map, width);
+	is_rectangular(game);
 	x = -1;
 	while (++x < height)
 	{
@@ -73,6 +74,7 @@ void	check_wall(t_game *game, char **map)
 				if (map[x][y] != '1')
 				{
 					ft_putstr_fd(RED"[ERROR]: Invalid wall format!\n"DEF, 2);
+					free_game(game);
 					exit(2);
 				}
 			}
@@ -101,6 +103,7 @@ void	check_essential(t_game *game, char **map)
 	{
 		ft_putstr_fd(RED"[ERROR]: Invalid map format!\n"DEF, 2);
 		ft_putstr_fd(YL"Require 1 (P)layer, 1 (E)xit, 1 (C)ollectible\n"DEF, 2);
+		free_game(game);
 		exit(2);
 	}
 }
@@ -119,25 +122,28 @@ void	check_valid_path(t_game *game, char **map)
 	t_vector	plyr;
 	char		*line;
 	char		**fill;
+	char		**temp;
 
 	find_entity(&plyr, map, 'P');
 	fill = copy_map(game, map);
 	fill_map(&plyr, fill);
+	temp = fill;
 	while (*fill != NULL)
 	{
-		line = *fill;
+		line = *(fill++);
 		while (*line != '\0')
 		{
 			if (*line == 'C' || *line == 'E')
 			{
-				// need to free fill & map
 				ft_putstr_fd(RED"[Error]: Map not playable!\n"DEF, 2);
+				free_game(game);
+				free(temp);
 				exit(2);
 			}
 			line++;
 		}
-		fill++;
 	}
+	free(temp);
 }
 
 /**
@@ -147,9 +153,15 @@ void	check_valid_path(t_game *game, char **map)
  * 2. Check if the wall is rectangular and only consists of '1'
  * 3. Check all the essential item is in the map
  * 4. Check if there is a valid path
+ * 5. If every test above does not have any error, then map will be
+ *    assigned to map_data.map. Which means this is a playable and
+ * 	  valid map.
 **/
-void	check_map_format(t_game *game, char **map)
+void	check_map_format(t_game *game)
 {
+	char	**map;
+
+	map = game->map_data.map;
 	check_extra_newline(game, map);
 	check_wall(game, map);
 	check_essential(game, map);
