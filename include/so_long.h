@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 15:32:55 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/09/07 14:34:42 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/09/07 14:52:28 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,6 @@ void	find_entity(t_vector *loc, char **map, char enty);
 char	**copy_map(t_game *game, char **map);
 
 // Pathfinder
-void	show_path(char **map); // for testing purpose
 void	fill_map(t_vector *start, char **map);
 
 // free

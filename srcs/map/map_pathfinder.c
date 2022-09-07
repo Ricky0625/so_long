@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 18:42:01 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/09/06 20:38:57 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/09/07 15:00:16 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 /**
  * Pathfinder visualizer
 **/
-void	show_path(char **map)
+static void	show_path(char **map)
 {
 	char	*line;
 
@@ -24,10 +24,14 @@ void	show_path(char **map)
 		line = *map;
 		while (*line != '\0')
 		{
-			if (*line != '0' && *line != 'F')
+			if (*line != '0' && *line != 'F' && *line != 'C' && *line != 'E')
 				ft_putchar_fd(*line, 1);
+			else if (*line == 'C')
+				ft_putstr_fd(YL"C"DEF, 1);
+			else if (*line == 'E')
+				ft_putstr_fd(RED"E"DEF, 1);
 			else if (*line == 'F')
-				ft_putstr_fd(GN"F"DEF, 1);
+				ft_putstr_fd(GN"▉"DEF, 1);
 			else
 				ft_putchar_fd(' ', 1);
 			line++;
@@ -44,7 +48,7 @@ void	show_path(char **map)
  * 
  * The base case is met if it encounters a wall or a filled space.
 **/
-void	flood_fill(char **map, int x, int y)
+static void	flood_fill(char **map, int x, int y)
 {
 	if (map[x][y] == '1' || map[x][y] == 'F')
 		return ;
@@ -55,15 +59,23 @@ void	flood_fill(char **map, int x, int y)
 	flood_fill(map, x, y - 1);
 }
 
+// int	count_collectibles(t_game *game)
+// {
+// 	char	**map;
+
+// 	while ()
+// }
+
 /**
  * Check if the surrounding is not '1' && 'P'
 **/
-void	fill_map(t_vector *start, char **map)
+void	fill_map(t_vector *start, char **fill)
 {
 	int	x;
 	int	y;
 
 	x = start->x;
 	y = start->y;
-	flood_fill(map, x, y);
+	flood_fill(fill, x, y);
+	show_path(fill);
 }
