@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 15:32:55 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/09/07 14:52:28 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/09/07 16:40:04 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,15 @@ typedef struct s_map {
 	t_vector	size;
 }	t_map;
 
+/**
+ * Metadata of the entity
+ * 
+ * Store the number of:
+ * 1. player
+ * 2. collectibles
+ * 3. exit
+ * 4. enemy
+**/
 typedef struct s_entity {
 	int	plyr;
 	int	coll;
