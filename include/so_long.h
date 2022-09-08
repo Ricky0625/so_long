@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 15:32:55 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/09/07 16:40:04 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/09/08 15:02:52 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@
 
 // Macros
 # define FILE_EXT ".ber"
+# define SPT_SIZE 64
+# define GNAME "so_long: "
 
 /**
  * Vector
@@ -83,13 +85,14 @@ typedef struct s_entity {
 **/
 typedef struct s_game {
 	void		*ref;
-	t_window	*window;
+	t_window	window;
 	t_map		map_data;
 	t_entity	enty;
 }	t_game;
 
-// Game init
+// Init
 t_game	*game_init(int ac, char **av);
+void	window_init(t_game *game);
 
 // Map Validator
 void	map_validator(t_game *game, char *file);
@@ -100,9 +103,11 @@ void	is_rectangular(t_game *game);
 void	get_entity(t_game *game, char ch);
 void	find_entity(t_vector *loc, char **map, char enty);
 char	**copy_map(t_game *game, char **map);
+char	**add_aesthetic(t_game *game);
 
 // Pathfinder
 void	fill_map(t_vector *start, char **map);
+void	show_path(char **map);
 
 // free
 void	free_map(char **map);

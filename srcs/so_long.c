@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 15:21:27 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/09/07 13:06:42 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/09/08 14:13:37 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,16 @@
  * TODO
  * 
  * Game Init
- * 1. Map parsing
- * 	  - check format
- * 		- check file name first
- *      - get raw map (unproccessed, a string)
- *    - get width, height
- * 	  - check map (Is it better to check using 2D array or a string)
- * 		- wall (Is it a rectangular shape)
- * 		- essential (1 Exit, 1 Collectible, 1 starting Position)
- * 		- Is there a valid path?
- *    - If all checking are fine, set game map
+ * 1. Map parsing														[V]
+ * 	  - check format													[V]
+ * 		- check file name first											[V]
+ *      - get raw map (unproccessed, a string)							[V]
+ *    - get width, height												[V]
+ * 	  - check map (Is it better to check using 2D array or a string)	[V]
+ * 		- wall (Is it a rectangular shape)								[V]
+ * 		- essential (1 Exit, 1 Collectible, 1 starting Position)		[V]
+ * 		- Is there a valid path?										[V]
+ *    - If all checking are fine, set game map							[V]
  * 2. Create a window
  * 	  - Create a window based on the width and height
  * 3. Put image
@@ -40,7 +40,7 @@ int	main(int ac, char **av)
 	t_game	*game;
 
 	game = game_init(ac, av);
-	free_map(game->map_data.map);
-	free(game);
+	window_init(game);
+	mlx_loop(game->ref);
 	return (0);
 }
