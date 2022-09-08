@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 14:57:44 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/09/07 14:22:24 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/09/08 12:13:39 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ t_game	*game_init(int ac, char **av)
 		exit(EXIT_FAILURE);
 	}
 	game = malloc(sizeof(t_game));
+	game->ref = mlx_init();
 	init_metadata(game);
 	file = av[ac - 1];
 	map_validator(game, file);
