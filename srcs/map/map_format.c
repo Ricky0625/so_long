@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 14:28:25 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/09/07 14:40:00 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/09/08 14:12:41 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,14 @@ void	check_wall(t_game *game, char **map)
 	}
 }
 
+/**
+ * Check if all the essential entity exists.
+ * 
+ * Essential entity:
+ * 1. At least one (C)ollectible
+ * 2. Only one (P)layer
+ * 3. Only one (E)xit
+**/
 void	check_essential(t_game *game, char **map)
 {
 	int	x;
@@ -98,8 +106,7 @@ void	check_essential(t_game *game, char **map)
 		while (++y < width - 1)
 			get_entity(game, map[x][y]);
 	}
-	if (game->enty.coll == 0 || game->enty.exit == 0 || game->enty.plyr == 0
-		|| game->enty.exit > 1 || game->enty.plyr > 1)
+	if (game->enty.coll == 0 || game->enty.exit != 1 || game->enty.plyr != 1)
 	{
 		ft_putstr_fd(RED"[ERROR]: Invalid map format!\n"DEF, 2);
 		ft_putstr_fd(YL"Require 1 (P)layer, 1 (E)xit, 1 (C)ollectible\n"DEF, 2);
@@ -137,13 +144,13 @@ void	check_valid_path(t_game *game, char **map)
 			{
 				ft_putstr_fd(RED"[Error]: Map not playable!\n"DEF, 2);
 				free_game(game);
-				free(temp);
+				free_map(temp);
 				exit(2);
 			}
 			line++;
 		}
 	}
-	free(temp);
+	free_map(temp);
 }
 
 /**

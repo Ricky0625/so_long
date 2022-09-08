@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 18:42:01 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/09/07 15:00:16 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/09/08 14:14:23 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,13 +58,6 @@ static void	flood_fill(char **map, int x, int y)
 	flood_fill(map, x, y + 1);
 	flood_fill(map, x, y - 1);
 }
-
-// int	count_collectibles(t_game *game)
-// {
-// 	char	**map;
-
-// 	while ()
-// }
 
 /**
  * Check if the surrounding is not '1' && 'P'
