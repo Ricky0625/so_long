@@ -6,12 +6,23 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 14:56:13 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/09/07 14:38:40 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/09/08 14:21:27 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/so_long.h"
 
+/**
+ * Check if the map is rectangular or not
+ * 
+ * len	: the length of the line that being inspected right now
+ * width: width of the map
+ * map	: the map
+ * 
+ * Iterate through the map, line by line. While iterating, get the length
+ * of that line. Check if the length is equal to the expected width. If
+ * not exit program.
+**/
 void	is_rectangular(t_game *game)
 {
 	int		len;
@@ -32,6 +43,18 @@ void	is_rectangular(t_game *game)
 	}
 }
 
+/**
+ * Count how many entity are there in the map
+ * 
+ * E	: Exit
+ * C	: Collectibles
+ * P	: Player
+ * M	: Monster
+ * 0	: Empty space
+ * 1	: Block
+ * 
+ * If detected any unrecognized character, exit program.
+**/
 void	get_entity(t_game *game, char ch)
 {
 	if (ch == 'E')
@@ -52,6 +75,15 @@ void	get_entity(t_game *game, char ch)
 	}
 }
 
+/**
+ * Locate where is the entity.
+ * 
+ * Iterate through the map, if the current character is the entity we are
+ * searching for, set location (x & y).
+ * 
+ * This function will always return the location of the last occurrence
+ * of the entity.
+**/
 void	find_entity(t_vector *loc, char **map, char enty)
 {
 	int		x;
@@ -77,6 +109,9 @@ void	find_entity(t_vector *loc, char **map, char enty)
 	}
 }
 
+/**
+ * Copy map. Duh.
+**/
 char	**copy_map(t_game *game, char **map)
 {
 	int		i;
