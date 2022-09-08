@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 15:32:55 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/09/08 15:02:52 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/09/08 15:50:21 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,25 @@
 # define FILE_EXT ".ber"
 # define SPT_SIZE 64
 # define GNAME "so_long: "
+
+// Sprite
+# define P "../assets/xpm/player.xpm"
+# define M "../assets/xpm/enemy.xpm"
+# define G "../assets/xpm/ghost.xpm"
+# define F "../assets/xpm/floor.xpm"
+# define V "../assets/xpm/wall_v.xpm"
+# define C "../assets/xpm/key.xpm"
+# define B "../assets/xpm/block.xpm"
+# define EO "../assets/xpm/exit.xpm"
+# define EC "../assets/xpm/exit_close.xpm"
+# define WU "../assets/xpm/wall_u.xpm"
+# define WD "../assets/xpm/wall_d.xpm"
+# define WL "../assets/xpm/wall_l.xpm"
+# define WR "../assets/xpm/wall_r.xpm"
+# define WUL "../assets/xpm/wall_ul.xpm"
+# define WUR "../assets/xpm/wall_ur.xpm"
+# define WDL "../assets/xpm/wall_dl.xpm"
+# define WDR "../assets/xpm/wall_dr.xpm"
 
 /**
  * Vector
