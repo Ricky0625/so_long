@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 18:42:01 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/09/08 14:14:23 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/09/08 14:59:23 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 /**
  * Pathfinder visualizer
 **/
-static void	show_path(char **map)
+void	show_path(char **map)
 {
 	char	*line;
 
@@ -70,5 +70,4 @@ void	fill_map(t_vector *start, char **fill)
 	x = start->x;
 	y = start->y;
 	flood_fill(fill, x, y);
-	show_path(fill);
 }

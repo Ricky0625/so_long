@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 14:05:05 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/09/07 14:36:13 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/09/08 15:28:43 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,6 +150,8 @@ void	map_validator(t_game *game, char *file)
 	map = ft_split(raw, '\n');
 	game->map_data.map = map;
 	check_map_format(game);
+	add_aesthetic(game);
+	show_path(game->map_data.map);
 	close(fd);
 	free(raw);
 }
