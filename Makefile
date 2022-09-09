@@ -6,7 +6,7 @@
 #    By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/02 10:46:26 by wricky-t          #+#    #+#              #
-#    Updated: 2022/09/08 14:45:33 by wricky-t         ###   ########.fr        #
+#    Updated: 2022/09/09 12:29:13 by wricky-t         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +29,8 @@ SRCS	:= so_long.c \
 		   map/map_format_utils.c \
 		   map/map_pathfinder.c \
 		   map/map_aesthetic.c \
+		   image/place_map.c \
+		   image/place_wall.c \
 		   free/free.c
 SRCS	:= $(SRCS:%=$(SRC_DIR)/%)
 OBJS	:= $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)

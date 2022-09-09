@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 15:21:27 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/09/08 14:13:37 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/09/09 12:40:12 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ int	main(int ac, char **av)
 
 	game = game_init(ac, av);
 	window_init(game);
+	place_map(game);
 	mlx_loop(game->ref);
 	return (0);
 }

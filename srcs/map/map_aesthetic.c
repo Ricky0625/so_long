@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 14:44:03 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/09/08 15:34:59 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/09/08 20:22:49 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,5 @@ char	**add_aesthetic(t_game *game)
 	new[i] = NULL;
 	game->map_data.map = new;
 	game->map_data.size.y += 1;
-	free(v_wall);
 	return (new);
 }

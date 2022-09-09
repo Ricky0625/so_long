@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 15:32:55 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/09/08 15:50:21 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/09/09 12:39:05 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,23 +30,23 @@
 # define GNAME "so_long: "
 
 // Sprite
-# define P "../assets/xpm/player.xpm"
-# define M "../assets/xpm/enemy.xpm"
-# define G "../assets/xpm/ghost.xpm"
-# define F "../assets/xpm/floor.xpm"
-# define V "../assets/xpm/wall_v.xpm"
-# define C "../assets/xpm/key.xpm"
-# define B "../assets/xpm/block.xpm"
-# define EO "../assets/xpm/exit.xpm"
-# define EC "../assets/xpm/exit_close.xpm"
-# define WU "../assets/xpm/wall_u.xpm"
-# define WD "../assets/xpm/wall_d.xpm"
-# define WL "../assets/xpm/wall_l.xpm"
-# define WR "../assets/xpm/wall_r.xpm"
-# define WUL "../assets/xpm/wall_ul.xpm"
-# define WUR "../assets/xpm/wall_ur.xpm"
-# define WDL "../assets/xpm/wall_dl.xpm"
-# define WDR "../assets/xpm/wall_dr.xpm"
+# define P "assets/xpm/player.xpm"
+# define M "assets/xpm/enemy.xpm"
+# define G "assets/xpm/ghost.xpm"
+# define F "assets/xpm/floor.xpm"
+# define C "assets/xpm/key.xpm"
+# define B "assets/xpm/block.xpm"
+# define EO "assets/xpm/exit.xpm"
+# define EC "assets/xpm/exit_close.xpm"
+# define WU "assets/xpm/wall_u.xpm"
+# define WD "assets/xpm/wall_d.xpm"
+# define WL "assets/xpm/wall_l.xpm"
+# define WR "assets/xpm/wall_r.xpm"
+# define WV "assets/xpm/wall_v.xpm"
+# define WUL "assets/xpm/wall_ul.xpm"
+# define WUR "assets/xpm/wall_ur.xpm"
+# define WDL "assets/xpm/wall_dl.xpm"
+# define WDR "assets/xpm/wall_dr.xpm"
 
 /**
  * Vector
@@ -97,6 +97,15 @@ typedef struct s_entity {
 	int	enem;
 }	t_entity;
 
+typedef struct s_image {
+	void		*ref;
+	t_vector	size;
+	char		*pixels;
+	int			bits_per_pixel;
+	int			line_size;
+	int			endian;
+}	t_image;
+
 /**
  * Game - To store all the info I need
  * ref		: mlx instance pointer
@@ -112,6 +121,8 @@ typedef struct s_game {
 // Init
 t_game	*game_init(int ac, char **av);
 void	window_init(t_game *game);
+void	init_vector(t_vector *vector);
+void	image_init(t_image *image);
 
 // Map Validator
 void	map_validator(t_game *game, char *file);
@@ -127,6 +138,12 @@ char	**add_aesthetic(t_game *game);
 // Pathfinder
 void	fill_map(t_vector *start, char **map);
 void	show_path(char **map);
+
+// image
+void	place_sprite(t_game *game, char *sprite, int x, int y);
+void	mapiteri(t_game *game, void (*f)(t_game *, int, int));
+void	place_wall_sprite(t_game *game, int x, int y);
+void    place_map(t_game *game);
 
 // free
 void	free_map(char **map);

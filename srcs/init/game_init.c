@@ -6,11 +6,33 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 14:57:44 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/09/08 12:13:39 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/09/09 12:28:38 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/so_long.h"
+
+/**
+ * Initialize vector
+**/
+void	init_vector(t_vector *vector)
+{
+	vector->x = 0;
+	vector->y = 0;
+}
+
+/**
+ * Initialize the metadata of image
+**/
+void	image_init(t_image *image)
+{
+	image->bits_per_pixel = 0;
+	image->endian = 0;
+	image->line_size = 0;
+	image->pixels = 0;
+	image->size.x = 0;
+	image->size.y = 0;
+}
 
 /**
  * Initialize all the metadata
