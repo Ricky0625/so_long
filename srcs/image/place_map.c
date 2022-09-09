@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 17:07:36 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/09/09 12:45:54 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/09/09 13:03:26 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,4 +68,5 @@ void	mapiteri(t_game *game, void (*f)(t_game *, int, int))
 void	place_map(t_game *game)
 {
 	mapiteri(game, place_wall_sprite);
+	mapiteri(game, place_entity_sprite);
 }

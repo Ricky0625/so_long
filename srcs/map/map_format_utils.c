@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 14:56:13 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/09/08 14:43:46 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/09/09 13:13:39 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,8 @@ void	get_entity(t_game *game, char ch)
 		game->enty.plyr += 1;
 	else if (ch == 'M')
 		game->enty.enem += 1;
+	else if (ch == 'G')
+		game->enty.ghost += 1;
 	else if (ch == '0' || ch == '1')
 		return ;
 	else

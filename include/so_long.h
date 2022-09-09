@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 15:32:55 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/09/09 12:39:05 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/09/09 13:39:58 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ typedef struct s_entity {
 	int	coll;
 	int	exit;
 	int	enem;
+	int	ghost;
 }	t_entity;
 
 typedef struct s_image {
@@ -143,6 +144,7 @@ void	show_path(char **map);
 void	place_sprite(t_game *game, char *sprite, int x, int y);
 void	mapiteri(t_game *game, void (*f)(t_game *, int, int));
 void	place_wall_sprite(t_game *game, int x, int y);
+void	place_entity_sprite(t_game *game, int x, int y);
 void    place_map(t_game *game);
 
 // free
