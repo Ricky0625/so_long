@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 15:21:27 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/09/09 12:40:12 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/09/09 14:47:58 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,24 @@
  * 		- essential (1 Exit, 1 Collectible, 1 starting Position)		[V]
  * 		- Is there a valid path?										[V]
  *    - If all checking are fine, set game map							[V]
- * 2. Create a window
- * 	  - Create a window based on the width and height
- * 3. Put image
- *    - put dummy image first
+ * 2. Create a window													[V]
+ * 	  - Create a window based on the width and height					[V]
+ * 3. Put image (all the items)											[V]
+ * 4. Mechanism
+ * 	  - Player can walk
+ * 	  - Player cannot pass through wall
+ * 	  - Player can collect keys
+ * 	  - When player touches skely, player died. game ends
+ * 	  - When player collect all keys, exit door open
+ * 	  EXTRA:
+ * 	  - When player is beside (UDLR) ghost, ghost remind player
+ * 		to press spacebar
+ *    - When pressed spacebar, spawn another window?
+ * 	  	- When this thing appears, player can type in numbers
+ * 			- need to listen to the event
+ * 		- Press enter to submit answer
+ *    - If player manage to answer it, kill all skely.
+ * 	  - If player cannot answer it, ghost dissappear.
  * 
  * Have a function that's dedicated to print error message and quit
  * ./so_long --help to show manual

@@ -6,7 +6,7 @@
 #    By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/02 10:46:26 by wricky-t          #+#    #+#              #
-#    Updated: 2022/09/09 13:03:57 by wricky-t         ###   ########.fr        #
+#    Updated: 2022/09/09 15:14:23 by wricky-t         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ NAME	:= so_long
 #   INGREDIENTS                                                                #
 #------------------------------------------------------------------------------#
 CC		:= gcc
-CFLAGS	:= -Wall -Wextra -Werror
+CFLAGS	:= -Wall -Wextra -Werror -g3
 MLXFLAGS:= -lmlx -framework OpenGL -framework AppKit
 
 SRC_DIR	:= srcs
