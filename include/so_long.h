@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 15:32:55 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/09/10 16:10:22 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/09/13 16:12:19 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,7 +141,6 @@ void	fill_map(t_vector *start, char **map);
 void	show_path(char **map);
 
 // image
-void	place_sprite(t_game *game, char *sprite, int x, int y);
 void	mapiteri(t_game *game, void (*f)(t_game *, int, int));
 void	place_wall_sprite(t_game *game, int x, int y);
 void	place_entity_sprite(t_game *game, int x, int y);

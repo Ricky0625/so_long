@@ -1,16 +1,81 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   place_wall.c                                       :+:      :+:    :+:   */
+/*   place_entity.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/08 20:26:00 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/09/09 12:49:38 by wricky-t         ###   ########.fr       */
+/*   Created: 2022/09/09 12:53:07 by wricky-t          #+#    #+#             */
+/*   Updated: 2022/09/13 16:13:50 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/so_long.h"
+
+/**
+ * Place sprite onto the window
+**/
+static void	place_sprite(t_game *game, char *sprite, int x, int y)
+{
+	t_image		img;
+	t_vector	loc;
+
+	image_init(&img);
+	init_vector(&loc);
+	loc.x = y * 64;
+	loc.y = x * 64;
+	img.ref = mlx_xpm_file_to_image(game->ref, sprite,
+			&img.size.x, &img.size.y);
+	img.pixels = mlx_get_data_addr(img.ref, &img.bits_per_pixel,
+			&img.line_size, &img.endian);
+	mlx_put_image_to_window(game->ref, game->window.ref, img.ref, loc.x, loc.y);
+	mlx_destroy_image(game->ref, img.ref);
+}
+
+/**
+ * Get the sprite of the entity
+**/
+static char	*get_entity_sprite(t_game *game, int x, int y)
+{
+	char		**map;
+	char		enty;
+	t_vector	size;
+
+	map = game->map_data.map;
+	enty = map[x][y];
+	size.x = game->map_data.size.x;
+	size.y = game->map_data.size.y;
+	if (x == 0 || y == 0 || x == size.y - 1 || y == size.x - 1)
+		return (NULL);
+	if (enty == 'P')
+		return (P);
+	if (enty == 'M')
+		return (M);
+	if (enty == 'G')
+		return (G);
+	if (enty == '0')
+		return (F);
+	if (enty == 'C')
+		return (C);
+	if (enty == '1')
+		return (B);
+	if (enty == 'E')
+		return (EC);
+	return (NULL);
+}
+
+/**
+ * Place entity sprite onto window
+**/
+void	place_entity_sprite(t_game *game, int x, int y)
+{
+	char	*enty;
+
+	enty = get_entity_sprite(game, x, y);
+	if (enty == NULL)
+		return ;
+	place_sprite(game, enty, x, y);
+}
 
 /**
  * Get the wall sprite
