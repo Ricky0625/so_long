@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 14:44:03 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/09/13 15:09:21 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/09/13 16:04:28 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ char	**add_aesthetic(t_game *game)
 {
 	char	**map;
 	char	**new;
-	char	*v_wall;
 	int		height;
 	int		i;
 
@@ -61,11 +60,13 @@ char	**add_aesthetic(t_game *game)
 	if (new == NULL)
 		return (NULL);
 	i = 0;
-	new[i++] = *(map++);
-	v_wall = add_horizontal_wall(game);
-	new[i++] = v_wall;
 	while (*map != NULL)
-		new[i++] = *(map++);
+	{
+		if (i == 1)
+			new[i++] = add_horizontal_wall(game);
+		else
+			new[i++] = *(map++);
+	}
 	new[i] = NULL;
 	game->map_data.map = new;
 	game->map_data.size.y += 1;
