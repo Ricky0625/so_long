@@ -6,14 +6,14 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 15:32:55 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/09/13 16:12:19 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/09/13 17:17:23 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
 
-# include "mlx.h"
+# include "../mlx/mlx.h"
 # include "../lib42/lib42.h"
 # include <stdio.h>
 # include <stdlib.h>
