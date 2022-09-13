@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 14:57:44 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/09/13 14:35:39 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/09/13 17:25:24 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	image_init(t_image *image)
 /**
  * Initialize all the metadata
 **/
-void	init_metadata(t_game *game)
+static void	init_metadata(t_game *game)
 {
 	game->map_data.map = NULL;
 	init_vector(&game->map_data.size);

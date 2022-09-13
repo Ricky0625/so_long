@@ -6,13 +6,18 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 11:58:59 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/09/13 14:41:43 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/09/13 17:28:19 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/so_long.h"
 
-void	set_window_size(t_game *game)
+/**
+ * Set the size of the window
+ * 
+ * Get the number of col and rows of the map, times sprite size
+**/
+static void	set_window_size(t_game *game)
 {
 	int	width;
 	int	height;
@@ -23,13 +28,19 @@ void	set_window_size(t_game *game)
 	game->window.size.y = height;
 }
 
+/**
+ * Close the window & free the memory
+**/
 int	close_window(t_game *game)
 {
 	free_game(game);
 	exit(0);
 }
 
-void	new_window(t_game *game)
+/**
+ * Create a new window
+**/
+static void	new_window(t_game *game)
 {
 	void	*mlx;
 	void	*win_ptr;
@@ -44,6 +55,9 @@ void	new_window(t_game *game)
 	free(name);
 }
 
+/**
+ * Set the properties of a window and open it
+**/
 void	window_init(t_game *game)
 {
 	set_window_size(game);
