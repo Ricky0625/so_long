@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 15:32:55 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/09/13 17:31:08 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/09/13 19:03:32 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,12 @@
 # define WDL "assets/xpm/wall_dl.xpm"
 # define WDR "assets/xpm/wall_dr.xpm"
 
+// keycodes
+# define KEY_W 13
+# define KEY_A 0
+# define KEY_S 1
+# define KEY_D 2
+
 /**
  * Vector
  * x	: width / x-axis position
@@ -67,6 +73,31 @@ typedef struct s_window {
 	void		*ref;
 	t_vector	size;
 }	t_window;
+
+/**
+ * Information of a tile and its location
+**/
+typedef struct s_tile {
+	char		type;
+	t_vector	loc;
+}	t_tile;
+
+/**
+ * Information of a player
+ * 
+ * collected	: number of collectibles collected
+ * move_count	: number of moves
+ * up,down,left,right: what's around the player
+**/
+typedef struct s_player {
+	t_tile	player;
+	int		collected;
+	int		move_count;
+	t_tile	up;
+	t_tile	down;
+	t_tile	left;
+	t_tile	right;
+}	t_player;
 
 /**
  * Metadata of map
@@ -98,6 +129,9 @@ typedef struct s_entity {
 	int	ghost;
 }	t_entity;
 
+/**
+ * Image metadata
+**/
 typedef struct s_image {
 	void		*ref;
 	t_vector	size;
@@ -117,12 +151,14 @@ typedef struct s_game {
 	t_window	window;
 	t_map		map_data;
 	t_entity	enty;
+	t_player	player;
 }	t_game;
 
 // Init
 t_game	*game_init(int ac, char **av);
 void	window_init(t_game *game);
-void	init_vector(t_vector *vector);
+void	vector_init(t_vector *vector);
+void	set_vector(t_vector *vector, int x, int y);
 void	image_init(t_image *image);
 
 // Map Validator
@@ -138,11 +174,14 @@ void	find_entity(t_vector *loc, char **map, char enty);
 char	**copy_map(t_game *game, char **map);
 char	**add_aesthetic(t_game *game);
 
-// image
+// Image
 void	mapiteri(t_game *game, void (*f)(t_game *, int, int));
 void	place_wall_sprite(t_game *game, int x, int y);
 void	place_entity_sprite(t_game *game, int x, int y);
 void    place_map(t_game *game);
+
+// Mechanism
+int		input_listener(int keycode, t_game *game);
 
 // free
 void	free_map(char **map);

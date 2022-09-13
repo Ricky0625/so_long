@@ -6,7 +6,7 @@
 #    By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/02 10:46:26 by wricky-t          #+#    #+#              #
-#    Updated: 2022/09/13 17:17:46 by wricky-t         ###   ########.fr        #
+#    Updated: 2022/09/13 19:02:52 by wricky-t         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,9 @@ OBJ_DIR	:= objs
 MLX_DIR	:= mlx
 SRCS	:= so_long.c \
 		   init/game_init.c \
+		   init/player_init.c \
 		   init/window_init.c \
+		   init/vector_init.c \
 		   map/map_validator.c \
 		   map/map_format.c \
 		   map/map_format_utils.c \
@@ -31,6 +33,8 @@ SRCS	:= so_long.c \
 		   map/map_aesthetic.c \
 		   image/place_map.c \
 		   image/place_sprite.c \
+		   mechanism/input_listener.c \
+		   mechanism/player_movement.c \
 		   free/free.c
 SRCS	:= $(SRCS:%=$(SRC_DIR)/%)
 OBJS	:= $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)

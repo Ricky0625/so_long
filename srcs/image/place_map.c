@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 17:07:36 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/09/13 17:12:04 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/09/13 18:18:47 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	mapiteri(t_game *game, void (*f)(t_game *, int, int))
 	t_vector	index;
 
 	map = game->map_data.map;
-	init_vector(&index);
+	vector_init(&index);
 	while (*map != NULL)
 	{
 		line = *map;

@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 12:53:07 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/09/13 17:14:05 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/09/13 18:18:57 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void	place_sprite(t_game *game, char *sprite, int x, int y)
 	t_vector	loc;
 
 	image_init(&img);
-	init_vector(&loc);
+	vector_init(&loc);
 	loc.x = y * 64;
 	loc.y = x * 64;
 	img.ref = mlx_xpm_file_to_image(game->ref, sprite,

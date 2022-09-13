@@ -6,20 +6,11 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 14:57:44 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/09/13 17:25:24 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/09/13 19:01:29 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/so_long.h"
-
-/**
- * Initialize vector
-**/
-void	init_vector(t_vector *vector)
-{
-	vector->x = 0;
-	vector->y = 0;
-}
 
 /**
  * Initialize the metadata of image
@@ -37,10 +28,10 @@ void	image_init(t_image *image)
 /**
  * Initialize all the metadata
 **/
-static void	init_metadata(t_game *game)
+static void	metatdata_init(t_game *game)
 {
 	game->map_data.map = NULL;
-	init_vector(&game->map_data.size);
+	vector_init(&game->map_data.size);
 	game->enty.coll = 0;
 	game->enty.enem = 0;
 	game->enty.exit = 0;
@@ -62,7 +53,7 @@ t_game	*game_init(int ac, char **av)
 	}
 	game = malloc(sizeof(t_game));
 	game->ref = mlx_init();
-	init_metadata(game);
+	metatdata_init(game);
 	file = av[ac - 1];
 	map_validator(game, file);
 	return (game);
