@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 15:32:55 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/09/13 17:17:23 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/09/13 17:31:08 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,6 +128,8 @@ void	image_init(t_image *image);
 // Map Validator
 void	map_validator(t_game *game, char *file);
 void	check_map_format(t_game *game);
+void	fill_map(t_vector *start, char **map);
+void	show_path(char **map);
 
 // Map utils
 void	is_rectangular(t_game *game);
@@ -135,10 +137,6 @@ void	get_entity(t_game *game, char ch);
 void	find_entity(t_vector *loc, char **map, char enty);
 char	**copy_map(t_game *game, char **map);
 char	**add_aesthetic(t_game *game);
-
-// Pathfinder
-void	fill_map(t_vector *start, char **map);
-void	show_path(char **map);
 
 // image
 void	mapiteri(t_game *game, void (*f)(t_game *, int, int));
