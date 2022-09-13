@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 18:42:01 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/09/08 14:59:23 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/09/13 15:46:40 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	show_path(char **map)
 **/
 static void	flood_fill(char **map, int x, int y)
 {
-	if (map[x][y] == '1' || map[x][y] == 'F')
+	if (map[x][y] == '1' || map[x][y] == 'F' || map[x][y] == 'M')
 		return ;
 	map[x][y] = 'F';
 	flood_fill(map, x + 1, y);

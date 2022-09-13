@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 14:05:05 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/09/08 20:22:56 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/09/13 15:51:33 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static void	check_map_name(t_game *game)
  * 
  * Strjoin all the line all together into a string
 **/
-static char	*get_raw_map(int fd)
+static void	get_raw_map(t_game *game, int fd)
 {
 	char	*str;
 	char	*raw;
@@ -72,7 +72,7 @@ static char	*get_raw_map(int fd)
 		free(temp);
 		free(str);
 	}
-	return (raw);
+	game->map_data.raw = raw;
 }
 
 /**
@@ -132,7 +132,6 @@ static void	get_map_size(t_game *game, char *raw)
 void	map_validator(t_game *game, char *file)
 {
 	int		fd;
-	char	*raw;
 	char	**map;
 
 	game->map_data.file = file;
@@ -144,13 +143,11 @@ void	map_validator(t_game *game, char *file)
 		free(game);
 		exit(2);
 	}
-	raw = get_raw_map(fd);
-	game->map_data.raw = raw;
-	get_map_size(game, raw);
-	map = ft_split(raw, '\n');
+	get_raw_map(game, fd);
+	get_map_size(game, game->map_data.raw);
+	map = ft_split(game->map_data.raw, '\n');
 	game->map_data.map = map;
 	check_map_format(game);
 	add_aesthetic(game);
 	close(fd);
-	free(raw);
 }

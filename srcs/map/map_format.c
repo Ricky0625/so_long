@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 14:28:25 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/09/08 14:12:41 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/09/13 15:43:41 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
  * it's not the end of the map (i < height). Meaning there is
  * extra newline at the end. If that's the case, exit.
 **/
-void	check_extra_newline(t_game *game, char **map)
+static void	check_extra_newline(t_game *game, char **map)
 {
 	int	i;
 	int	height;
@@ -53,7 +53,7 @@ void	check_extra_newline(t_game *game, char **map)
  * 1. Check if the wall is rectangular
  * 2. Check if the wall only constructed using '1'
 **/
-void	check_wall(t_game *game, char **map)
+static void	check_wall(t_game *game, char **map)
 {
 	int	x;
 	int	y;
@@ -90,7 +90,7 @@ void	check_wall(t_game *game, char **map)
  * 2. Only one (P)layer
  * 3. Only one (E)xit
 **/
-void	check_essential(t_game *game, char **map)
+static void	check_essential(t_game *game, char **map)
 {
 	int	x;
 	int	y;
@@ -124,7 +124,7 @@ void	check_essential(t_game *game, char **map)
  * 4. Check if there is a collectible or exit still exists
  *    in the map
 **/
-void	check_valid_path(t_game *game, char **map)
+static void	check_valid_path(t_game *game, char **map)
 {
 	t_vector	plyr;
 	char		*line;

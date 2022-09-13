@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 14:44:03 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/09/08 20:22:49 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/09/13 15:09:21 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ char	**add_aesthetic(t_game *game)
 
 	map = game->map_data.map;
 	height = game->map_data.size.y + 1;
-	new = malloc(sizeof(char *) * height + 1);
+	new = malloc(sizeof(char *) * (height + 1));
 	if (new == NULL)
 		return (NULL);
 	i = 0;

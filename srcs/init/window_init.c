@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 11:58:59 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/09/09 15:26:47 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/09/13 14:41:43 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	new_window(t_game *game)
 	win_ptr = mlx_new_window(
 			mlx, game->window.size.x, game->window.size.y, name);
 	game->window.ref = win_ptr;
-	mlx_hook(game->window.ref, 17, 0, close_window, (void *)game);
+	mlx_hook(game->window.ref, 17, 0, close_window, game);
 	free(name);
 }
 
