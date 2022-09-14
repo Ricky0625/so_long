@@ -6,11 +6,17 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 17:45:10 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/09/13 19:15:06 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/09/14 12:52:21 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/so_long.h"
+
+int	update_frame(t_game *game)
+{
+	place_map(game);
+	return (0);
+}
 
 /**
  * Listen to the user input while the program is running
@@ -26,12 +32,13 @@ int	input_listener(int keycode, t_game *game)
 	map = game->map_data.map;
 	ply = &game->player;
 	if (keycode == KEY_W)
-		printf("W\n");
+		move_player(&ply->player, &ply->up, map);
 	else if (keycode == KEY_A)
-		printf("A\n");
+		move_player(&ply->player, &ply->left, map);
 	else if (keycode == KEY_S)
-		printf("S\n");
+		move_player(&ply->player, &ply->down, map);
 	else if (keycode == KEY_D)
-		printf("D\n");
+		move_player(&ply->player, &ply->right, map);
+	player_update(ply, map);
 	return (0);
 }

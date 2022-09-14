@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 17:07:36 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/09/13 18:18:47 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/09/14 12:41:35 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,4 +55,6 @@ void	place_map(t_game *game)
 {
 	mapiteri(game, place_wall_sprite);
 	mapiteri(game, place_entity_sprite);
+	place_sprite(game, P,
+		game->player.player.loc.x, game->player.player.loc.y);
 }

@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 15:32:55 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/09/13 19:03:32 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/09/14 14:33:30 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@
 # define F "assets/xpm/floor.xpm"
 # define C "assets/xpm/key.xpm"
 # define B "assets/xpm/block.xpm"
+// Player on top of exit. ASCII value E - A + P - A = T
+# define T "assets/xpm/player_exit_close.xpm";
 # define EO "assets/xpm/exit.xpm"
 # define EC "assets/xpm/exit_close.xpm"
 # define WU "assets/xpm/wall_u.xpm"
@@ -160,6 +162,9 @@ void	window_init(t_game *game);
 void	vector_init(t_vector *vector);
 void	set_vector(t_vector *vector, int x, int y);
 void	image_init(t_image *image);
+void	player_init(t_game *game);
+void	player_update(t_player *player, char **map);
+void	print_surrounding(t_player *ply);
 
 // Map Validator
 void	map_validator(t_game *game, char *file);
@@ -170,7 +175,7 @@ void	show_path(char **map);
 // Map utils
 void	is_rectangular(t_game *game);
 void	get_entity(t_game *game, char ch);
-void	find_entity(t_vector *loc, char **map, char enty);
+int		find_entity(t_vector *loc, char **map, char enty);
 char	**copy_map(t_game *game, char **map);
 char	**add_aesthetic(t_game *game);
 
@@ -179,9 +184,12 @@ void	mapiteri(t_game *game, void (*f)(t_game *, int, int));
 void	place_wall_sprite(t_game *game, int x, int y);
 void	place_entity_sprite(t_game *game, int x, int y);
 void    place_map(t_game *game);
+void	place_sprite(t_game *game, char *sprite, int x, int y);
 
 // Mechanism
 int		input_listener(int keycode, t_game *game);
+int		update_frame(t_game *game);
+void	move_player(t_tile *player, t_tile *dest, char **map);
 
 // free
 void	free_map(char **map);

@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 14:56:13 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/09/09 13:13:39 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/09/14 14:42:53 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,14 +86,16 @@ void	get_entity(t_game *game, char ch)
  * This function will always return the location of the last occurrence
  * of the entity.
 **/
-void	find_entity(t_vector *loc, char **map, char enty)
+int	find_entity(t_vector *loc, char **map, char enty)
 {
 	int		x;
 	int		y;
+	int		found;
 	char	*line;
 
 	x = 0;
 	y = 0;
+	found = 0;
 	while (*(map + x) != NULL)
 	{
 		line = *(map + x);
@@ -104,11 +106,13 @@ void	find_entity(t_vector *loc, char **map, char enty)
 			{
 				loc->x = x;
 				loc->y = y;
+				found = 1;
 			}
 			y++;
 		}
 		x++;
 	}
+	return (found);
 }
 
 /**

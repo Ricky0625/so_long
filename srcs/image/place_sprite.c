@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 12:53:07 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/09/13 18:18:57 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/09/14 14:29:20 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 /**
  * Place sprite onto the window
 **/
-static void	place_sprite(t_game *game, char *sprite, int x, int y)
+void	place_sprite(t_game *game, char *sprite, int x, int y)
 {
 	t_image		img;
 	t_vector	loc;
@@ -47,19 +47,15 @@ static char	*get_entity_sprite(t_game *game, int x, int y)
 	size.y = game->map_data.size.y;
 	if (x == 0 || y == 0 || x == size.y - 1 || y == size.x - 1)
 		return (NULL);
-	if (enty == 'P')
-		return (P);
 	if (enty == 'M')
 		return (M);
-	if (enty == 'G')
-		return (G);
-	if (enty == '0')
+	if (enty == '0' || enty == 'P' || enty == 'G')
 		return (F);
 	if (enty == 'C')
 		return (C);
 	if (enty == '1')
 		return (B);
-	if (enty == 'E')
+	if (enty == 'E' || enty == 'T')
 		return (EC);
 	return (NULL);
 }

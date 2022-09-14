@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 15:21:27 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/09/13 17:49:38 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/09/14 12:52:11 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,12 @@ int	main(int ac, char **av)
 
 	game = game_init(ac, av);
 	window_init(game);
+	player_init(game);
 	place_map(game);
-	mlx_key_hook(game->window.ref, input_listener, &game);
+	print_surrounding(&game->player);
+	show_path(game->map_data.map);
+	mlx_key_hook(game->window.ref, input_listener, (void *)game);
+	mlx_loop_hook(game->ref, update_frame, (void *)game);
 	mlx_loop(game->ref);
 	return (0);
 }
