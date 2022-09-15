@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 14:46:24 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/09/15 20:09:20 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/09/15 20:25:52 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,6 +152,11 @@ typedef struct s_vwall
 	t_image		*idle3;
 }	t_vwall;
 
+/**
+ * Struct for the special entity of the game, ghost or ghosy (not enemy)
+ * 
+ * show	: boolean. to appear or not
+**/
 typedef struct s_ghost
 {
 	int			show;
@@ -162,6 +167,11 @@ typedef struct s_ghost
 	t_image		*appear;
 }	t_ghost;
 
+/**
+ * Struct for the enemy of the game, skeleton or skely hehe
+ * 
+ * collide	: check if skeleton has collision with the wall
+**/
 typedef struct s_skeleton
 {
 	int			collide;
@@ -171,6 +181,11 @@ typedef struct s_skeleton
 	t_image		*killed;
 }	t_skeleton;
 
+/**
+ * The collectibles - no much special
+ * 
+ * It's just a struct to animate the collectibles
+**/
 typedef struct s_coll
 {
 	t_tile		me;
@@ -178,6 +193,9 @@ typedef struct s_coll
 	t_image		*idle2;
 }	t_coll;
 
+/**
+ * Info about the player
+**/
 typedef struct s_player
 {
 	int			moves;
@@ -187,6 +205,9 @@ typedef struct s_player
 	t_image		*idle2;
 }	t_player;
 
+/**
+ * Basically everything the game needs to run
+**/
 typedef struct s_game
 {
 	void		*ref;
