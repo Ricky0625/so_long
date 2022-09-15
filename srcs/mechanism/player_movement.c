@@ -6,20 +6,11 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 17:52:32 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/09/14 14:51:57 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/09/14 19:21:18 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/so_long.h"
-
-/**
- * Check if the tile can be passed through
-**/
-// int	can_pass_through(char tile_ch)
-// {
-// 	return (tile_ch == '0' || tile_ch == 'E' || tile_ch == 'C'
-// 		|| tile_ch == 'G');
-// }
 
 void	swap_tile(t_tile *a, t_tile *b, char **map)
 {
@@ -46,29 +37,57 @@ void	overlay_tile(t_tile *a, t_tile *b, char **map)
 	*tile_a = '0';
 }
 
-// void	restore_previous_tile(t_tile *ply, char prev_tile, char **map)
-// {
-	
-// }
+void	wipe_tile(t_tile *a, t_tile *b, char **map)
+{
+	char	*tile_a;
+	char	*tile_b;
+
+	tile_a = &map[a->loc.x][a->loc.y];
+	tile_b = &map[b->loc.x][b->loc.y];
+	*tile_b = a->type;
+	*tile_a = '0';
+}
+
+/**
+ * Restore previous tile if player is leaving 'exit' or 'ghost'
+**/
+void	restore_previous_tile(t_tile *a, t_tile *b, char prev_tile, char **map)
+{
+	char	*next;
+	char	*prev;
+
+	next = &map[b->loc.x][b->loc.y];
+	prev = &map[a->loc.x][a->loc.y];
+	*next = 'P';
+	*prev = prev_tile;
+}
 
 /**
  * Move player around the map
 **/
-void	move_player(t_tile *player, t_tile *dest, char **map)
+void	move_player(t_player *ply, t_tile *dest, char **map)
 {
 	char		tile;
-	static char	prev_tile = 0;
+	static char	prev_tile = '0';
 
-	if (prev_tile == 'E')
-	{
-		printf("last tile i stepped on is exit\n");
-		return ;
-	}
 	tile = dest->type;
+	if (prev_tile == 'E' && ply->player.type == 'T')
+		restore_previous_tile(&ply->player, dest, prev_tile, map);
+	else
+	{
+		if (tile == '0')
+			swap_tile(&ply->player, dest, map);
+		else if (tile == 'E')
+			overlay_tile(&ply->player, dest, map);
+		// else if (tile == 'C')
+		// {
+		// 	print_surrounding(ply);
+		// 	printf("run this\n");
+		// 	printf("before: %d\n", ply->collected);
+		// 	ply->collected += 1;
+		// 	printf("after: %d\n", ply->collected);
+		// 	wipe_tile(&ply->player, dest, map);
+		// }
+	}
 	prev_tile = tile;
-	if (tile == '0')
-		swap_tile(player, dest, map);
-	else if (tile == 'E')
-		overlay_tile(player, dest, map);
-	show_path(map);
 }

@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 14:28:25 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/09/13 15:43:41 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/09/14 17:42:21 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,10 +106,12 @@ static void	check_essential(t_game *game, char **map)
 		while (++y < width - 1)
 			get_entity(game, map[x][y]);
 	}
-	if (game->enty.coll == 0 || game->enty.exit != 1 || game->enty.plyr != 1)
+	if (game->enty.coll == 0 || game->enty.exit != 1 || game->enty.plyr != 1
+		|| game->enty.ghost > 1)
 	{
 		ft_putstr_fd(RED"[ERROR]: Invalid map format!\n"DEF, 2);
-		ft_putstr_fd(YL"Require 1 (P)layer, 1 (E)xit, 1 (C)ollectible\n"DEF, 2);
+		ft_putstr_fd(YL"Require 1 (P)layer, 1 (E)xit, 1 (C)ollectible.\n", 2);
+		ft_putstr_fd("For advanced setup: Only 1 (G)host is required.\n"DEF, 2);
 		free_game(game);
 		exit(2);
 	}

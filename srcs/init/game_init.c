@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 14:57:44 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/09/13 19:01:29 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/09/14 17:41:48 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ static void	metatdata_init(t_game *game)
 	game->enty.enem = 0;
 	game->enty.exit = 0;
 	game->enty.plyr = 0;
+	game->enty.ghost = 0;
 }
 
 /**

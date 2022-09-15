@@ -6,15 +6,23 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 17:45:10 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/09/14 12:52:21 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/09/14 19:04:24 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/so_long.h"
 
+void	check_collectible(t_game *game)
+{
+	printf("%d, %d\n", game->enty.coll, game->player.collected);
+	if (game->enty.coll == game->player.collected)
+		printf("player collected all\n");
+}
+
 int	update_frame(t_game *game)
 {
 	place_map(game);
+	check_collectible(game);
 	return (0);
 }
 
@@ -32,13 +40,13 @@ int	input_listener(int keycode, t_game *game)
 	map = game->map_data.map;
 	ply = &game->player;
 	if (keycode == KEY_W)
-		move_player(&ply->player, &ply->up, map);
+		move_player(ply, &ply->up, map);
 	else if (keycode == KEY_A)
-		move_player(&ply->player, &ply->left, map);
+		move_player(ply, &ply->left, map);
 	else if (keycode == KEY_S)
-		move_player(&ply->player, &ply->down, map);
+		move_player(ply, &ply->down, map);
 	else if (keycode == KEY_D)
-		move_player(&ply->player, &ply->right, map);
+		move_player(ply, &ply->right, map);
 	player_update(ply, map);
 	return (0);
 }

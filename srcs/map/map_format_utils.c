@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 14:56:13 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/09/14 14:42:53 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/09/14 19:08:00 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,15 +58,18 @@ void	is_rectangular(t_game *game)
 void	get_entity(t_game *game, char ch)
 {
 	if (ch == 'E')
-		game->enty.exit += 1;
+		game->enty.exit++;
 	else if (ch == 'C')
-		game->enty.coll += 1;
+	{
+		game->enty.coll++;
+		printf("coll: %d\n", game->enty.coll);
+	}
 	else if (ch == 'P')
-		game->enty.plyr += 1;
+		game->enty.plyr++;
 	else if (ch == 'M')
-		game->enty.enem += 1;
+		game->enty.enem++;
 	else if (ch == 'G')
-		game->enty.ghost += 1;
+		game->enty.ghost++;
 	else if (ch == '0' || ch == '1')
 		return ;
 	else

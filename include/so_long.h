@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 15:32:55 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/09/14 14:33:30 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/09/14 18:59:50 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,14 @@ typedef struct s_player {
 	t_tile	right;
 }	t_player;
 
+typedef struct s_ghost {
+	t_tile	ghost;
+	t_tile	up;
+	t_tile	down;
+	t_tile	left;
+	t_tile	right;
+}	t_ghost;
+
 /**
  * Metadata of map
  * 
@@ -189,7 +197,7 @@ void	place_sprite(t_game *game, char *sprite, int x, int y);
 // Mechanism
 int		input_listener(int keycode, t_game *game);
 int		update_frame(t_game *game);
-void	move_player(t_tile *player, t_tile *dest, char **map);
+void	move_player(t_player *ply, t_tile *dest, char **map);
 
 // free
 void	free_map(char **map);

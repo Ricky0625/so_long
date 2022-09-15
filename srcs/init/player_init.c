@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 18:17:59 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/09/14 14:33:05 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/09/14 16:27:36 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	get_surrounding(t_player *player, char **map)
 **/
 void	player_init(t_game *game)
 {
-	t_player *ply;
+	t_player	*ply;
 
 	ply = &game->player;
 	find_entity(&ply->player.loc, game->map_data.map, 'P');
@@ -66,8 +66,13 @@ void	player_init(t_game *game)
 void	player_update(t_player *player, char **map)
 {
 	if (find_entity(&player->player.loc, map, 'P') == 0)
+	{
 		find_entity(&player->player.loc, map, 'T');
-	get_surrounding(player, map);	
+		player->player.type = 'T';
+	}
+	else
+		player->player.type = 'P';
+	get_surrounding(player, map);
 }
 
 void	print_surrounding(t_player *ply)
