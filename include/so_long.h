@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 14:46:24 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/09/15 20:25:52 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/09/15 20:31:57 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -234,5 +234,17 @@ void	tile_init(t_tile *tile);
 void	image_init(t_image *img);
 void	player_init(t_player *player);
 void	ghost_init(t_ghost *gho);
+
+/** ==== MAP PARSER ==== **/
+
+/** ==== TILE MAP GENERATOR ==== **/
+
+/** ==== PLAYER MECHANISM ==== **/
+
+/** ==== SKELETON MECHANISM ==== **/
+
+/** ==== GHOST MECHANISM ==== **/
+
+/** ==== ANIMATION ==== **/
 
 #endif
