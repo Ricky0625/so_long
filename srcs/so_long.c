@@ -6,61 +6,81 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 15:21:27 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/09/14 12:52:11 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/09/15 20:18:40 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/so_long.h"
 
 /**
- * TODO
- * 
- * Game Init
- * 1. Map parsing														[V]
- * 	  - check format													[V]
- * 		- check file name first											[V]
- *      - get raw map (unproccessed, a string)							[V]
- *    - get width, height												[V]
- * 	  - check map (Is it better to check using 2D array or a string)	[V]
- * 		- wall (Is it a rectangular shape)								[V]
- * 		- essential (1 Exit, 1 Collectible, 1 starting Position)		[V]
- * 		- Is there a valid path?										[V]
- *    - If all checking are fine, set game map							[V]
- * 2. Create a window													[V]
- * 	  - Create a window based on the width and height					[V]
- * 3. Put image (all the items)											[V]
- * 4. Mechanism
- * 	  - Player can walk
- * 	  - Player cannot pass through wall
- * 	  - Player can collect keys
- * 	  - When player touches skely, player died. game ends
- * 	  - When player collect all keys, exit door open
- * 	  EXTRA:
- * 	  - When player is beside (UDLR) ghost, ghost remind player
- * 		to press spacebar
- *    - When pressed spacebar, spawn another window?
- * 	  	- When this thing appears, player can type in numbers
- * 			- need to listen to the event
- * 		- Press enter to submit answer
- *    - If player manage to answer it, kill all skely.
- * 	  - If player cannot answer it, ghost dissappear.
- * 
- * Have a function that's dedicated to print error message and quit
- * ./so_long --help to show manual
- * Have a function to free the game upon exit
+ * Initialize the game, basically everything
 **/
+static void	game_init(t_game *game)
+{
+	game->ref = mlx_init();
+	window_init(&game->window);
+	map_init(&game->map_data);
+	entity_init(&game->entity);
+	player_init(&game->player);
+	ghost_init(&game->ghost);
+	game->skeleton = 0;
+	game->collectibles = 0;
+	game->vwall = 0;
+}
+
+/**
+ * Start the game
+ * 
+ * 1. Initialize game
+ * 2. Parse map
+ * 3. Generate tile map
+ * 4. Update player info
+ * 5. Update ghost info
+ * 6. Get skeleton (enemy) list
+ * 7. Get vertical wall list
+ * 8. Set window properties
+ * 9. Place the map onto the window
+**/
+static t_game	*start_game(int ac, char **av)
+{
+	t_game	*game;
+	char	*file;
+
+	if (ac != 2)
+	{
+		ft_putstr_fd(RED"[ERROR]: Invalid Usage!\n"DEF, 2);
+		ft_putstr_fd(RED"./so_long [name.ber]\n"DEF, 2);
+		exit(EXIT_FAILURE);
+	}
+	file = av[1];
+	game = malloc(sizeof(t_game));
+	game_init(game);
+	// parse map here
+	// generate tile map
+	// set player
+	// set ghost
+	// get skeleton list
+	// get vertical list
+	// set window properties
+	// place map based on tile map
+	return (game);
+}
+
 int	main(int ac, char **av)
 {
 	t_game	*game;
 
-	game = game_init(ac, av);
-	window_init(game);
-	player_init(game);
-	place_map(game);
-	print_surrounding(&game->player);
-	show_path(game->map_data.map);
-	mlx_key_hook(game->window.ref, input_listener, (void *)game);
-	mlx_loop_hook(game->ref, update_frame, (void *)game);
-	mlx_loop(game->ref);
+	game = start_game(ac, av);
+	// listen to input
+	// mlx_key_hook(game->window.ref, input_listener, (void *)game);
+	
+	// listen to exit event here
+	// mlx_hook(game->window.ref, 17, 0, close_window, game);
+	
+	// update frame
+	// mlx_loop_hook(game->ref, update_frame, (void *)game);
+
+	// run game
+	// mlx_loop(game->ref);
 	return (0);
 }

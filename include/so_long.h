@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long_new.h                                      :+:      :+:    :+:   */
+/*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 14:46:24 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/09/15 16:23:27 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/09/15 20:09:20 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "../lib42/lib42.h"
 # include "mlx.h"
+# include <stdlib.h>
 
 /** ==== TEXT STYLING ==== **/
 # define RED "\033[0;31m"
@@ -35,6 +36,15 @@
 
 /** ==== UTILS STRUCTS ==== **/
 /**
+ * Vector - For size, location, index, area
+**/
+typedef struct s_vector
+{
+	int	x;
+	int	y;
+}	t_vector;
+
+/**
  * Window - For mlx window
  * ref	: window instance pointer
  * size	: width & height of window
@@ -44,15 +54,6 @@ typedef struct s_window
 	void		*ref;
 	t_vector	size;
 }	t_window;
-
-/**
- * Vector - For size, location, index, area
-**/
-typedef struct s_vector
-{
-	int	x;
-	int	y;
-}	t_vector;
 
 /**
  * Image metadata
@@ -108,13 +109,13 @@ typedef enum e_tiletype
 **/
 typedef struct s_tile
 {
-	t_tiletype	type;
-	t_tiletype	prev;
-	t_vector	loc;
-	t_tile		*up;
-	t_tile		*down;
-	t_tile		*left;
-	t_tile		*right;
+	t_tiletype		type;
+	t_tiletype		prev;
+	t_vector		loc;
+	struct s_tile	*up;
+	struct s_tile	*down;
+	struct s_tile	*left;
+	struct s_tile	*right;
 }	t_tile;
 
 /**
@@ -198,5 +199,19 @@ typedef struct s_game
 	t_coll		*collectibles;
 	t_vwall		*vwall;
 }	t_game;
+
+/** ==== FUNCTION PROTOTYPES ==== **/
+
+/** ==== INITIALIZATION & ITS UTILITIES ==== **/
+void	vector_init(t_vector *vector);
+void	set_vector(t_vector *vector, int x, int y);
+void	window_init(t_window *win);
+int		close_window(t_game *game);
+void	entity_init(t_entity *entity);
+void	map_init(t_map *map_data);
+void	tile_init(t_tile *tile);
+void	image_init(t_image *img);
+void	player_init(t_player *player);
+void	ghost_init(t_ghost *gho);
 
 #endif
