@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 15:21:27 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/09/15 20:18:40 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/09/16 12:25:30 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static t_game	*start_game(int ac, char **av)
 	file = av[1];
 	game = malloc(sizeof(t_game));
 	game_init(game);
-	// parse map here
+	map_validator(game, file);
 	// generate tile map
 	// set player
 	// set ghost

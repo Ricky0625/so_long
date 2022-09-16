@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 14:56:13 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/09/16 12:25:10 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/09/16 12:29:15 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,7 @@ void	get_entity(t_game *game, char ch)
 	if (ch == 'E')
 		game->entity.exit++;
 	else if (ch == 'C')
-	{
 		game->entity.coll++;
-		printf("coll: %d\n", game->entity.coll);
-	}
 	else if (ch == 'P')
 		game->entity.plyr++;
 	else if (ch == 'M')
