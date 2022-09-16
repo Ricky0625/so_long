@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 16:28:13 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/09/16 12:08:11 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/09/16 12:15:01 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 void	map_init(t_map *map_data)
 {
 	map_data->raw = 0;
-	map_data->map = 0;	
+	map_data->map = 0;
 	map_data->file = 0;
 	vector_init(&map_data->size);
 }

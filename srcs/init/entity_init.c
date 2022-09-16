@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 17:26:00 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/09/16 12:09:57 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/09/16 12:14:49 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	entity_init(t_entity *entity)
 
 /**
  * Initialize skeleton (enemy)
-**/ 
+**/
 void	skeleton_init(t_skeleton *ske)
 {
 	ske->collide = 0;

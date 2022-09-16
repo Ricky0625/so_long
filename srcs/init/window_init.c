@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 11:58:59 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/09/15 20:14:56 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/09/16 12:25:58 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 **/
 int	close_window(t_game *game)
 {
-	// free_game(game);
+	free_game(game);
 	mlx_destroy_window(game->ref, game->window.ref);
 	exit(0);
 }
