@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 14:56:13 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/09/14 19:08:00 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/09/16 12:25:10 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,18 +58,18 @@ void	is_rectangular(t_game *game)
 void	get_entity(t_game *game, char ch)
 {
 	if (ch == 'E')
-		game->enty.exit++;
+		game->entity.exit++;
 	else if (ch == 'C')
 	{
-		game->enty.coll++;
-		printf("coll: %d\n", game->enty.coll);
+		game->entity.coll++;
+		printf("coll: %d\n", game->entity.coll);
 	}
 	else if (ch == 'P')
-		game->enty.plyr++;
+		game->entity.plyr++;
 	else if (ch == 'M')
-		game->enty.enem++;
+		game->entity.skely++;
 	else if (ch == 'G')
-		game->enty.ghost++;
+		game->entity.ghost++;
 	else if (ch == '0' || ch == '1')
 		return ;
 	else
@@ -89,7 +89,7 @@ void	get_entity(t_game *game, char ch)
  * This function will always return the location of the last occurrence
  * of the entity.
 **/
-int	find_entity(t_vector *loc, char **map, char enty)
+int	find_entity(t_vector *loc, char **map, char entity)
 {
 	int		x;
 	int		y;
@@ -105,7 +105,7 @@ int	find_entity(t_vector *loc, char **map, char enty)
 		y = 0;
 		while (*(line + y) != '\0')
 		{
-			if (*(line + y) == enty)
+			if (*(line + y) == entity)
 			{
 				loc->x = x;
 				loc->y = y;
