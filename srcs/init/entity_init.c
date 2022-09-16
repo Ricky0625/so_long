@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 17:26:00 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/09/15 17:33:29 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/09/16 12:09:57 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,9 @@ void	entity_init(t_entity *entity)
 	entity->ghost = 0;
 }
 
+/**
+ * Initialize skeleton (enemy)
+**/ 
 void	skeleton_init(t_skeleton *ske)
 {
 	ske->collide = 0;
@@ -33,6 +36,9 @@ void	skeleton_init(t_skeleton *ske)
 	ske->killed = 0;
 }
 
+/**
+ * Initialize ghost (not enemy)
+**/
 void	ghost_init(t_ghost *gho)
 {
 	gho->show = 0;
@@ -43,6 +49,9 @@ void	ghost_init(t_ghost *gho)
 	gho->appear = 0;
 }
 
+/**
+ * Initialize vertical wall (Decoration)
+**/
 void	vwall_init(t_vwall *vwall)
 {
 	vector_init(&vwall->loc);
@@ -51,6 +60,9 @@ void	vwall_init(t_vwall *vwall)
 	vwall->idle3 = 0;
 }
 
+/**
+ * Initialize collectibles
+**/
 void	collectible_init(t_coll *coll)
 {
 	tile_init(&coll->me);

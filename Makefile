@@ -6,7 +6,7 @@
 #    By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/02 10:46:26 by wricky-t          #+#    #+#              #
-#    Updated: 2022/09/15 20:09:36 by wricky-t         ###   ########.fr        #
+#    Updated: 2022/09/16 12:10:07 by wricky-t         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,8 +25,8 @@ SRCS	:= so_long.c \
 		   init/entity_init.c \
 		   init/player_init.c \
 		   init/utils_init.c \
-		   init/vector_init.c \
-		   init/window_init.c
+		   init/window_init.c \
+		   
 SRCS	:= $(SRCS:%=$(SRC_DIR)/%)
 OBJS	:= $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 INC		:= include

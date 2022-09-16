@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 16:28:13 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/09/15 17:30:55 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/09/16 12:08:11 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,4 +49,22 @@ void	image_init(t_image *img)
 	img->bits_per_pixel = 0;
 	img->line_size = 0;
 	img->endian = 0;
+}
+
+/**
+ * Initialize vector
+**/
+void	vector_init(t_vector *vector)
+{
+	vector->x = 0;
+	vector->y = 0;
+}
+
+/**
+ * Set vector with given parameter
+**/
+void	set_vector(t_vector *vector, int x, int y)
+{
+	vector->x = x;
+	vector->y = y;
 }
