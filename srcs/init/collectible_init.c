@@ -1,73 +1,62 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   entity_init.c                                      :+:      :+:    :+:   */
+/*   collectible_init.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/15 17:26:00 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/09/19 20:37:39 by wricky-t         ###   ########.fr       */
+/*   Created: 2022/09/19 20:16:00 by wricky-t          #+#    #+#             */
+/*   Updated: 2022/09/19 20:20:48 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/so_long.h"
 
 /**
- * Initialize entity struct
+ * Initialize collectibles
 **/
-void	entity_init(t_entity *entity)
+void	collectible_init(t_coll *coll)
 {
-	entity->plyr = 0;
-	entity->coll = 0;
-	entity->exit = 0;
-	entity->skely = 0;
-	entity->ghost = 0;
+	coll->me = 0;
+	coll->idle1 = 0;
+	coll->idle2 = 0;
 }
 
-/**
- * Initialize vertical wall (Decoration)
-**/
-void	vwall_init(t_vwall *vwall)
-{
-	vwall->me = NULL;
-	vwall->idle1 = 0;
-	vwall->idle2 = 0;
-	vwall->idle3 = 0;
-}
-
-static void	get_vwall_list(t_game *game)
+static void	get_collectible_list(t_game *game)
 {
 	t_tile	**tilemap;
 	t_tile	*tile;
-	t_vwall	*vwall;
+	t_coll	*coll;
 
 	tilemap = game->tilemap;
-	vwall = game->vwall;
-	if (vwall == NULL)
+	coll = game->collectibles;
+	if (coll == NULL)
 		return ;
 	while (*tilemap != NULL)
 	{
 		tile = *tilemap;
 		while (tile->type != 0)
 		{
-			if (tile->type == VWALL)
+			if (tile->type == COLLECTIBLE)
 			{
-				vwall_init(vwall);
-				vwall->me = tile;
-				vwall++;
+				collectible_init(coll);
+				coll->me = tile;
+				coll++;
 			}
 			tile++;
 		}
 		tilemap++;
 	}
-	vwall->me = NULL;
+	coll->me = NULL;
 }
 
-void	vwall_update(t_game *game)
+void	collectible_update(t_game *game)
 {
 	int			num;
 
-	num = game->map_data.size.x - 2;
-	game->vwall = malloc(sizeof(t_vwall) * (num + 1));
-	get_vwall_list(game);
+	num = game->entity.coll;
+	if (num <= 0)
+		return ;
+	game->collectibles = malloc(sizeof(t_coll) * (num + 1));
+	get_collectible_list(game);
 }

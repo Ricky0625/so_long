@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 15:21:27 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/09/16 12:25:30 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/09/19 20:46:11 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,10 @@ static void	game_init(t_game *game)
 	entity_init(&game->entity);
 	player_init(&game->player);
 	ghost_init(&game->ghost);
-	game->skeleton = 0;
-	game->collectibles = 0;
-	game->vwall = 0;
+	game->tilemap = NULL;
+	game->skeleton = NULL;
+	game->collectibles = NULL;
+	game->vwall = NULL;
 }
 
 /**
@@ -56,12 +57,13 @@ static t_game	*start_game(int ac, char **av)
 	game = malloc(sizeof(t_game));
 	game_init(game);
 	map_validator(game, file);
-	// generate tile map
-	// set player
-	// set ghost
-	// get skeleton list
-	// get vertical list
-	// set window properties
+	tilemap_generator(game);
+	player_update(game);
+	ghost_update(game);
+	skeleton_update(game);
+	collectible_update(game);
+	vwall_update(game);
+	set_window(game);
 	// place map based on tile map
 	return (game);
 }
@@ -71,16 +73,9 @@ int	main(int ac, char **av)
 	t_game	*game;
 
 	game = start_game(ac, av);
-	// listen to input
 	// mlx_key_hook(game->window.ref, input_listener, (void *)game);
-	
-	// listen to exit event here
-	// mlx_hook(game->window.ref, 17, 0, close_window, game);
-	
-	// update frame
+	mlx_hook(game->window.ref, 17, 0, close_window, game);
 	// mlx_loop_hook(game->ref, update_frame, (void *)game);
-
-	// run game
-	// mlx_loop(game->ref);
+	mlx_loop(game->ref);
 	return (0);
 }

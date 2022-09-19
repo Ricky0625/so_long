@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 18:17:59 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/09/15 20:01:36 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/09/16 20:14:16 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	player_init(t_player *player)
 {
 	player->moves = 0;
 	player->collected = 0;
-	tile_init(&player->me);
+	player->me = NULL;
 	player->idle1 = 0;
 	player->idle2 = 0;
 }
@@ -47,17 +47,16 @@ void	player_init(t_player *player)
 /**
  * Update player after initialize (if needed)
 **/
-// void	player_update(t_player *player, char **map)
-// {
-// 	if (find_entity(&player->player.loc, map, 'P') == 0)
-// 	{
-// 		find_entity(&player->player.loc, map, 'T');
-// 		player->player.type = 'T';
-// 	}
-// 	else
-// 		player->player.type = 'P';
-// 	get_surrounding(player, map);
-// }
+void	player_update(t_game *game)
+{
+	t_vector	loc;
+	t_player	*player;
+
+	vector_init(&loc);
+	find_entity(&loc, game->map_data.map, 'P');
+	player = &game->player;
+	player->me = &game->tilemap[loc.x][loc.y];
+}
 
 // void	print_surrounding(t_player *ply)
 // {

@@ -6,7 +6,7 @@
 #    By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/02 10:46:26 by wricky-t          #+#    #+#              #
-#    Updated: 2022/09/16 12:23:21 by wricky-t         ###   ########.fr        #
+#    Updated: 2022/09/19 20:21:40 by wricky-t         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ NAME	:= so_long
 #   INGREDIENTS                                                                #
 #------------------------------------------------------------------------------#
 CC		:= gcc
-CFLAGS	:= -Wall -Wextra -Werror -I$(MLX_DIR) -I$(INC) -g -fsanitize=address
+CFLAGS	:= -Wall -Wextra -Werror -I$(MLX_DIR) -I$(INC) -g3 -fsanitize=address
 MLXFLAGS:= -lmlx -framework OpenGL -framework AppKit
 SRC_DIR	:= srcs
 OBJ_DIR	:= objs
@@ -24,6 +24,9 @@ MLX_DIR	:= mlx
 SRCS	:= so_long.c \
 		   init/entity_init.c \
 		   init/player_init.c \
+		   init/ghost_init.c \
+		   init/skeleton_init.c \
+		   init/collectible_init.c \
 		   init/utils_init.c \
 		   init/window_init.c \
 		   map/map_aesthetic.c \
@@ -31,6 +34,8 @@ SRCS	:= so_long.c \
 		   map/map_format_utils.c \
 		   map/map_pathfinder.c \
 		   map/map_validator.c \
+		   tilemap/tilemap_generator.c \
+		   tilemap/tilemap_utils.c \
 		   free/free.c
 SRCS	:= $(SRCS:%=$(SRC_DIR)/%)
 OBJS	:= $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)

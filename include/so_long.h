@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 14:46:24 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/09/16 12:24:53 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/09/19 20:42:11 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,8 @@ typedef enum e_tiletype
 	VWALL = 'V',
 	COLLECTIBLE = 'C',
 	SKELETON = 'M',
-	GHOST = 'G'
+	GHOST = 'G',
+	EXIT = 'E'
 }	t_tiletype;
 
 /**
@@ -146,7 +147,7 @@ typedef struct s_map
 **/
 typedef struct s_vwall
 {
-	t_vector	loc;
+	t_tile		*me;
 	t_image		*idle1;
 	t_image		*idle2;
 	t_image		*idle3;
@@ -160,7 +161,7 @@ typedef struct s_vwall
 typedef struct s_ghost
 {
 	int			show;
-	t_tile		me;
+	t_tile		*me;
 	t_image		*idle1;
 	t_image		*idle2;
 	t_image		*invisible;
@@ -175,7 +176,7 @@ typedef struct s_ghost
 typedef struct s_skeleton
 {
 	int			collide;
-	t_tile		me;
+	t_tile		*me;
 	t_image		*idle1;
 	t_image		*idle2;
 	t_image		*killed;
@@ -188,10 +189,17 @@ typedef struct s_skeleton
 **/
 typedef struct s_coll
 {
-	t_tile		me;
+	t_tile		*me;
 	t_image		*idle1;
 	t_image		*idle2;
 }	t_coll;
+
+typedef union u_entity_list
+{
+	t_skeleton	*skely;
+	t_coll		*coll;
+	t_vwall		*vwall;
+}	t_entity_list;
 
 /**
  * Info about the player
@@ -200,7 +208,7 @@ typedef struct s_player
 {
 	int			moves;
 	int			collected;
-	t_tile		me;
+	t_tile		*me;
 	t_image		*idle1;
 	t_image		*idle2;
 }	t_player;
@@ -213,6 +221,7 @@ typedef struct s_game
 	void		*ref;
 	t_window	window;
 	t_map		map_data;
+	t_tile		**tilemap;
 	t_entity	entity;
 	t_player	player;
 	t_ghost		ghost;
@@ -233,7 +242,15 @@ void	map_init(t_map *map_data);
 void	tile_init(t_tile *tile);
 void	image_init(t_image *img);
 void	player_init(t_player *player);
+void	player_update(t_game *game);
 void	ghost_init(t_ghost *gho);
+void	ghost_update(t_game *game);
+void	skeleton_init(t_skeleton *ske);
+void	skeleton_update(t_game *game);
+void	collectible_init(t_coll *coll);
+void	collectible_update(t_game *game);
+void	vwall_update(t_game *game);
+void	set_window(t_game *game);
 
 /** ==== MAP PARSER & ITS UTILITIES==== **/
 void	map_validator(t_game *game, char *file);
@@ -243,10 +260,12 @@ void	get_entity(t_game *game, char ch);
 int		find_entity(t_vector *loc, char **map, char entity);
 char	**copy_map(t_game *game, char **map);
 void	fill_map(t_vector *start, char **fill);
-void	show_path(char **map);
 char	**add_aesthetic(t_game *game);
+void	show_path(char **map);
 
 /** ==== TILE MAP GENERATOR ==== **/
+void	tilemap_generator(t_game *game);
+t_tile	*tilechr(t_tile *tile, t_tiletype type);
 
 /** ==== PLAYER MECHANISM ==== **/
 

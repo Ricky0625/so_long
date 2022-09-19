@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 16:28:13 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/09/16 12:15:01 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/09/16 19:34:25 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,10 @@ void	tile_init(t_tile *tile)
 	tile->type = 0;
 	tile->prev = 0;
 	vector_init(&tile->loc);
-	tile->up = 0;
-	tile->down = 0;
-	tile->left = 0;
-	tile->right = 0;
+	tile->up = NULL;
+	tile->down = NULL;
+	tile->left = NULL;
+	tile->right = NULL;
 }
 
 /**
