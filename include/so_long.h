@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 14:46:24 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/09/19 20:42:11 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/09/19 21:12:37 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -252,7 +252,7 @@ void	collectible_update(t_game *game);
 void	vwall_update(t_game *game);
 void	set_window(t_game *game);
 
-/** ==== MAP PARSER & ITS UTILITIES==== **/
+/** ==== MAP PARSER & ITS UTILITIES& ITS UTILITIES==== **/
 void	map_validator(t_game *game, char *file);
 void	check_map_format(t_game *game);
 void	is_rectangular(t_game *game);
@@ -274,6 +274,10 @@ t_tile	*tilechr(t_tile *tile, t_tiletype type);
 /** ==== GHOST MECHANISM ==== **/
 
 /** ==== ANIMATION ==== **/
+
+/** ==== FREE ==== **/
+void	free_map(char **map);
+void	free_game(t_game *game);
 
 /** ==== FREE ==== **/
 void	free_map(char **map);
