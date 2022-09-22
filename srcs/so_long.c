@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 15:21:27 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/09/19 21:11:50 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/09/21 17:47:50 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ static t_game	*start_game(int ac, char **av)
 	collectible_update(game);
 	vwall_update(game);
 	set_window(game);
-	// place map based on tile map
+	render(game);
 	return (game);
 }
 
@@ -75,6 +75,7 @@ int	main(int ac, char **av)
 	game = start_game(ac, av);
 	// mlx_key_hook(game->window.ref, input_listener, (void *)game);
 	mlx_hook(game->window.ref, 17, 0, close_window, game);
+	// this will also include placing image to the window (render function)
 	// mlx_loop_hook(game->ref, update_frame, (void *)game);
 	mlx_loop(game->ref);
 	return (0);

@@ -6,7 +6,7 @@
 #    By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/02 10:46:26 by wricky-t          #+#    #+#              #
-#    Updated: 2022/09/19 21:12:51 by wricky-t         ###   ########.fr        #
+#    Updated: 2022/09/21 17:48:06 by wricky-t         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,6 +36,7 @@ SRCS	:= so_long.c \
 		   map/map_validator.c \
 		   tilemap/tilemap_generator.c \
 		   tilemap/tilemap_utils.c \
+		   render/render.c \
 		   free/free.c
 SRCS	:= $(SRCS:%=$(SRC_DIR)/%)
 OBJS	:= $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)

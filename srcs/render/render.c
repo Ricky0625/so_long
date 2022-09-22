@@ -1,51 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tilemap_utils.c                                    :+:      :+:    :+:   */
+/*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/16 21:06:29 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/09/20 17:24:46 by wricky-t         ###   ########.fr       */
+/*   Created: 2022/09/21 17:31:14 by wricky-t          #+#    #+#             */
+/*   Updated: 2022/09/21 21:12:13 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/so_long.h"
 
-/**
- * Basically a strchr but instead of searching for a character in a string,
- * search for a tile in a tilemap
-**/
-t_tile	*tilechr(t_tile *tile, t_tiletype type)
+void	place_sprite(t_tile *tile, t_game *game)
 {
-	while (tile->type != 0)
-	{
-		if (tile->type == type)
-			return (tile);
-		tile++;
-	}
-	return (0);
+	t_tiletype type;
+
+	type = tile->type;
+	if (type == WALL)
+		place_wall_sprite(tile, game);
 }
 
-void	tileiteri(t_game *game, void (*f)(t_game *, int, int))
+void	render(t_game *game)
 {
-	t_tile		**tilemap;
-	t_tile		*tile;
-	t_vector	index;
+	t_tile	*tile;
+	t_tile	**tilemap;
 
+	mlx_clear_window(game->ref, game->window.ref);
 	tilemap = game->tilemap;
-	vector_init(&index);
-	while (*tilemap != NULL)
+	while (*tilemap != 0)
 	{
 		tile = *tilemap;
-		index.y = 0;
 		while (tile->type != 0)
 		{
-			f(game, index.x, index.y);
-			index.y++;
+			place_sprite(tile, game);
 			tile++;
 		}
-		index.x++;
 		tilemap++;
 	}
 }

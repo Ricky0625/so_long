@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 14:46:24 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/09/19 21:12:37 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/09/22 10:56:16 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,9 +148,9 @@ typedef struct s_map
 typedef struct s_vwall
 {
 	t_tile		*me;
-	t_image		*idle1;
-	t_image		*idle2;
-	t_image		*idle3;
+	void		*idle1;
+	void		*idle2;
+	void		*idle3;
 }	t_vwall;
 
 /**
@@ -266,6 +266,9 @@ void	show_path(char **map);
 /** ==== TILE MAP GENERATOR ==== **/
 void	tilemap_generator(t_game *game);
 t_tile	*tilechr(t_tile *tile, t_tiletype type);
+
+/** ==== RENDER ==== **/
+void	render(t_game *game);
 
 /** ==== PLAYER MECHANISM ==== **/
 

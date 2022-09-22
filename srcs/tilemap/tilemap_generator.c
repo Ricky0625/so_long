@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_tilemap.c                                      :+:      :+:    :+:   */
+/*   tilemap_generator.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 13:19:38 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/09/16 20:47:41 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/09/21 17:49:58 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,8 @@ static t_tiletype	get_tiletype(char ch)
 static void	set_tile(t_tile **tilemap, int x, int y)
 {
 	tilemap[x][y].prev = tilemap[x][y].type;
-	tilemap[x][y].loc.x = y * SPT_SIZE;
-	tilemap[x][y].loc.y = x * SPT_SIZE;
+	tilemap[x][y].loc.x = x;
+	tilemap[x][y].loc.y = y;
 	if (x != 0)
 		tilemap[x][y].up = &tilemap[x - 1][y];
 	if (tilemap[x + 1] != NULL)
