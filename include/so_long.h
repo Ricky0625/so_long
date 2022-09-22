@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 14:46:24 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/09/22 10:56:16 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/09/22 13:21:26 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -233,24 +233,6 @@ typedef struct s_game
 /** ==== FUNCTION PROTOTYPES ==== **/
 
 /** ==== INITIALIZATION & ITS UTILITIES ==== **/
-void	vector_init(t_vector *vector);
-void	set_vector(t_vector *vector, int x, int y);
-void	window_init(t_window *win);
-int		close_window(t_game *game);
-void	entity_init(t_entity *entity);
-void	map_init(t_map *map_data);
-void	tile_init(t_tile *tile);
-void	image_init(t_image *img);
-void	player_init(t_player *player);
-void	player_update(t_game *game);
-void	ghost_init(t_ghost *gho);
-void	ghost_update(t_game *game);
-void	skeleton_init(t_skeleton *ske);
-void	skeleton_update(t_game *game);
-void	collectible_init(t_coll *coll);
-void	collectible_update(t_game *game);
-void	vwall_update(t_game *game);
-void	set_window(t_game *game);
 
 /** ==== MAP PARSER & ITS UTILITIES& ITS UTILITIES==== **/
 void	map_validator(t_game *game, char *file);
@@ -264,11 +246,8 @@ char	**add_aesthetic(t_game *game);
 void	show_path(char **map);
 
 /** ==== TILE MAP GENERATOR ==== **/
-void	tilemap_generator(t_game *game);
-t_tile	*tilechr(t_tile *tile, t_tiletype type);
 
 /** ==== RENDER ==== **/
-void	render(t_game *game);
 
 /** ==== PLAYER MECHANISM ==== **/
 
@@ -277,10 +256,6 @@ void	render(t_game *game);
 /** ==== GHOST MECHANISM ==== **/
 
 /** ==== ANIMATION ==== **/
-
-/** ==== FREE ==== **/
-void	free_map(char **map);
-void	free_game(t_game *game);
 
 /** ==== FREE ==== **/
 void	free_map(char **map);

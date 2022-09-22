@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 15:21:27 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/09/21 17:47:50 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/09/22 13:22:45 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,6 @@ static void	game_init(t_game *game)
 	window_init(&game->window);
 	map_init(&game->map_data);
 	entity_init(&game->entity);
-	player_init(&game->player);
-	ghost_init(&game->ghost);
-	game->tilemap = NULL;
-	game->skeleton = NULL;
-	game->collectibles = NULL;
-	game->vwall = NULL;
 }
 
 /**
@@ -57,14 +51,6 @@ static t_game	*start_game(int ac, char **av)
 	game = malloc(sizeof(t_game));
 	game_init(game);
 	map_validator(game, file);
-	tilemap_generator(game);
-	player_update(game);
-	ghost_update(game);
-	skeleton_update(game);
-	collectible_update(game);
-	vwall_update(game);
-	set_window(game);
-	render(game);
 	return (game);
 }
 
@@ -74,9 +60,9 @@ int	main(int ac, char **av)
 
 	game = start_game(ac, av);
 	// mlx_key_hook(game->window.ref, input_listener, (void *)game);
-	mlx_hook(game->window.ref, 17, 0, close_window, game);
+	// mlx_hook(game->window.ref, 17, 0, close_window, game);
 	// this will also include placing image to the window (render function)
 	// mlx_loop_hook(game->ref, update_frame, (void *)game);
-	mlx_loop(game->ref);
+	// mlx_loop(game->ref);
 	return (0);
 }
