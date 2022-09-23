@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 15:21:27 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/09/22 13:22:45 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/09/22 16:13:02 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@
 static void	game_init(t_game *game)
 {
 	game->ref = mlx_init();
-	window_init(&game->window);
-	map_init(&game->map_data);
 	entity_init(&game->entity);
 }
 
@@ -54,15 +52,16 @@ static t_game	*start_game(int ac, char **av)
 	return (game);
 }
 
+/**
+ * 1. Start game
+ * 2. Key hook (input_listener)
+ * 3. render
+ * 4. mlx_loop
+**/
 int	main(int ac, char **av)
 {
 	t_game	*game;
 
 	game = start_game(ac, av);
-	// mlx_key_hook(game->window.ref, input_listener, (void *)game);
-	// mlx_hook(game->window.ref, 17, 0, close_window, game);
-	// this will also include placing image to the window (render function)
-	// mlx_loop_hook(game->ref, update_frame, (void *)game);
-	// mlx_loop(game->ref);
 	return (0);
 }

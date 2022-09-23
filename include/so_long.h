@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 14:46:24 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/09/22 13:21:26 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/09/22 18:12:00 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,34 +138,41 @@ typedef struct s_map
 	t_vector	size;
 }	t_map;
 
+/**
+ * Struct for animation
+ * 
+ * current_tick	: to keep track when to change frame
+ * duration		: the duration between each frame
+ * frames		: the animation frames
+**/
+typedef struct s_anim
+{
+	int		current_tick;
+	int		duration;
+	void	**frames;
+}	t_anim;
+
 /** ==== MAIN STRUCTS ==== **/
 /**
- * 
  * Vertical wall (entity)
  * 
  * Mostly will use this struct to animate the wall
 **/
 typedef struct s_vwall
 {
-	t_tile		*me;
-	void		*idle1;
-	void		*idle2;
-	void		*idle3;
+	t_vector	loc;
+	t_anim		*idle;
 }	t_vwall;
 
 /**
  * Struct for the special entity of the game, ghost or ghosy (not enemy)
- * 
- * show	: boolean. to appear or not
 **/
 typedef struct s_ghost
 {
-	int			show;
-	t_tile		*me;
-	t_image		*idle1;
-	t_image		*idle2;
-	t_image		*invisible;
-	t_image		*appear;
+	int			appear_counter;
+	t_vector	loc;
+	t_anim		*idle;
+	t_anim		*appear;
 }	t_ghost;
 
 /**
@@ -176,30 +183,25 @@ typedef struct s_ghost
 typedef struct s_skeleton
 {
 	int			collide;
-	t_tile		*me;
-	t_image		*idle1;
-	t_image		*idle2;
-	t_image		*killed;
+	t_vector	loc;
+	t_anim		*idle;
+	t_anim		*killed;
 }	t_skeleton;
 
 /**
- * The collectibles - no much special
+ * The collectibles
  * 
- * It's just a struct to animate the collectibles
+ * collected: to check whether this item has been collected or not
+ * idle		: the idle animation
+ * effect	: the animation when player collects it
 **/
 typedef struct s_coll
 {
-	t_tile		*me;
-	t_image		*idle1;
-	t_image		*idle2;
+	int			collected;
+	t_vector	loc;
+	t_anim		idle;
+	t_anim		effect;
 }	t_coll;
-
-typedef union u_entity_list
-{
-	t_skeleton	*skely;
-	t_coll		*coll;
-	t_vwall		*vwall;
-}	t_entity_list;
 
 /**
  * Info about the player
@@ -208,9 +210,8 @@ typedef struct s_player
 {
 	int			moves;
 	int			collected;
-	t_tile		*me;
-	t_image		*idle1;
-	t_image		*idle2;
+	t_vector	loc;
+	t_anim		*idle;
 }	t_player;
 
 /**
@@ -233,17 +234,18 @@ typedef struct s_game
 /** ==== FUNCTION PROTOTYPES ==== **/
 
 /** ==== INITIALIZATION & ITS UTILITIES ==== **/
+void	entity_init(t_entity *enty);
 
-/** ==== MAP PARSER & ITS UTILITIES& ITS UTILITIES==== **/
+/** ==== MAP PARSER & ITS UTILITIES ==== **/
 void	map_validator(t_game *game, char *file);
 void	check_map_format(t_game *game);
 void	is_rectangular(t_game *game);
 void	get_entity(t_game *game, char ch);
-int		find_entity(t_vector *loc, char **map, char entity);
-char	**copy_map(t_game *game, char **map);
 void	fill_map(t_vector *start, char **fill);
-char	**add_aesthetic(t_game *game);
 void	show_path(char **map);
+char	**copy_map(t_game *game, char **map);
+char	**add_aesthetic(t_game *game);
+int		find_entity(t_vector *loc, char **map, char entity);
 
 /** ==== TILE MAP GENERATOR ==== **/
 
