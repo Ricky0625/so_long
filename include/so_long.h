@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 14:46:24 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/09/22 18:12:00 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/09/25 13:20:37 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,10 @@
 # define DEF "\033[0m"
 
 /** ==== MACROS ==== **/
+# define WIN_WIDTH 1280
+# define WIN_HEIGHT 896
 # define FILE_EXT ".ber"
-# define SPT_SIZE 64
+# define SPT_SIZE 128
 # define GNAME "so_long: "
 
 /** ==== KEYCODES ==== **/
@@ -33,6 +35,7 @@
 # define KEY_A 0
 # define KEY_S 1
 # define KEY_D 2
+# define KEY_F 3
 
 /** ==== UTILS STRUCTS ==== **/
 /**
@@ -43,17 +46,6 @@ typedef struct s_vector
 	int	x;
 	int	y;
 }	t_vector;
-
-/**
- * Window - For mlx window
- * ref	: window instance pointer
- * size	: width & height of window
-**/
-typedef struct s_window
-{
-	void		*ref;
-	t_vector	size;
-}	t_window;
 
 /**
  * Image metadata
@@ -85,6 +77,9 @@ typedef struct s_entity
 	int	ghost;
 }	t_entity;
 
+/**
+ * Tiletype enum
+**/
 typedef enum e_tiletype
 {
 	PLAYER = 'P',
@@ -136,6 +131,7 @@ typedef struct s_map
 	char		**map;
 	char		*file;
 	t_vector	size;
+	t_image		map_img;
 }	t_map;
 
 /**
@@ -143,12 +139,14 @@ typedef struct s_map
  * 
  * current_tick	: to keep track when to change frame
  * duration		: the duration between each frame
+ * num_of_frame	: number of frame
  * frames		: the animation frames
 **/
 typedef struct s_anim
 {
 	int		current_tick;
 	int		duration;
+	int		num_of_frame;
 	void	**frames;
 }	t_anim;
 
@@ -157,6 +155,8 @@ typedef struct s_anim
  * Vertical wall (entity)
  * 
  * Mostly will use this struct to animate the wall
+ * loc	: location
+ * idle	: idle animation
 **/
 typedef struct s_vwall
 {
@@ -166,6 +166,11 @@ typedef struct s_vwall
 
 /**
  * Struct for the special entity of the game, ghost or ghosy (not enemy)
+ * 
+ * appear_counter	: pass by how many times to let ghost appear
+ * loc				: location
+ * idle				: idle animation
+ * appear			: appear animation
 **/
 typedef struct s_ghost
 {
@@ -179,6 +184,9 @@ typedef struct s_ghost
  * Struct for the enemy of the game, skeleton or skely hehe
  * 
  * collide	: check if skeleton has collision with the wall
+ * loc		: location
+ * idle		: idle animation frame
+ * killed	: killed animation frame
 **/
 typedef struct s_skeleton
 {
@@ -192,6 +200,7 @@ typedef struct s_skeleton
  * The collectibles
  * 
  * collected: to check whether this item has been collected or not
+ * loc		: location
  * idle		: the idle animation
  * effect	: the animation when player collects it
 **/
@@ -199,12 +208,17 @@ typedef struct s_coll
 {
 	int			collected;
 	t_vector	loc;
-	t_anim		idle;
-	t_anim		effect;
+	t_anim		*idle;
+	t_anim		*effect;
 }	t_coll;
 
 /**
  * Info about the player
+ * 
+ * moves	: how many moves
+ * collected: collected how many collectible
+ * loc		: location
+ * idle		: idle animation
 **/
 typedef struct s_player
 {
@@ -216,19 +230,30 @@ typedef struct s_player
 
 /**
  * Basically everything the game needs to run
+ * 
+ * ref			: mlx pointer
+ * win			: mlx window pointer
+ * map_dat		: map data
+ * entity		: entity summary
+ * player		: the player
+ * ghost		: the ghost (only one)
+ * skeleton		: skeleton list
+ * collectibles	: collectible list
+ * vwall		: vertical wall list
+ * bg			: the background image
 **/
 typedef struct s_game
 {
 	void		*ref;
-	t_window	window;
+	void		*win;
 	t_map		map_data;
-	t_tile		**tilemap;
 	t_entity	entity;
 	t_player	player;
 	t_ghost		ghost;
-	t_skeleton	*skeleton;
-	t_coll		*collectibles;
-	t_vwall		*vwall;
+	t_list		*skeleton;
+	t_list		*collectibles;
+	t_list		*vwall;
+	t_image		bg;
 }	t_game;
 
 /** ==== FUNCTION PROTOTYPES ==== **/
@@ -247,7 +272,7 @@ char	**copy_map(t_game *game, char **map);
 char	**add_aesthetic(t_game *game);
 int		find_entity(t_vector *loc, char **map, char entity);
 
-/** ==== TILE MAP GENERATOR ==== **/
+/** ==== IMAGE ==== **/
 
 /** ==== RENDER ==== **/
 
