@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 14:46:24 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/09/25 13:20:37 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/09/25 17:22:28 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,33 @@
 # define KEY_D 2
 # define KEY_F 3
 
+/** ==== SPRITES ==== **/
+# define PLAYER1 "assets/player/player1.xpm"
+# define PLAYER2 "assets/player/player2.xpm"
+# define SKELY1 "assets/skeleton/skeleton1.xpm"
+# define SKELY2 "assets/skeleton/skeleton2.xpm"
+# define GHOST1 "assets/ghost/ghost1.xpm"
+# define GHOST2 "assets/ghost/ghost2.xpm"
+# define GHOSTI1 "assets/ghost/ghost_i1.xpm"
+# define KEY1 "assets/key/key1.xpm"
+# define KEY2 "assets/key/key2.xpm"
+# define WALL_U "assets/wall/wall_u.xpm"
+# define WALL_D "assets/wall/wall_d.xpm"
+# define WALL_L "assets/wall/wall_l.xpm"
+# define WALL_R "assets/wall/wall_r.xpm"
+# define WALL_UL "assets/wall/wall_ul.xpm"
+# define WALL_UR "assets/wall/wall_ur.xpm"
+# define WALL_DL "assets/wall/wall_dl.xpm"
+# define WALL_DR "assets/wall/wall_dr.xpm"
+# define VWALL1 "assets/vwall/vwall1.xpm"
+# define VWALL2 "assets/vwall/vwall2.xpm"
+# define VWALL3 "assets/vwall/vwall3.xpm"
+# define FLOOR "assets/other/floor.xpm"
+# define BLOCK "assets/other/block.xpm"
+# define EXITO "assets/other/exit_open.xpm"
+# define EXITC "assets/other/exit_close.xpm"
+# define BG "assets/other/bg.xpm"
+
 /** ==== UTILS STRUCTS ==== **/
 /**
  * Vector - For size, location, index, area
@@ -47,21 +74,28 @@ typedef struct s_vector
 	int	y;
 }	t_vector;
 
+typedef struct s_data_addr
+{
+	char	*buffer;
+	int		bits_per_pixel;
+	int		line_size;
+	int		endian;
+}	t_data_addr;
+
 /**
  * Image metadata
  * 
- * The only two useful things are ref and size :D
- * The rest idk the actual usage of them, but they need
- * to be initialized for mlx to use if needed
+ * ref				: pointer to the image
+ * size				: image size
+ * buffer			: memory address of the image
+ * bits_per_pixel	: the number of pixels in a bit
+ * line_size		: 
 **/
 typedef struct s_image
 {
 	void		*ref;
 	t_vector	size;
-	char		*pixels;
-	int			bits_per_pixel;
-	int			line_size;
-	int			endian;
+	t_data_addr	*data;
 }	t_image;
 
 /**
@@ -80,17 +114,17 @@ typedef struct s_entity
 /**
  * Tiletype enum
 **/
-typedef enum e_tiletype
-{
-	PLAYER = 'P',
-	FLOOR = '0',
-	WALL = '1',
-	VWALL = 'V',
-	COLLECTIBLE = 'C',
-	SKELETON = 'M',
-	GHOST = 'G',
-	EXIT = 'E'
-}	t_tiletype;
+// typedef enum e_tiletype
+// {
+// 	PLAYER = 'P',
+// 	FLOOR = '0',
+// 	WALL = '1',
+// 	VWALL = 'V',
+// 	COLLECTIBLE = 'C',
+// 	SKELETON = 'M',
+// 	GHOST = 'G',
+// 	EXIT = 'E'
+// }	t_tiletype;
 
 /**
  * Tile - Info about a tile and its surrounding
@@ -103,16 +137,16 @@ typedef enum e_tiletype
  * left	: the tile on the left
  * right: the tile on the right
 **/
-typedef struct s_tile
-{
-	t_tiletype		type;
-	t_tiletype		prev;
-	t_vector		loc;
-	struct s_tile	*up;
-	struct s_tile	*down;
-	struct s_tile	*left;
-	struct s_tile	*right;
-}	t_tile;
+// typedef struct s_tile
+// {
+// 	t_tiletype		type;
+// 	t_tiletype		prev;
+// 	t_vector		loc;
+// 	struct s_tile	*up;
+// 	struct s_tile	*down;
+// 	struct s_tile	*left;
+// 	struct s_tile	*right;
+// }	t_tile;
 
 /**
  * Info about the map
@@ -131,7 +165,6 @@ typedef struct s_map
 	char		**map;
 	char		*file;
 	t_vector	size;
-	t_image		map_img;
 }	t_map;
 
 /**
@@ -253,13 +286,15 @@ typedef struct s_game
 	t_list		*skeleton;
 	t_list		*collectibles;
 	t_list		*vwall;
-	t_image		bg;
+	t_image		*bg;
+	t_image		*map_img;
 }	t_game;
 
 /** ==== FUNCTION PROTOTYPES ==== **/
 
 /** ==== INITIALIZATION & ITS UTILITIES ==== **/
 void	entity_init(t_entity *enty);
+void	image_init(t_image *img, char *file, void *mlx);
 
 /** ==== MAP PARSER & ITS UTILITIES ==== **/
 void	map_validator(t_game *game, char *file);
@@ -271,8 +306,15 @@ void	show_path(char **map);
 char	**copy_map(t_game *game, char **map);
 char	**add_aesthetic(t_game *game);
 int		find_entity(t_vector *loc, char **map, char entity);
+void	mapiteri(t_game *game, void (*f)(t_game *, int, int));
 
 /** ==== IMAGE ==== **/
+t_image		*xpm_to_image(t_game *game, char *file, int set_data);
+t_image		*new_image(t_game *game, int width, int height, int set_data);
+t_data_addr	*set_data_addr(t_image *img);
+void		get_map_image(t_game *game);
+void		copy_image(t_image *src, t_image *dst, int x, int y);
+void    	draw_corner_wall(t_game *game, int x, int y);
 
 /** ==== RENDER ==== **/
 

@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 14:56:13 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/09/22 15:18:28 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/09/25 17:22:56 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,4 +137,22 @@ char	**copy_map(t_game *game, char **map)
 	}
 	copy[i] = NULL;
 	return (copy);
+}
+
+void	mapiteri(t_game *game, void (*f)(t_game *, int, int))
+{
+	int		x;
+	int		y;
+	char	*line;
+	char	**map;
+
+	map = game->map_data.map;
+	x = -1;
+	while (map[++x] != 0)
+	{
+		y = -1;
+		line = map[x];
+		while (line[++y] != '\0')
+			f(game, x, y);
+	}
 }
