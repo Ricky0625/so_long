@@ -6,11 +6,24 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 21:56:37 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/09/25 17:39:40 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/09/27 12:14:26 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/so_long.h"
+
+int	is_blk(char *buffer, int pixel)
+{
+	int	i;
+
+	i = -1;
+	while (++i < 4)
+	{
+		if ((buffer[pixel + i] | 0x00) != 0x00)
+			return (0);
+	}
+	return (1);
+}
 
 /**
  * Copy an image pixel by pixel onto another image.
@@ -39,10 +52,13 @@ void	copy_image(t_image *src, t_image *dst, int x, int y)
 		{
 			src_pixel = (j * src->data->line_size) + (i * 4);
 			dst_pixel = ((y + j) * dst->data->line_size) + ((x + i) * 4);
-			dst->data->buffer[dst_pixel + 0] = src->data->buffer[src_pixel + 0];
-			dst->data->buffer[dst_pixel + 1] = src->data->buffer[src_pixel + 1];
-			dst->data->buffer[dst_pixel + 2] = src->data->buffer[src_pixel + 2];
-			dst->data->buffer[dst_pixel + 3] = src->data->buffer[src_pixel + 3];
+			if (!is_blk(src->data->buffer, src_pixel))
+			{
+				dst->data->buffer[dst_pixel + 0] = src->data->buffer[src_pixel + 0];
+				dst->data->buffer[dst_pixel + 1] = src->data->buffer[src_pixel + 1];
+				dst->data->buffer[dst_pixel + 2] = src->data->buffer[src_pixel + 2];
+				dst->data->buffer[dst_pixel + 3] = src->data->buffer[src_pixel + 3];	
+			}
 		}
 	}
 }

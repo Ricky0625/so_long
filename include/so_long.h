@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 14:46:24 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/09/25 17:22:28 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/09/28 19:26:53 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 # define DEF "\033[0m"
 
 /** ==== MACROS ==== **/
-# define WIN_WIDTH 1280
+# define WIN_WIDTH 1408
 # define WIN_HEIGHT 896
 # define FILE_EXT ".ber"
 # define SPT_SIZE 128
@@ -112,43 +112,6 @@ typedef struct s_entity
 }	t_entity;
 
 /**
- * Tiletype enum
-**/
-// typedef enum e_tiletype
-// {
-// 	PLAYER = 'P',
-// 	FLOOR = '0',
-// 	WALL = '1',
-// 	VWALL = 'V',
-// 	COLLECTIBLE = 'C',
-// 	SKELETON = 'M',
-// 	GHOST = 'G',
-// 	EXIT = 'E'
-// }	t_tiletype;
-
-/**
- * Tile - Info about a tile and its surrounding
- * 
- * type	: the type of the tile (check t_tiletype for more idea)
- * prev	: the previous type of the tile
- * loc	: location
- * up	: the tile above
- * down	: the tile below
- * left	: the tile on the left
- * right: the tile on the right
-**/
-// typedef struct s_tile
-// {
-// 	t_tiletype		type;
-// 	t_tiletype		prev;
-// 	t_vector		loc;
-// 	struct s_tile	*up;
-// 	struct s_tile	*down;
-// 	struct s_tile	*left;
-// 	struct s_tile	*right;
-// }	t_tile;
-
-/**
  * Info about the map
  * 
  * This is mostly used for the map parsing and error checking
@@ -172,18 +135,44 @@ typedef struct s_map
  * 
  * current_tick	: to keep track when to change frame
  * duration		: the duration between each frame
- * num_of_frame	: number of frame
+ * num_of_frame	: number of frame (total frame)
  * frames		: the animation frames
 **/
 typedef struct s_anim
 {
 	int		current_tick;
 	int		duration;
-	int		num_of_frame;
-	void	**frames;
+	int		current_frame;
+	t_image	**frames;
 }	t_anim;
 
-/** ==== MAIN STRUCTS ==== **/
+/**
+ * A "database" for the images that I will use in the program
+ * 
+ * Each of the struct member is an array of struct type t_image.
+ * This will be initialized before generating the maps.
+ * The idea is that since the program will be hooked on a mlx_loop_hook
+ * to render next frame, it's not recommended to xpm_to_image everytime
+ * because it will cost a lot of memory. And since all these are constant,
+ * they should be initialized once only. When needed, just point to the
+ * array and get the image inside.
+**/
+typedef struct s_img_db {
+	t_image	**player_idle;
+	t_image	**ghost_idle;
+	t_image	**ghost_appear;
+	t_image	**ghost_cutscene;
+	t_image	**key_idle;
+	t_image	**key_effect;
+	t_image	**skeleton_idle;
+	t_image	**skeleton_killed;
+	t_image	**exit_open;
+	t_image	**vwall_idle;
+	t_image	**corner_wall;
+	t_image	**side_wall;
+	t_image	*floor;
+}	t_img_db;
+
 /**
  * Vertical wall (entity)
  * 
@@ -194,7 +183,7 @@ typedef struct s_anim
 typedef struct s_vwall
 {
 	t_vector	loc;
-	t_anim		*idle;
+	t_anim		idle;
 }	t_vwall;
 
 /**
@@ -209,8 +198,8 @@ typedef struct s_ghost
 {
 	int			appear_counter;
 	t_vector	loc;
-	t_anim		*idle;
-	t_anim		*appear;
+	t_anim		idle;
+	t_anim		appear;
 }	t_ghost;
 
 /**
@@ -225,8 +214,8 @@ typedef struct s_skeleton
 {
 	int			collide;
 	t_vector	loc;
-	t_anim		*idle;
-	t_anim		*killed;
+	t_anim		idle;
+	t_anim		killed;
 }	t_skeleton;
 
 /**
@@ -241,8 +230,8 @@ typedef struct s_coll
 {
 	int			collected;
 	t_vector	loc;
-	t_anim		*idle;
-	t_anim		*effect;
+	t_anim		idle;
+	t_anim		effect;
 }	t_coll;
 
 /**
@@ -258,8 +247,20 @@ typedef struct s_player
 	int			moves;
 	int			collected;
 	t_vector	loc;
-	t_anim		*idle;
+	t_anim		idle;
 }	t_player;
+
+/**
+ * Struct for the exit
+ * 
+ * clear	: check if the player clear the stage or not
+ * exit_open: animation for exit open
+**/
+typedef struct s_exit
+{
+	int		clear;
+	t_anim	exit_open;
+}	t_exit;
 
 /**
  * Basically everything the game needs to run
@@ -283,18 +284,31 @@ typedef struct s_game
 	t_entity	entity;
 	t_player	player;
 	t_ghost		ghost;
-	t_list		*skeleton;
+	t_exit		exit;
+	t_list		*skeletons;
 	t_list		*collectibles;
-	t_list		*vwall;
+	t_list		*vwalls;
 	t_image		*bg;
 	t_image		*map_img;
+	t_img_db	img_db;
 }	t_game;
 
 /** ==== FUNCTION PROTOTYPES ==== **/
 
 /** ==== INITIALIZATION & ITS UTILITIES ==== **/
 void	entity_init(t_entity *enty);
-void	image_init(t_image *img, char *file, void *mlx);
+void	anim_init(t_anim *anim, int duration, t_image **frames);
+void	vector_init(t_vector *vector);
+void	vwall_init(t_game *game, t_vwall *vwall);
+void    add_vwall(t_game *game, int x, int y);
+void	skeleton_init(t_game *game, t_skeleton *skeleton);
+void	add_skeleton(t_game *game, int x, int y);
+void	collectible_init(t_game *game, t_coll *coll);
+void	add_collectible(t_game *game, int x, int y);
+void	ghost_init(t_game *game, t_ghost *ghost);
+void	add_ghost(t_game *game, int x, int y);
+void	player_init(t_game *game, t_player *player);
+void    add_player(t_game *game, int x, int y);
 
 /** ==== MAP PARSER & ITS UTILITIES ==== **/
 void	map_validator(t_game *game, char *file);
@@ -312,9 +326,19 @@ void	mapiteri(t_game *game, void (*f)(t_game *, int, int));
 t_image		*xpm_to_image(t_game *game, char *file, int set_data);
 t_image		*new_image(t_game *game, int width, int height, int set_data);
 t_data_addr	*set_data_addr(t_image *img);
-void		get_map_image(t_game *game);
+void    	draw_map(t_game *game);
 void		copy_image(t_image *src, t_image *dst, int x, int y);
-void    	draw_corner_wall(t_game *game, int x, int y);
+void    	draw_base(t_game *game);
+void		get_map_position(t_game *game, t_vector *pos);
+void		lstiteri(t_game *game, t_list **lst, void (*f)(t_game *game, void *));
+void		draw_vertical_wall(t_game *game, void *content);
+void		draw_skeletons(t_game *game, void *content);
+void		draw_colls(t_game *game, void *content);
+void		draw_player(t_game *game);
+void		draw_ghost(t_game *game);
+void		draw_entity(t_game *game);
+
+void	fetch_all_imgs(t_game *game);
 
 /** ==== RENDER ==== **/
 

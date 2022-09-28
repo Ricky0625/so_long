@@ -1,26 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_map_image.c                                    :+:      :+:    :+:   */
+/*   utils_init.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/25 16:42:20 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/09/25 17:25:07 by wricky-t         ###   ########.fr       */
+/*   Created: 2022/09/22 14:42:41 by wricky-t          #+#    #+#             */
+/*   Updated: 2022/09/28 14:47:28 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/so_long.h"
 
-void    get_map_image(t_game *game)
+void	entity_init(t_entity *enty)
 {
-    int     width;
-    int     height;
-    char    **map;
+	enty->plyr = 0;
+	enty->ghost = 0;
+	enty->skely = 0;
+	enty->coll = 0;
+	enty->exit = 0;
+}
 
-    width = game->map_data.size.x * SPT_SIZE;
-    height = game->map_data.size.y * SPT_SIZE;
-    game->map_img = new_image(game, width, height, 1);
-    map = game->map_data.map;
-    mapiteri(game, draw_corner_wall);
+void	anim_init(t_anim *anim, int duration, t_image **frames)
+{
+	anim->current_tick = 0;
+	anim->duration = duration;
+	anim->current_frame = 0;
+	anim->frames = frames;
+}
+
+void	vector_init(t_vector *vector)
+{
+	vector->x = 0;
+	vector->y = 0;
 }

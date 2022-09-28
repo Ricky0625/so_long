@@ -6,7 +6,7 @@
 #    By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/02 10:46:26 by wricky-t          #+#    #+#              #
-#    Updated: 2022/09/25 17:25:57 by wricky-t         ###   ########.fr        #
+#    Updated: 2022/09/28 18:27:50 by wricky-t         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,16 +22,23 @@ SRC_DIR	:= srcs
 OBJ_DIR	:= objs
 MLX_DIR	:= mlx
 SRCS	:= so_long.c \
-		   init/init.c \
+		   init/utils_init.c \
+		   init/skeleton_init.c \
+		   init/vwall_init.c \
+		   init/player_init.c \
+		   init/ghost_init.c \
+		   init/collectible_init.c \
 		   map/map_aesthetic.c \
 		   map/map_format.c \
 		   map/map_format_utils.c \
 		   map/map_pathfinder.c \
 		   map/map_validator.c \
-		   image/image_utils.c \
-		   image/get_map_image.c \
-		   image/draw_wall.c \
+		   image/draw_map.c \
+		   image/draw_base.c \
+		   image/draw_entity.c \
+		   image/draw_utils.c \
 		   image/copy_image.c \
+		   image/img_db_init.c \
 		   free/free.c
 SRCS	:= $(SRCS:%=$(SRC_DIR)/%)
 OBJS	:= $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
@@ -83,7 +90,7 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@echo "$(GR)↻ compiling...$(DF)"
 
 lib:
-	@make all -C $(LIB42)
+	@make bonus -C $(LIB42)
 
 clean:
 	@-[ -d $(OBJ_DIR) ] && $(RM) $(OBJ_DIR)
