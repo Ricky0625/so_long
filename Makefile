@@ -6,7 +6,7 @@
 #    By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/02 10:46:26 by wricky-t          #+#    #+#              #
-#    Updated: 2022/09/28 18:27:50 by wricky-t         ###   ########.fr        #
+#    Updated: 2022/10/03 14:14:39 by wricky-t         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ NAME	:= so_long
 #   INGREDIENTS                                                                #
 #------------------------------------------------------------------------------#
 CC		:= gcc
-CFLAGS	:= -Wall -Wextra -Werror -I$(MLX_DIR) -I$(INC) -g3 -fsanitize=address
+CFLAGS	:= -Wall -Wextra -Werror -I$(MLX_DIR) -I$(INC) #-g3 -fsanitize=address
 MLXFLAGS:= -lmlx -framework OpenGL -framework AppKit
 SRC_DIR	:= srcs
 OBJ_DIR	:= objs
