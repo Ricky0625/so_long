@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 16:29:49 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/09/28 18:22:13 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/10/03 15:23:51 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	draw_vertical_wall(t_game *game, void *content)
 	t_image	*map_img;
 	t_image	**frames;
 	int		*current_frame;
-	
+
 	vwall = content;
 	map_img = game->map_img;
 	frames = vwall->idle.frames;
@@ -35,7 +35,7 @@ void	draw_skeletons(t_game *game, void *content)
 	t_image		*map_img;
 	t_image		**frames;
 	int			*current_frame;
-	
+
 	skeleton = content;
 	map_img = game->map_img;
 	frames = skeleton->idle.frames;
@@ -52,7 +52,7 @@ void	draw_colls(t_game *game, void *content)
 	t_image	*map_img;
 	t_image	**frames;
 	int		*current_frame;
-	
+
 	coll = content;
 	map_img = game->map_img;
 	frames = coll->idle.frames;
@@ -69,7 +69,7 @@ void	draw_player(t_game *game)
 	t_image		*map_img;
 	t_image		**frames;
 	int			*current_frame;
-	
+
 	player = &game->player;
 	map_img = game->map_img;
 	frames = player->idle.frames;
@@ -86,7 +86,7 @@ void	draw_ghost(t_game *game)
 	t_image	*map_img;
 	t_image	**frames;
 	int		*current_frame;
-	
+
 	ghost = &game->ghost;
 	map_img = game->map_img;
 	frames = ghost->idle.frames;

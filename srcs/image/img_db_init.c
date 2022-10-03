@@ -6,15 +6,15 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 13:39:23 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/10/03 14:18:05 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/10/03 15:26:23 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/so_long.h"
 
-static void img_db_init(t_game *game)
+static void	img_db_init(t_game *game)
 {
-	t_img_db *img_db;
+	t_img_db	*img_db;
 
 	img_db = &game->img_db;
 	img_db->player_idle = ft_calloc(3, sizeof(t_image *));
@@ -31,7 +31,7 @@ static void img_db_init(t_game *game)
 	img_db->side_wall = ft_calloc(5, sizeof(t_image *));
 }
 
-static void fetch_wall_imgs(t_game *game, t_img_db *img_db)
+static void	fetch_wall_imgs(t_game *game, t_img_db *img_db)
 {
 	img_db->corner_wall[0] = xpm_to_image(game, WALL_UL, 1);
 	img_db->corner_wall[1] = xpm_to_image(game, WALL_UR, 1);
@@ -43,7 +43,7 @@ static void fetch_wall_imgs(t_game *game, t_img_db *img_db)
 	img_db->side_wall[3] = xpm_to_image(game, WALL_D, 1);
 }
 
-static void fetch_entity_imgs(t_game *game, t_img_db *img_db)
+static void	fetch_entity_imgs(t_game *game, t_img_db *img_db)
 {
 	img_db->player_idle[0] = xpm_to_image(game, PLAYER1, 1);
 	img_db->player_idle[1] = xpm_to_image(game, PLAYER2, 1);
@@ -68,9 +68,9 @@ static void fetch_entity_imgs(t_game *game, t_img_db *img_db)
 	img_db->vwall_idle[2] = xpm_to_image(game, VWALL3, 1);
 }
 
-void fetch_all_imgs(t_game *game)
+void	fetch_all_imgs(t_game *game)
 {
-	t_img_db *img_db;
+	t_img_db	*img_db;
 
 	img_db_init(game);
 	img_db = &game->img_db;

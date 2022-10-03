@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 14:05:05 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/10/03 14:55:48 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/10/03 15:25:11 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,18 +28,18 @@
  * 	  meaning it's not a valid file extension.
  * 4. When it's not a valid file extension, output error msg and exit.
  **/
-static void check_map_name(t_game *game)
+static void	check_map_name(t_game *game)
 {
-	char *file;
-	char *fe;
-	size_t cmp_len;
+	char	*file;
+	char	*fe;
+	size_t	cmp_len;
 
 	file = game->map_data.file;
 	fe = ft_strrchr(file, '.');
 	cmp_len = ft_strlen(FILE_EXT);
 	if (ft_strlen(fe) > cmp_len || ft_strncmp(fe, FILE_EXT, cmp_len) != 0)
 	{
-		ft_putstr_fd(RED  "[ERROR]: File extension not supported!\n"  DEF, 2);
+		ft_putstr_fd(RED"[ERROR]: File extension not supported!\n"DEF, 2);
 		free(game);
 		exit(2);
 	}
@@ -50,22 +50,22 @@ static void check_map_name(t_game *game)
  *
  * Strjoin all the line all together into a string
  **/
-static void get_raw_map(t_game *game, int fd)
+static void	get_raw_map(t_game *game, int fd)
 {
-	char *str;
-	char *raw;
-	char *temp;
+	char	*str;
+	char	*raw;
+	char	*temp;
 
 	raw = NULL;
 	while (1)
 	{
 		str = get_next_line(fd);
 		if (str == NULL)
-			break;
+			break ;
 		else if (raw == NULL)
 		{
 			raw = str;
-			continue;
+			continue ;
 		}
 		temp = raw;
 		raw = ft_strjoin(raw, str);
@@ -88,10 +88,10 @@ static void get_raw_map(t_game *game, int fd)
  * 	  line (it does not end with '\n')
  * 4. Set width and height to the map_data
  **/
-static void get_map_size(t_game *game, char *raw)
+static void	get_map_size(t_game *game, char *raw)
 {
-	int width;
-	int height;
+	int	width;
+	int	height;
 
 	width = 0;
 	height = 1;
@@ -129,10 +129,10 @@ static void get_map_size(t_game *game, char *raw)
  * 7. Set the map to map_data
  * 6. Close file
  **/
-void map_validator(t_game *game, char *file)
+void	map_validator(t_game *game, char *file)
 {
-	int fd;
-	char **map;
+	int		fd;
+	char	**map;
 
 	game->map_data.file = file;
 	check_map_name(game);
