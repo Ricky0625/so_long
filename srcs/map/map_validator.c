@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 14:05:05 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/09/13 15:51:33 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/10/03 14:53:25 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 /**
  * Check if the file extension is accepted or not
- * 
+ *
  * fe		: The file extension of the map (input)
  * cmp_len	: Length that will be used for strncmp
- * 
+ *
  * 1. Use ft_strrchr to locate the last occurrence of '.'.
  * 2. Get the len of valid file extension ".ber", which will always be 4
  * 3. If we want to use ft_strncmp, we have to use the length of longer
@@ -27,19 +27,19 @@
  *    If input file length is less or equal, use strncmp. If not 0,
  * 	  meaning it's not a valid file extension.
  * 4. When it's not a valid file extension, output error msg and exit.
-**/
-static void	check_map_name(t_game *game)
+ **/
+static void check_map_name(t_game *game)
 {
-	char	*file;
-	char	*fe;
-	size_t	cmp_len;
+	char *file;
+	char *fe;
+	size_t cmp_len;
 
 	file = game->map_data.file;
 	fe = ft_strrchr(file, '.');
 	cmp_len = ft_strlen(FILE_EXT);
 	if (ft_strlen(fe) > cmp_len || ft_strncmp(fe, FILE_EXT, cmp_len) != 0)
 	{
-		ft_putstr_fd(RED"[ERROR]: File extension not supported!\n"DEF, 2);
+		ft_putstr_fd(RED "[ERROR]: File extension not supported!\n" DEF, 2);
 		free(game);
 		exit(2);
 	}
@@ -47,25 +47,25 @@ static void	check_map_name(t_game *game)
 
 /**
  * Get raw map (Unprocessed map, not checked)
- * 
+ *
  * Strjoin all the line all together into a string
-**/
-static void	get_raw_map(t_game *game, int fd)
+ **/
+static void get_raw_map(t_game *game, int fd)
 {
-	char	*str;
-	char	*raw;
-	char	*temp;
+	char *str;
+	char *raw;
+	char *temp;
 
 	raw = NULL;
 	while (1)
 	{
 		str = get_next_line(fd);
 		if (str == NULL)
-			break ;
+			break;
 		else if (raw == NULL)
 		{
 			raw = str;
-			continue ;
+			continue;
 		}
 		temp = raw;
 		raw = ft_strjoin(raw, str);
@@ -78,7 +78,7 @@ static void	get_raw_map(t_game *game, int fd)
 /**
  * Get the size of the map
  * This does not check if the map is valid or not.
- * 
+ *
  * 1. Get the width of the map
  * 	  Count the first line until it encounters '\n' OR '\0'
  * 2. Reset pointer to the base address of raw
@@ -87,17 +87,17 @@ static void	get_raw_map(t_game *game, int fd)
  * 	  1 which means we already consider the last line as one
  * 	  line (it does not end with '\n')
  * 4. Set width and height to the map_data
-**/
-static void	get_map_size(t_game *game, char *raw)
+ **/
+static void get_map_size(t_game *game, char *raw)
 {
-	int	width;
-	int	height;
+	int width;
+	int height;
 
 	width = 0;
 	height = 1;
 	if (raw == NULL)
 	{
-		ft_putstr_fd(RED"[ERROR]: Empty map!\n", 2);
+		ft_putstr_fd(RED "[ERROR]: Empty map!\n", 2);
 		free(game->map_data.raw);
 		exit(EXIT_FAILURE);
 	}
@@ -119,7 +119,7 @@ static void	get_map_size(t_game *game, char *raw)
 
 /**
  * Validate the map
- * 
+ *
  * 1. Start by checking if the file extension is accepted
  *    Accepted: .ber, yo.ber.ber, 123.ber
  * 2. Get the raw map in a string format
@@ -128,18 +128,18 @@ static void	get_map_size(t_game *game, char *raw)
  * 5. Check map format
  * 7. Set the map to map_data
  * 6. Close file
-**/
-void	map_validator(t_game *game, char *file)
+ **/
+void map_validator(t_game *game, char *file)
 {
-	int		fd;
-	char	**map;
+	int fd;
+	char **map;
 
 	game->map_data.file = file;
 	check_map_name(game);
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
 	{
-		ft_putstr_fd(RED"[ERROR]: File does not exist!\n"DEF, 2);
+		ft_putstr_fd(RED "[ERROR]: File does not exist!\n" DEF, 2);
 		free(game);
 		exit(2);
 	}
@@ -149,5 +149,6 @@ void	map_validator(t_game *game, char *file)
 	game->map_data.map = map;
 	check_map_format(game);
 	add_aesthetic(game);
+	free(map);
 	close(fd);
 }

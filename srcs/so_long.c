@@ -6,17 +6,17 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 15:21:27 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/09/28 18:41:19 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/10/03 14:31:08 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/so_long.h"
 
-static void	update_entity(t_game *game)
+static void update_entity(t_game *game)
 {
-	int		x;
-	int		y;
-	char	**map;
+	int x;
+	int y;
+	char **map;
 
 	x = -1;
 	map = game->map_data.map;
@@ -41,8 +41,8 @@ static void	update_entity(t_game *game)
 
 /**
  * Initialize the game, basically everything
-**/
-static void	game_init(t_game *game)
+ **/
+static void game_init(t_game *game)
 {
 	game->ref = mlx_init();
 	game->win = mlx_new_window(game->ref, WIN_WIDTH, WIN_HEIGHT, "so_long");
@@ -56,19 +56,19 @@ static void	game_init(t_game *game)
 
 /**
  * Start the game
- * 
+ *
  * 1. Initialize game
  * 2. Parse map
-**/
-static t_game	*start_game(int ac, char **av)
+ **/
+static t_game *start_game(int ac, char **av)
 {
-	t_game	*game;
-	char	*file;
+	t_game *game;
+	char *file;
 
 	if (ac != 2)
 	{
-		ft_putstr_fd(RED"[ERROR]: Invalid Usage!\n"DEF, 2);
-		ft_putstr_fd(RED"./so_long [name.ber]\n"DEF, 2);
+		ft_putstr_fd(RED "[ERROR]: Invalid Usage!\n" DEF, 2);
+		ft_putstr_fd(RED "./so_long [name.ber]\n" DEF, 2);
 		exit(EXIT_FAILURE);
 	}
 	file = av[1];
@@ -86,14 +86,12 @@ static t_game	*start_game(int ac, char **av)
  * 2. Key hook (input_listener)
  * 3. render
  * 4. mlx_loop
-**/
-int	main(int ac, char **av)
+ **/
+int main(int ac, char **av)
 {
-	t_game		*game;
-	// t_vector	pos;
+	t_game *game;
 
 	game = start_game(ac, av);
-	// get_map_position(game, &pos);
 	mlx_put_image_to_window(game->ref, game->win, game->bg->ref, 0, 0);
 	mlx_put_image_to_window(game->ref, game->win, game->map_img->ref, 0, 0);
 	mlx_destroy_image(game->ref, game->bg->ref);
