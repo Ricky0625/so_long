@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 14:05:05 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/10/03 14:53:25 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/10/03 14:55:48 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static void check_map_name(t_game *game)
 	cmp_len = ft_strlen(FILE_EXT);
 	if (ft_strlen(fe) > cmp_len || ft_strncmp(fe, FILE_EXT, cmp_len) != 0)
 	{
-		ft_putstr_fd(RED "[ERROR]: File extension not supported!\n" DEF, 2);
+		ft_putstr_fd(RED  "[ERROR]: File extension not supported!\n"  DEF, 2);
 		free(game);
 		exit(2);
 	}
@@ -151,4 +151,5 @@ void map_validator(t_game *game, char *file)
 	add_aesthetic(game);
 	free(map);
 	close(fd);
+	free(map);
 }
