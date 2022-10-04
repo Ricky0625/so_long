@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 14:46:24 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/09/28 19:26:53 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/10/04 17:15:48 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define SO_LONG_H
 
 # include "../lib42/lib42.h"
+# include "../assets/sprites.h"
 # include "mlx.h"
 # include <stdlib.h>
 
@@ -24,8 +25,8 @@
 # define DEF "\033[0m"
 
 /** ==== MACROS ==== **/
-# define WIN_WIDTH 1408
-# define WIN_HEIGHT 896
+# define WIN_WIDTH 1152
+# define WIN_HEIGHT 640
 # define FILE_EXT ".ber"
 # define SPT_SIZE 128
 # define GNAME "so_long: "
@@ -36,33 +37,6 @@
 # define KEY_S 1
 # define KEY_D 2
 # define KEY_F 3
-
-/** ==== SPRITES ==== **/
-# define PLAYER1 "assets/player/player1.xpm"
-# define PLAYER2 "assets/player/player2.xpm"
-# define SKELY1 "assets/skeleton/skeleton1.xpm"
-# define SKELY2 "assets/skeleton/skeleton2.xpm"
-# define GHOST1 "assets/ghost/ghost1.xpm"
-# define GHOST2 "assets/ghost/ghost2.xpm"
-# define GHOSTI1 "assets/ghost/ghost_i1.xpm"
-# define KEY1 "assets/key/key1.xpm"
-# define KEY2 "assets/key/key2.xpm"
-# define WALL_U "assets/wall/wall_u.xpm"
-# define WALL_D "assets/wall/wall_d.xpm"
-# define WALL_L "assets/wall/wall_l.xpm"
-# define WALL_R "assets/wall/wall_r.xpm"
-# define WALL_UL "assets/wall/wall_ul.xpm"
-# define WALL_UR "assets/wall/wall_ur.xpm"
-# define WALL_DL "assets/wall/wall_dl.xpm"
-# define WALL_DR "assets/wall/wall_dr.xpm"
-# define VWALL1 "assets/vwall/vwall1.xpm"
-# define VWALL2 "assets/vwall/vwall2.xpm"
-# define VWALL3 "assets/vwall/vwall3.xpm"
-# define FLOOR "assets/other/floor.xpm"
-# define BLOCK "assets/other/block.xpm"
-# define EXITO "assets/other/exit_open.xpm"
-# define EXITC "assets/other/exit_close.xpm"
-# define BG "assets/other/bg.xpm"
 
 /** ==== UTILS STRUCTS ==== **/
 /**
@@ -166,7 +140,7 @@ typedef struct s_img_db {
 	t_image	**key_effect;
 	t_image	**skeleton_idle;
 	t_image	**skeleton_killed;
-	t_image	**exit_open;
+	t_image	**exit;
 	t_image	**vwall_idle;
 	t_image	**corner_wall;
 	t_image	**side_wall;
@@ -183,7 +157,7 @@ typedef struct s_img_db {
 typedef struct s_vwall
 {
 	t_vector	loc;
-	t_anim		idle;
+	t_anim		anim;
 }	t_vwall;
 
 /**
@@ -198,8 +172,7 @@ typedef struct s_ghost
 {
 	int			appear_counter;
 	t_vector	loc;
-	t_anim		idle;
-	t_anim		appear;
+	t_anim		anim;
 }	t_ghost;
 
 /**
@@ -214,8 +187,7 @@ typedef struct s_skeleton
 {
 	int			collide;
 	t_vector	loc;
-	t_anim		idle;
-	t_anim		killed;
+	t_anim		anim;
 }	t_skeleton;
 
 /**
@@ -230,8 +202,7 @@ typedef struct s_coll
 {
 	int			collected;
 	t_vector	loc;
-	t_anim		idle;
-	t_anim		effect;
+	t_anim		anim;
 }	t_coll;
 
 /**
@@ -247,7 +218,7 @@ typedef struct s_player
 	int			moves;
 	int			collected;
 	t_vector	loc;
-	t_anim		idle;
+	t_anim		anim;
 }	t_player;
 
 /**
@@ -259,7 +230,7 @@ typedef struct s_player
 typedef struct s_exit
 {
 	int		clear;
-	t_anim	exit_open;
+	t_anim	anim;
 }	t_exit;
 
 /**
@@ -349,6 +320,7 @@ void	fetch_all_imgs(t_game *game);
 /** ==== GHOST MECHANISM ==== **/
 
 /** ==== ANIMATION ==== **/
+void    update_animation(t_game *game);
 
 /** ==== FREE ==== **/
 void	free_map(char **map);

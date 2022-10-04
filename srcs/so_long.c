@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 15:21:27 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/10/03 15:28:42 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/10/04 16:21:57 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,37 @@ static void	update_entity(t_game *game)
 				add_ghost(game, x, y);
 		}
 	}
+}
+
+/**
+ * Tested idea:
+ * 1. Update current_tick
+ * 2. If current_tick is the idle duration, increment frame, reset current_tick
+ * 2. Draw map
+ * 3. Put image again
+**/
+int	render(t_game *game)
+{
+	update_animation(game);
+	draw_map(game);
+	mlx_clear_window(game->ref, game->win);
+	mlx_put_image_to_window(game->ref, game->win, game->bg->ref, 0, 0);
+	mlx_put_image_to_window(game->ref, game->win, game->map_img->ref, 0, 0);
+	mlx_destroy_image(game->ref, game->map_img->ref);
+	return (1);
+}
+
+/**
+ * @brief 
+ * 
+ * @param game 
+ * @return int 
+ */
+int	close_game(t_game *game)
+{
+	(void)game;
+	exit(0);
+	return (1);
 }
 
 /**
@@ -92,10 +123,8 @@ int	main(int ac, char **av)
 	t_game	*game;
 
 	game = start_game(ac, av);
-	mlx_put_image_to_window(game->ref, game->win, game->bg->ref, 0, 0);
-	mlx_put_image_to_window(game->ref, game->win, game->map_img->ref, 0, 0);
-	mlx_destroy_image(game->ref, game->bg->ref);
-	mlx_destroy_image(game->ref, game->map_img->ref);
+	mlx_loop_hook(game->ref, render, game);
+	mlx_hook(game->win, 17, 0L, close_game, game);
 	mlx_loop(game->ref);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 15:30:28 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/09/28 18:25:53 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/10/04 12:04:57 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	player_init(t_game *game, t_player *player)
 {
 	player->collected = 0;
 	player->moves = 0;
-	anim_init(&player->idle, 10, game->img_db.player_idle);
+	anim_init(&player->anim, 12, game->img_db.player_idle);
 }
 
 void	add_player(t_game *game, int x, int y)

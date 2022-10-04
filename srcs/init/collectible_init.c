@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 15:20:32 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/09/28 18:05:12 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/10/04 16:29:31 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,7 @@
 void	collectible_init(t_game *game, t_coll *coll)
 {
 	coll->collected = 0;
-	anim_init(&coll->idle, 10, game->img_db.key_idle);
-	anim_init(&coll->effect, 10, game->img_db.key_effect);
+	anim_init(&coll->anim, 10, game->img_db.key_idle);
 }
 
 void	add_collectible(t_game *game, int x, int y)

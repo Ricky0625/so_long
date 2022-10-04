@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 14:03:05 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/10/03 15:26:53 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/10/04 14:10:21 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	vwall_init(t_game *game, t_vwall *vwall)
 {
-	anim_init(&vwall->idle, 10, game->img_db.vwall_idle);
+	anim_init(&vwall->anim, 10, game->img_db.vwall_idle);
 	vector_init(&vwall->loc);
 }
 

@@ -6,7 +6,7 @@
 #    By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/02 10:46:26 by wricky-t          #+#    #+#              #
-#    Updated: 2022/10/03 14:14:39 by wricky-t         ###   ########.fr        #
+#    Updated: 2022/10/04 17:30:55 by wricky-t         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ NAME	:= so_long
 #   INGREDIENTS                                                                #
 #------------------------------------------------------------------------------#
 CC		:= gcc
-CFLAGS	:= -Wall -Wextra -Werror -I$(MLX_DIR) -I$(INC) #-g3 -fsanitize=address
+CFLAGS	:= -Wall -Wextra -Werror -I$(MLX_DIR) -I$(INC) -g3 -fsanitize=address
 MLXFLAGS:= -lmlx -framework OpenGL -framework AppKit
 SRC_DIR	:= srcs
 OBJ_DIR	:= objs
@@ -39,6 +39,7 @@ SRCS	:= so_long.c \
 		   image/draw_utils.c \
 		   image/copy_image.c \
 		   image/img_db_init.c \
+		   anim/update_frame.c \
 		   free/free.c
 SRCS	:= $(SRCS:%=$(SRC_DIR)/%)
 OBJS	:= $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
