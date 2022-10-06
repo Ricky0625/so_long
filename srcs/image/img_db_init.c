@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 13:39:23 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/10/06 15:53:40 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/10/06 16:03:22 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,4 +112,5 @@ void	fetch_all_imgs(t_game *game)
 	fetch_entity_imgs(game, img_db);
 	fetch_effect_imgs(game, img_db);
 	img_db->floor = xpm_to_image(game, FLOOR, 1);
+	img_db->block = xpm_to_image(game, BLOCK, 1);
 }

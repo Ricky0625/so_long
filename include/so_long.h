@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 14:46:24 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/10/06 15:18:39 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/10/06 16:03:04 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,6 +149,7 @@ typedef struct s_img_db {
 	t_image	**corner_wall;
 	t_image	**side_wall;
 	t_image	*floor;
+	t_image	*block;
 }	t_img_db;
 
 /**
