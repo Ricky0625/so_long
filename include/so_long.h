@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 14:46:24 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/10/06 12:48:41 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/10/06 15:18:39 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -270,14 +270,16 @@ typedef struct s_game
 }	t_game;
 
 /**
- * @brief A enum struct to represent entity that will be in a list
+ * @brief A enum struct to represent entity
  */
-typedef enum e_elst_type
+typedef enum e_enty_type
 {
-	SKELETON,
-	COLLECTIBLE,
-	VWALL
-}	t_elst_type;
+	PLAYER = 'P',
+	GHOST = 'G',
+	SKELETON = 'M',
+	COLLECTIBLE = 'C',
+	VWALL = 'V'
+}	t_enty_type;
 
 /** ==== FUNCTION PROTOTYPES ==== **/
 
@@ -285,16 +287,11 @@ typedef enum e_elst_type
 void		entity_init(t_entity *enty);
 void		anim_init(t_anim *anim, int duration, t_image **frames);
 void		vector_init(t_vector *vector);
-void		vwall_init(t_game *game, t_vwall *vwall);
-void		add_vwall(t_game *game, int x, int y);
-void		skeleton_init(t_game *game, t_skeleton *skeleton);
-void		add_skeleton(t_game *game, int x, int y);
-void		collectible_init(t_game *game, t_coll *coll);
-void		add_collectible(t_game *game, int x, int y);
-void		ghost_init(t_game *game, t_ghost *ghost);
-void		add_ghost(t_game *game, int x, int y);
-void		player_init(t_game *game, t_player *player);
-void		add_player(t_game *game, int x, int y);
+void		add_vwall(t_game *game, t_vector loc);
+void		add_skeleton(t_game *game, t_vector loc);
+void		add_collectible(t_game *game, t_vector loc);
+void		add_ghost(t_game *game, t_vector loc);
+void		add_player(t_game *game, t_vector loc);
 
 /** ==== MAP PARSER & ITS UTILITIES ==== **/
 void		map_validator(t_game *game, char *file);
@@ -337,6 +334,7 @@ void		fetch_all_imgs(t_game *game);
 
 /** ==== ANIMATION ==== **/
 void		update_animation(t_game *game);
+void		update_entity(t_game *game);
 
 /** ==== FREE ==== **/
 void		free_map(char **map);

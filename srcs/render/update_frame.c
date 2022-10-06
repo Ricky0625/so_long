@@ -6,15 +6,15 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 17:54:13 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/10/06 12:55:13 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/10/06 15:39:36 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/so_long.h"
 
-void update_frame(t_anim *anim)
+void	update_frame(t_anim *anim)
 {
-	t_image **frames;
+	t_image	**frames;
 
 	frames = anim->frames;
 	anim->current_tick++;
@@ -27,7 +27,7 @@ void update_frame(t_anim *anim)
 	}
 }
 
-void	lst_update_frame(t_list *lst, t_elst_type type, void (*updt)(t_anim *))
+void	lst_update_frame(t_list *lst, t_enty_type type, void (*updt)(t_anim *))
 {
 	while (lst != NULL)
 	{
@@ -41,7 +41,7 @@ void	lst_update_frame(t_list *lst, t_elst_type type, void (*updt)(t_anim *))
 	}
 }
 
-void update_animation(t_game *game)
+void	update_animation(t_game *game)
 {
 	update_frame(&game->player.anim);
 	update_frame(&game->ghost.anim);

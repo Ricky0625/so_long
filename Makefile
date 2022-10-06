@@ -6,7 +6,7 @@
 #    By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/02 10:46:26 by wricky-t          #+#    #+#              #
-#    Updated: 2022/10/06 12:59:46 by wricky-t         ###   ########.fr        #
+#    Updated: 2022/10/06 15:19:04 by wricky-t         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,11 +23,7 @@ OBJ_DIR	:= objs
 MLX_DIR	:= mlx
 SRCS	:= so_long.c \
 		   init/utils_init.c \
-		   init/skeleton_init.c \
-		   init/vwall_init.c \
-		   init/player_init.c \
-		   init/ghost_init.c \
-		   init/collectible_init.c \
+		   init/add_entity.c \
 		   map/map_aesthetic.c \
 		   map/map_format.c \
 		   map/map_format_utils.c \
@@ -40,6 +36,7 @@ SRCS	:= so_long.c \
 		   image/copy_image.c \
 		   image/img_db_init.c \
 		   render/update_frame.c \
+		   render/update_stats.c \
 		   free/free.c
 SRCS	:= $(SRCS:%=$(SRC_DIR)/%)
 OBJS	:= $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)

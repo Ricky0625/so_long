@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 15:21:27 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/10/06 10:32:30 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/10/06 13:27:30 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,32 +17,32 @@
  * 
  * @param game 
  */
-static void	update_entity(t_game *game)
-{
-	int		x;
-	int		y;
-	char	**map;
+// static void	update_entity(t_game *game)
+// {
+// 	int		x;
+// 	int		y;
+// 	char	**map;
 
-	x = -1;
-	map = game->map_data.map;
-	while (map[++x] != NULL)
-	{
-		y = -1;
-		while (map[x][++y] != '\0')
-		{
-			if (map[x][y] == 'V')
-				add_vwall(game, x, y);
-			else if (map[x][y] == 'C')
-				add_collectible(game, x, y);
-			else if (map[x][y] == 'M')
-				add_skeleton(game, x, y);
-			else if (map[x][y] == 'P')
-				add_player(game, x, y);
-			else if (map[x][y] == 'G')
-				add_ghost(game, x, y);
-		}
-	}
-}
+// 	x = -1;
+// 	map = game->map_data.map;
+// 	while (map[++x] != NULL)
+// 	{
+// 		y = -1;
+// 		while (map[x][++y] != '\0')
+// 		{
+// 			if (map[x][y] == 'V')
+// 				add_vwall(game, x, y);
+// 			else if (map[x][y] == 'C')
+// 				add_collectible(game, x, y);
+// 			else if (map[x][y] == 'M')
+// 				add_skeleton(game, x, y);
+// 			else if (map[x][y] == 'P')
+// 				add_player(game, x, y);
+// 			else if (map[x][y] == 'G')
+// 				add_ghost(game, x, y);
+// 		}
+// 	}
+// }
 
 /**
  * Tested idea:
