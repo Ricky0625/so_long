@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 14:46:24 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/10/04 17:15:48 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/10/06 12:48:41 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,9 @@
 # define KEY_F 3
 
 /** ==== UTILS STRUCTS ==== **/
+
 /**
- * Vector - For size, location, index, area
+ * @brief Vector - For size, location, index, area
 **/
 typedef struct s_vector
 {
@@ -48,6 +49,9 @@ typedef struct s_vector
 	int	y;
 }	t_vector;
 
+/**
+ * @brief Image data address
+ */
 typedef struct s_data_addr
 {
 	char	*buffer;
@@ -57,13 +61,13 @@ typedef struct s_data_addr
 }	t_data_addr;
 
 /**
- * Image metadata
+ * @brief Image metadata
  * 
- * ref				: pointer to the image
- * size				: image size
- * buffer			: memory address of the image
- * bits_per_pixel	: the number of pixels in a bit
- * line_size		: 
+ * @param ref			: pointer to the image
+ * @param size			: image size
+ * @param buffer		: memory address of the image
+ * @param bits_per_pixel: the number of pixels in a bit
+ * @param line_size		: 
 **/
 typedef struct s_image
 {
@@ -73,9 +77,9 @@ typedef struct s_image
 }	t_image;
 
 /**
- * Basically a summary of all the entities (how many of them)
+ * @brief Basically a summary of all the entities (how many of them)
  * Can use it for error checking.
-**/
+ */
 typedef struct s_entity
 {
 	int	plyr;
@@ -86,16 +90,16 @@ typedef struct s_entity
 }	t_entity;
 
 /**
- * Info about the map
+ * @brief Info about the map
  * 
  * This is mostly used for the map parsing and error checking
  * before the map has been converted into tile map
  * 
- * raw	: raw map
- * map	: processed and validated map
- * file	: the name of the file
- * size	: the size of the map
-**/
+ * @param raw	: raw map
+ * @param map	: processed and validated map
+ * @param file	: the name of the file
+ * @param size	: the size of the map
+ */
 typedef struct s_map
 {
 	char		*raw;
@@ -105,13 +109,13 @@ typedef struct s_map
 }	t_map;
 
 /**
- * Struct for animation
+ * @brief Struct for animation
  * 
- * current_tick	: to keep track when to change frame
- * duration		: the duration between each frame
- * num_of_frame	: number of frame (total frame)
- * frames		: the animation frames
-**/
+ * @param current_tick	: to keep track when to change frame
+ * @param duration		: the duration between each frame
+ * @param num_of_frame	: number of frame (total frame)
+ * @param frames		: the animation frames
+ */
 typedef struct s_anim
 {
 	int		current_tick;
@@ -121,16 +125,16 @@ typedef struct s_anim
 }	t_anim;
 
 /**
- * A "database" for the images that I will use in the program
+ * @brief A "database" for the images
  * 
- * Each of the struct member is an array of struct type t_image.
+ * @details Each of the struct member is an array of struct type t_image.
  * This will be initialized before generating the maps.
  * The idea is that since the program will be hooked on a mlx_loop_hook
  * to render next frame, it's not recommended to xpm_to_image everytime
  * because it will cost a lot of memory. And since all these are constant,
  * they should be initialized once only. When needed, just point to the
  * array and get the image inside.
-**/
+ */
 typedef struct s_img_db {
 	t_image	**player_idle;
 	t_image	**ghost_idle;
@@ -148,12 +152,12 @@ typedef struct s_img_db {
 }	t_img_db;
 
 /**
- * Vertical wall (entity)
+ * @brief Vertical wall (entity)
  * 
  * Mostly will use this struct to animate the wall
- * loc	: location
- * idle	: idle animation
-**/
+ * @param loc	: location
+ * @param anim	: idle animation
+ */
 typedef struct s_vwall
 {
 	t_vector	loc;
@@ -161,13 +165,12 @@ typedef struct s_vwall
 }	t_vwall;
 
 /**
- * Struct for the special entity of the game, ghost or ghosy (not enemy)
+ * @brief Struct for the special entity of the game, ghost or ghosy (not enemy)
  * 
- * appear_counter	: pass by how many times to let ghost appear
- * loc				: location
- * idle				: idle animation
- * appear			: appear animation
-**/
+ * @param appear_counter: pass by how many times to let ghost appear
+ * @param loc			: location
+ * @param anim			: idle/appearing animation
+ */
 typedef struct s_ghost
 {
 	int			appear_counter;
@@ -176,13 +179,13 @@ typedef struct s_ghost
 }	t_ghost;
 
 /**
- * Struct for the enemy of the game, skeleton or skely hehe
+ * @brief Struct for the enemy of the game, skeleton or skely hehe
  * 
- * collide	: check if skeleton has collision with the wall
- * loc		: location
- * idle		: idle animation frame
- * killed	: killed animation frame
-**/
+ * @param collide	: check if skeleton has collision with the wall
+ * @param loc		: location
+ * @param idle		: idle animation frame
+ * @param killed	: killed animation frame
+ */
 typedef struct s_skeleton
 {
 	int			collide;
@@ -191,13 +194,13 @@ typedef struct s_skeleton
 }	t_skeleton;
 
 /**
- * The collectibles
+ * @brief The collectibles
  * 
- * collected: to check whether this item has been collected or not
- * loc		: location
- * idle		: the idle animation
- * effect	: the animation when player collects it
-**/
+ * @param collected	: to check whether this item has been collected or not
+ * @param loc		: location
+ * @param idle		: the idle animation
+ * @param effect	: the animation when player collects it
+ */
 typedef struct s_coll
 {
 	int			collected;
@@ -206,13 +209,13 @@ typedef struct s_coll
 }	t_coll;
 
 /**
- * Info about the player
+ * @brief Info about the player
  * 
- * moves	: how many moves
- * collected: collected how many collectible
- * loc		: location
- * idle		: idle animation
-**/
+ * @param moves		: how many moves
+ * @param collected	: collected how many collectible
+ * @param loc		: location
+ * @param idle		: idle animation
+ */
 typedef struct s_player
 {
 	int			moves;
@@ -222,11 +225,11 @@ typedef struct s_player
 }	t_player;
 
 /**
- * Struct for the exit
+ * @brief Struct for the exit
  * 
- * clear	: check if the player clear the stage or not
- * exit_open: animation for exit open
-**/
+ * @param clear	: check if the player clear the stage or not
+ * @param anim	: animation for exit open
+ */
 typedef struct s_exit
 {
 	int		clear;
@@ -234,19 +237,21 @@ typedef struct s_exit
 }	t_exit;
 
 /**
- * Basically everything the game needs to run
- * 
- * ref			: mlx pointer
- * win			: mlx window pointer
- * map_dat		: map data
- * entity		: entity summary
- * player		: the player
- * ghost		: the ghost (only one)
- * skeleton		: skeleton list
- * collectibles	: collectible list
- * vwall		: vertical wall list
- * bg			: the background image
-**/
+ * @brief Basically everything the game needs to run
+ *
+ * @param ref			: mlx pointer
+ * @param win			: mlx window pointer
+ * @param map_data		: map data
+ * @param entity		: entity summary
+ * @param player		: the player
+ * @param ghost			: the ghost (only one)
+ * @param exit			: the exit (only one)
+ * @param skeleton		: skeleton list
+ * @param collectibles	: collectible list
+ * @param vwall			: vertical wall list
+ * @param bg			: the background image
+ * @param imgdb			: the image database
+ */
 typedef struct s_game
 {
 	void		*ref;
@@ -264,44 +269,55 @@ typedef struct s_game
 	t_img_db	img_db;
 }	t_game;
 
+/**
+ * @brief A enum struct to represent entity that will be in a list
+ */
+typedef enum e_elst_type
+{
+	SKELETON,
+	COLLECTIBLE,
+	VWALL
+}	t_elst_type;
+
 /** ==== FUNCTION PROTOTYPES ==== **/
 
 /** ==== INITIALIZATION & ITS UTILITIES ==== **/
-void	entity_init(t_entity *enty);
-void	anim_init(t_anim *anim, int duration, t_image **frames);
-void	vector_init(t_vector *vector);
-void	vwall_init(t_game *game, t_vwall *vwall);
-void    add_vwall(t_game *game, int x, int y);
-void	skeleton_init(t_game *game, t_skeleton *skeleton);
-void	add_skeleton(t_game *game, int x, int y);
-void	collectible_init(t_game *game, t_coll *coll);
-void	add_collectible(t_game *game, int x, int y);
-void	ghost_init(t_game *game, t_ghost *ghost);
-void	add_ghost(t_game *game, int x, int y);
-void	player_init(t_game *game, t_player *player);
-void    add_player(t_game *game, int x, int y);
+void		entity_init(t_entity *enty);
+void		anim_init(t_anim *anim, int duration, t_image **frames);
+void		vector_init(t_vector *vector);
+void		vwall_init(t_game *game, t_vwall *vwall);
+void		add_vwall(t_game *game, int x, int y);
+void		skeleton_init(t_game *game, t_skeleton *skeleton);
+void		add_skeleton(t_game *game, int x, int y);
+void		collectible_init(t_game *game, t_coll *coll);
+void		add_collectible(t_game *game, int x, int y);
+void		ghost_init(t_game *game, t_ghost *ghost);
+void		add_ghost(t_game *game, int x, int y);
+void		player_init(t_game *game, t_player *player);
+void		add_player(t_game *game, int x, int y);
 
 /** ==== MAP PARSER & ITS UTILITIES ==== **/
-void	map_validator(t_game *game, char *file);
-void	check_map_format(t_game *game);
-void	is_rectangular(t_game *game);
-void	get_entity(t_game *game, char ch);
-void	fill_map(t_vector *start, char **fill);
-void	show_path(char **map);
-char	**copy_map(t_game *game, char **map);
-char	**add_aesthetic(t_game *game);
-int		find_entity(t_vector *loc, char **map, char entity);
-void	mapiteri(t_game *game, void (*f)(t_game *, int, int));
+void		map_validator(t_game *game, char *file);
+void		check_map_format(t_game *game);
+void		is_rectangular(t_game *game);
+void		get_entity(t_game *game, char ch);
+void		fill_map(t_vector *start, char **fill);
+void		show_path(char **map);
+char		**copy_map(t_game *game, char **map);
+char		**add_aesthetic(t_game *game);
+int			find_entity(t_vector *loc, char **map, char entity);
+void		mapiteri(t_game *game, void (*f)(t_game *, int, int));
 
 /** ==== IMAGE ==== **/
 t_image		*xpm_to_image(t_game *game, char *file, int set_data);
 t_image		*new_image(t_game *game, int width, int height, int set_data);
 t_data_addr	*set_data_addr(t_image *img);
-void    	draw_map(t_game *game);
+void		draw_map(t_game *game);
 void		copy_image(t_image *src, t_image *dst, int x, int y);
-void    	draw_base(t_game *game);
+void		draw_base(t_game *game);
 void		get_map_position(t_game *game, t_vector *pos);
-void		lstiteri(t_game *game, t_list **lst, void (*f)(t_game *game, void *));
+void		lstiteri(t_game *game, t_list **lst,
+				void (*f)(t_game *game, void *));
 void		draw_vertical_wall(t_game *game, void *content);
 void		draw_skeletons(t_game *game, void *content);
 void		draw_colls(t_game *game, void *content);
@@ -309,7 +325,7 @@ void		draw_player(t_game *game);
 void		draw_ghost(t_game *game);
 void		draw_entity(t_game *game);
 
-void	fetch_all_imgs(t_game *game);
+void		fetch_all_imgs(t_game *game);
 
 /** ==== RENDER ==== **/
 
@@ -320,10 +336,10 @@ void	fetch_all_imgs(t_game *game);
 /** ==== GHOST MECHANISM ==== **/
 
 /** ==== ANIMATION ==== **/
-void    update_animation(t_game *game);
+void		update_animation(t_game *game);
 
 /** ==== FREE ==== **/
-void	free_map(char **map);
-void	free_game(t_game *game);
+void		free_map(char **map);
+void		free_game(t_game *game);
 
 #endif

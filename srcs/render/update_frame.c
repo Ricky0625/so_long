@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 17:54:13 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/10/04 18:09:09 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/10/06 12:55:13 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,35 +27,25 @@ void update_frame(t_anim *anim)
 	}
 }
 
-void update_vwall_frame(void *content)
+void	lst_update_frame(t_list *lst, t_elst_type type, void (*updt)(t_anim *))
 {
-	t_vwall *vwall;
-
-	vwall = content;
-	update_frame(&vwall->anim);
-}
-
-void update_coll_frame(void *content)
-{
-	t_coll *coll;
-
-	coll = content;
-	update_frame(&coll->anim);
-}
-
-void update_skeleton_frame(void *content)
-{
-	t_skeleton *skely;
-
-	skely = content;
-	update_frame(&skely->anim);
+	while (lst != NULL)
+	{
+		if (type == SKELETON)
+			updt(&((t_skeleton *)lst->content)->anim);
+		else if (type == COLLECTIBLE)
+			updt(&((t_coll *)lst->content)->anim);
+		else if (type == VWALL)
+			updt(&((t_vwall *)lst->content)->anim);
+		lst = lst->next;
+	}
 }
 
 void update_animation(t_game *game)
 {
 	update_frame(&game->player.anim);
 	update_frame(&game->ghost.anim);
-	ft_lstiter(game->vwalls, update_vwall_frame);
-	ft_lstiter(game->collectibles, update_coll_frame);
-	ft_lstiter(game->skeletons, update_skeleton_frame);
+	lst_update_frame(game->skeletons, SKELETON, update_frame);
+	lst_update_frame(game->collectibles, COLLECTIBLE, update_frame);
+	lst_update_frame(game->vwalls, VWALL, update_frame);
 }

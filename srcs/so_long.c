@@ -6,12 +6,17 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 15:21:27 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/10/04 16:21:57 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/10/06 10:32:30 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/so_long.h"
 
+/**
+ * @brief Update the entities stats of the game.
+ * 
+ * @param game 
+ */
 static void	update_entity(t_game *game)
 {
 	int		x;
@@ -58,10 +63,13 @@ int	render(t_game *game)
 }
 
 /**
- * @brief 
+ * @brief Close the game. The process when the user clicked on the red cross
+ * 		  or pressed the 'ESC' key. This function will also free everything
+ * 		  before exit to ensure there's no memory leaks.
  * 
  * @param game 
- * @return int 
+ * @return int. The return value is useless, it is required for the function
+ * 		   that will be hooked on the mlx function/
  */
 int	close_game(t_game *game)
 {
@@ -71,8 +79,10 @@ int	close_game(t_game *game)
 }
 
 /**
- * Initialize the game, basically everything
- **/
+ * @brief Initialize the t_game struct
+ * 
+ * @param game
+ */
 static void	game_init(t_game *game)
 {
 	game->ref = mlx_init();
@@ -86,11 +96,12 @@ static void	game_init(t_game *game)
 }
 
 /**
- * Start the game
- *
- * 1. Initialize game
- * 2. Parse map
- **/
+ * @brief Initialize everything for the game to run
+ * 
+ * @param ac 
+ * @param av 
+ * @return t_game* (pointer to t_game), which will store all the things
+ */
 static t_game	*start_game(int ac, char **av)
 {
 	t_game	*game;
