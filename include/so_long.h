@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 14:46:24 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/10/06 16:03:04 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/10/06 20:01:20 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -285,14 +285,15 @@ typedef enum e_enty_type
 /** ==== FUNCTION PROTOTYPES ==== **/
 
 /** ==== INITIALIZATION & ITS UTILITIES ==== **/
-void		entity_init(t_entity *enty);
-void		anim_init(t_anim *anim, int duration, t_image **frames);
-void		vector_init(t_vector *vector);
 void		add_vwall(t_game *game, t_vector loc);
 void		add_skeleton(t_game *game, t_vector loc);
 void		add_collectible(t_game *game, t_vector loc);
 void		add_ghost(t_game *game, t_vector loc);
 void		add_player(t_game *game, t_vector loc);
+void		entity_init(t_entity *enty);
+void		anim_init(t_anim *anim, int duration, t_image **frames);
+void		vector_init(t_vector *vector);
+void		set_vector(t_vector *vector, int x, int y);
 
 /** ==== MAP PARSER & ITS UTILITIES ==== **/
 void		map_validator(t_game *game, char *file);
@@ -308,12 +309,11 @@ void		mapiteri(t_game *game, void (*f)(t_game *, int, int));
 
 /** ==== IMAGE ==== **/
 t_image		*xpm_to_image(t_game *game, char *file, int set_data);
-t_image		*new_image(t_game *game, int width, int height, int set_data);
+t_image		*new_image(t_game *game, t_vector size, int set_data);
 t_data_addr	*set_data_addr(t_image *img);
 void		draw_map(t_game *game);
 void		copy_image(t_image *src, t_image *dst, int x, int y);
 void		draw_base(t_game *game);
-void		get_map_position(t_game *game, t_vector *pos);
 void		lstiteri(t_game *game, t_list **lst,
 				void (*f)(t_game *game, void *));
 void		draw_vertical_wall(t_game *game, void *content);

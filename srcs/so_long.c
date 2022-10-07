@@ -6,24 +6,27 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 15:21:27 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/10/06 16:01:41 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/10/06 17:13:01 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/so_long.h"
 
 /**
- * Tested idea:
- * 1. Update current_tick
- * 2. If current_tick is the idle duration, increment frame, reset current_tick
- * 2. Draw map
- * 3. Put image again
-**/
+ * @brief Render everything to the screen.
+ * 
+ * Will start by clear up the screen. After that update each entity's animation
+ * if any. Based on their current image, draw a map img. Place the background
+ * img first then overlay the map img on it's top. Once the img is on the
+ * screen, destroy the map img.
+ * 
+ * This will run in a loop. (mlx_loop_hook)
+ */
 int	render(t_game *game)
 {
+	mlx_clear_window(game->ref, game->win);
 	update_animation(game);
 	draw_map(game);
-	mlx_clear_window(game->ref, game->win);
 	mlx_put_image_to_window(game->ref, game->win, game->bg->ref, 0, 0);
 	mlx_put_image_to_window(game->ref, game->win, game->map_img->ref, 0, 0);
 	mlx_destroy_image(game->ref, game->map_img->ref);
@@ -59,7 +62,7 @@ static void	game_init(t_game *game)
 	game->skeletons = NULL;
 	game->collectibles = NULL;
 	game->vwalls = NULL;
-	game->bg = xpm_to_image(game, BG, 0);
+	game->bg = xpm_to_image(game, BG, 1);
 	game->map_img = NULL;
 }
 
@@ -87,7 +90,6 @@ static t_game	*start_game(int ac, char **av)
 	map_validator(game, file);
 	fetch_all_imgs(game);
 	update_entity(game);
-	draw_map(game);
 	return (game);
 }
 

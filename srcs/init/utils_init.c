@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 14:42:41 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/10/06 12:56:17 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/10/06 20:01:03 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,4 +33,10 @@ void	vector_init(t_vector *vector)
 {
 	vector->x = 0;
 	vector->y = 0;
+}
+
+void	set_vector(t_vector *vector, int x, int y)
+{
+	vector->x = x;
+	vector->y = y;
 }

@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 15:42:54 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/09/28 18:01:04 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/10/06 19:58:18 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,13 @@ t_data_addr	*set_data_addr(t_image *img)
 	return (data);
 }
 
-t_image	*new_image(t_game *game, int width, int height, int set_data)
+t_image	*new_image(t_game *game, t_vector size, int set_data)
 {
 	t_image	*img;
 
 	img = malloc(sizeof(t_image));
-	img->ref = mlx_new_image(game->ref, width, height);
-	img->size.x = width;
-	img->size.y = height;
+	img->ref = mlx_new_image(game->ref, size.x, size.y);
+	img->size = size;
 	if (set_data == 1)
 		img->data = set_data_addr(img);
 	else
