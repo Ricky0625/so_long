@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 14:46:24 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/10/06 20:01:20 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/10/17 16:41:18 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,8 +146,14 @@ typedef struct s_img_db {
 	t_image	**skeleton_killed;
 	t_image	**exit;
 	t_image	**vwall_idle;
-	t_image	**corner_wall;
-	t_image	**side_wall;
+	t_image	*corner_up_left;
+	t_image	*corner_down_left;
+	t_image	*corner_up_right;
+	t_image	*corner_down_right;
+	t_image	*side_up;
+	t_image	*side_down;
+	t_image	*side_left;
+	t_image	*side_right;
 	t_image	*floor;
 	t_image	*block;
 }	t_img_db;
@@ -233,8 +239,9 @@ typedef struct s_player
  */
 typedef struct s_exit
 {
-	int		clear;
-	t_anim	anim;
+	int			clear;
+	t_anim		anim;
+	t_vector	loc;
 }	t_exit;
 
 /**
@@ -279,7 +286,8 @@ typedef enum e_enty_type
 	GHOST = 'G',
 	SKELETON = 'M',
 	COLLECTIBLE = 'C',
-	VWALL = 'V'
+	VWALL = 'V',
+	EXIT = 'E'
 }	t_enty_type;
 
 /** ==== FUNCTION PROTOTYPES ==== **/
@@ -290,6 +298,7 @@ void		add_skeleton(t_game *game, t_vector loc);
 void		add_collectible(t_game *game, t_vector loc);
 void		add_ghost(t_game *game, t_vector loc);
 void		add_player(t_game *game, t_vector loc);
+void		add_exit(t_game *game, t_vector loc);
 void		entity_init(t_entity *enty);
 void		anim_init(t_anim *anim, int duration, t_image **frames);
 void		vector_init(t_vector *vector);
@@ -311,18 +320,10 @@ void		mapiteri(t_game *game, void (*f)(t_game *, int, int));
 t_image		*xpm_to_image(t_game *game, char *file, int set_data);
 t_image		*new_image(t_game *game, t_vector size, int set_data);
 t_data_addr	*set_data_addr(t_image *img);
+void		draw_base(t_game *game, int x, int y);
+void		draw_entity(t_game *game);
 void		draw_map(t_game *game);
 void		copy_image(t_image *src, t_image *dst, int x, int y);
-void		draw_base(t_game *game);
-void		lstiteri(t_game *game, t_list **lst,
-				void (*f)(t_game *game, void *));
-void		draw_vertical_wall(t_game *game, void *content);
-void		draw_skeletons(t_game *game, void *content);
-void		draw_colls(t_game *game, void *content);
-void		draw_player(t_game *game);
-void		draw_ghost(t_game *game);
-void		draw_entity(t_game *game);
-
 void		fetch_all_imgs(t_game *game);
 
 /** ==== RENDER ==== **/

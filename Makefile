@@ -6,7 +6,7 @@
 #    By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/02 10:46:26 by wricky-t          #+#    #+#              #
-#    Updated: 2022/10/06 15:19:04 by wricky-t         ###   ########.fr        #
+#    Updated: 2022/10/17 15:44:37 by wricky-t         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,16 +24,17 @@ MLX_DIR	:= mlx
 SRCS	:= so_long.c \
 		   init/utils_init.c \
 		   init/add_entity.c \
+		   init/add_object.c \
 		   map/map_aesthetic.c \
 		   map/map_format.c \
 		   map/map_format_utils.c \
 		   map/map_pathfinder.c \
 		   map/map_validator.c \
-		   image/draw_map.c \
+		   image/copy_image.c \
 		   image/draw_base.c \
 		   image/draw_entity.c \
+		   image/draw_map.c \
 		   image/draw_utils.c \
-		   image/copy_image.c \
 		   image/img_db_init.c \
 		   render/update_frame.c \
 		   render/update_stats.c \
