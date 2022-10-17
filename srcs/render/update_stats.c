@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 13:02:03 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/10/06 15:31:46 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/10/17 12:41:21 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ void	add_entity(t_game *game, t_enty_type type, t_vector loc)
 		add_collectible(game, loc);
 	else if (type == VWALL)
 		add_vwall(game, loc);
+	else if (type == EXIT)
+		add_exit(game, loc);
 }
 
 void	update_entity(t_game *game)
