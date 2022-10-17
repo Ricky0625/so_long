@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 14:46:24 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/10/17 16:41:18 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/10/17 21:51:13 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -244,6 +244,11 @@ typedef struct s_exit
 	t_vector	loc;
 }	t_exit;
 
+typedef struct s_final_img {
+	t_image		*img;
+	t_vector	position;
+}	t_final_img;
+
 /**
  * @brief Basically everything the game needs to run
  *
@@ -274,6 +279,7 @@ typedef struct s_game
 	t_list		*vwalls;
 	t_image		*bg;
 	t_image		*map_img;
+	t_final_img	final_img;
 	t_img_db	img_db;
 }	t_game;
 
@@ -324,6 +330,7 @@ void		draw_base(t_game *game, int x, int y);
 void		draw_entity(t_game *game);
 void		draw_map(t_game *game);
 void		copy_image(t_image *src, t_image *dst, int x, int y);
+void		get_final_map_img(t_game *game);
 void		fetch_all_imgs(t_game *game);
 
 /** ==== RENDER ==== **/

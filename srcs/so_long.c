@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 15:21:27 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/10/17 15:39:02 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/10/17 22:00:31 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ int	render(t_game *game)
 	update_animation(game);
 	draw_map(game);
 	mlx_put_image_to_window(game->ref, game->win, game->bg->ref, 0, 0);
-	mlx_put_image_to_window(game->ref, game->win, game->map_img->ref, 0, 0);
-	mlx_destroy_image(game->ref, game->map_img->ref);
+	mlx_put_image_to_window(game->ref, game->win, game->final_img.img->ref, game->final_img.position.x, game->final_img.position.y);
+	mlx_destroy_image(game->ref, game->final_img.img->ref);
 	return (1);
 }
 
