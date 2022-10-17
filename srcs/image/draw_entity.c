@@ -6,88 +6,64 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 16:29:49 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/10/04 16:22:46 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/10/17 15:40:22 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/so_long.h"
+
+void	draw_to_map(t_image *map_img, t_anim *anim, t_vector loc)
+{
+	t_image	*frame;
+	int		current_frame;
+
+	current_frame = anim->current_frame;
+	frame = anim->frames[current_frame];
+	copy_image(frame, map_img,
+		loc.y * SPT_SIZE, loc.x * SPT_SIZE);
+}
+
+void	lst_draw_frame(t_image *map_img, t_list *lst, t_enty_type type,
+	void (*draw)(t_image *, t_anim *, t_vector loc))
+{
+	t_skeleton	*skely;
+	t_coll		*coll;
+	t_vwall		*vwall;
+
+	while (lst != NULL)
+	{
+		if (type == SKELETON)
+		{
+			skely = lst->content;
+			draw(map_img, &skely->anim, skely->loc);
+		}
+		else if (type == COLLECTIBLE)
+		{
+			coll = lst->content;
+			draw(map_img, &coll->anim, coll->loc);
+		}
+		else if (type == VWALL)
+		{
+			vwall = lst->content;
+			draw(map_img, &vwall->anim, vwall->loc);
+		}
+		lst = lst->next;
+	}
+}
+
 /**
- * @brief 
- * 
- * @param game 
- * @param content 
+ * @note this may change (when map is bigger than the screen)
  */
-void	draw_vertical_wall(t_game *game, void *content)
+void	draw_entity(t_game *game)
 {
-	t_vwall	*vwall;
 	t_image	*map_img;
-	t_image	**frames;
-	int		*current_frame;
 
-	vwall = content;
 	map_img = game->map_img;
-	frames = vwall->anim.frames;
-	current_frame = &vwall->anim.current_frame;
-	copy_image(frames[*current_frame], map_img,
-		vwall->loc.y * SPT_SIZE, vwall->loc.x * SPT_SIZE);
-}
-
-void	draw_skeletons(t_game *game, void *content)
-{
-	t_skeleton	*skeleton;
-	t_image		*map_img;
-	t_image		**frames;
-	int			*current_frame;
-
-	skeleton = content;
-	map_img = game->map_img;
-	frames = skeleton->anim.frames;
-	current_frame = &skeleton->anim.current_frame;
-	copy_image(frames[*current_frame], map_img,
-		skeleton->loc.y * SPT_SIZE, skeleton->loc.x * SPT_SIZE);
-}
-
-void	draw_colls(t_game *game, void *content)
-{
-	t_coll	*coll;
-	t_image	*map_img;
-	t_image	**frames;
-	int		*current_frame;
-
-	coll = content;
-	map_img = game->map_img;
-	frames = coll->anim.frames;
-	current_frame = &coll->anim.current_frame;
-	copy_image(frames[*current_frame], map_img,
-		coll->loc.y * SPT_SIZE, coll->loc.x * SPT_SIZE);
-}
-
-void	draw_player(t_game *game)
-{
-	t_player	*player;
-	t_image		*map_img;
-	t_image		**frames;
-	int			*current_frame;
-
-	player = &game->player;
-	map_img = game->map_img;
-	frames = player->anim.frames;
-	current_frame = &player->anim.current_frame;
-	copy_image(frames[*current_frame], map_img,
-		player->loc.y * SPT_SIZE, player->loc.x * SPT_SIZE);
-}
-
-void	draw_ghost(t_game *game)
-{
-	t_ghost	*ghost;
-	t_image	*map_img;
-	t_image	**frames;
-	int		*current_frame;
-
-	ghost = &game->ghost;
-	map_img = game->map_img;
-	frames = ghost->anim.frames;
-	current_frame = &ghost->anim.current_frame;
-	copy_image(frames[*current_frame], map_img,
-		ghost->loc.y * SPT_SIZE, ghost->loc.x * SPT_SIZE);
+	lst_draw_frame(map_img, game->skeletons, SKELETON, draw_to_map);
+	lst_draw_frame(map_img, game->collectibles, COLLECTIBLE, draw_to_map);
+	lst_draw_frame(map_img, game->vwalls, VWALL, draw_to_map);
+	draw_to_map(map_img, &game->exit.anim, game->exit.loc);
+	draw_to_map(map_img, &game->player.anim, game->player.loc);
+	if (game->entity.ghost == 1)
+		draw_to_map(map_img, &game->ghost.anim, game->ghost.loc);
 }

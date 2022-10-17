@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 15:42:54 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/10/06 19:58:18 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/10/17 15:37:49 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,16 +48,4 @@ t_image	*xpm_to_image(t_game *game, char *file, int set_data)
 	else
 		img->data = 0;
 	return (img);
-}
-
-void	lstiteri(t_game *game, t_list **lst, void (*f)(t_game *game, void *))
-{
-	t_list	*curr;
-
-	curr = *lst;
-	while (curr != NULL)
-	{
-		f(game, curr->content);
-		curr = curr->next;
-	}
 }
