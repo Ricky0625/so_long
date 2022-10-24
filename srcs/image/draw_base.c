@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 17:15:32 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/10/17 17:42:30 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/10/22 16:56:05 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	draw_base(t_game *game, int x, int y)
 	t_image		*base;
 	t_image		*block;
 
-	map = game->map_data.map;	
+	map = game->map_data.map;
 	map_size = game->map_data.size;
 	if (map[x][y] == 'V')
 		return ;
@@ -79,7 +79,7 @@ void	draw_base(t_game *game, int x, int y)
  */
 void	mapiteri(t_game *game, void (*fun)(t_game *, int, int))
 {
-	char 	**map;
+	char	**map;
 	int		x;
 	int		y;
 

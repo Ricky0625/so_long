@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 14:46:24 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/10/17 21:51:13 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/10/22 17:07:10 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,10 @@
 # define DEF "\033[0m"
 
 /** ==== MACROS ==== **/
-# define WIN_WIDTH 1152
-# define WIN_HEIGHT 640
+# define WIN_WIDTH 960
+# define WIN_HEIGHT 576
 # define FILE_EXT ".ber"
-# define SPT_SIZE 128
+# define SPT_SIZE 64
 # define GNAME "so_long: "
 
 /** ==== KEYCODES ==== **/
@@ -58,6 +58,7 @@ typedef struct s_data_addr
 	int		bits_per_pixel;
 	int		line_size;
 	int		endian;
+	int		pixel;
 }	t_data_addr;
 
 /**
@@ -244,10 +245,10 @@ typedef struct s_exit
 	t_vector	loc;
 }	t_exit;
 
-typedef struct s_final_img {
+typedef struct s_img_put {
 	t_image		*img;
 	t_vector	position;
-}	t_final_img;
+}	t_img_put;
 
 /**
  * @brief Basically everything the game needs to run
@@ -277,9 +278,9 @@ typedef struct s_game
 	t_list		*skeletons;
 	t_list		*collectibles;
 	t_list		*vwalls;
-	t_image		*bg;
 	t_image		*map_img;
-	t_final_img	final_img;
+	t_img_put	final_img;
+	t_img_put	bg;
 	t_img_db	img_db;
 }	t_game;
 
@@ -326,11 +327,13 @@ void		mapiteri(t_game *game, void (*f)(t_game *, int, int));
 t_image		*xpm_to_image(t_game *game, char *file, int set_data);
 t_image		*new_image(t_game *game, t_vector size, int set_data);
 t_data_addr	*set_data_addr(t_image *img);
+void		put_to_screen(t_game *game, t_img_put *img);
 void		draw_base(t_game *game, int x, int y);
 void		draw_entity(t_game *game);
 void		draw_map(t_game *game);
 void		copy_image(t_image *src, t_image *dst, int x, int y);
-void		get_final_map_img(t_game *game);
+void		crop_image(t_image *src, t_image *dst, t_vector start);
+void		final_img_init(t_game *game);
 void		fetch_all_imgs(t_game *game);
 
 /** ==== RENDER ==== **/

@@ -6,7 +6,7 @@
 #    By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/02 10:46:26 by wricky-t          #+#    #+#              #
-#    Updated: 2022/10/17 15:44:37 by wricky-t         ###   ########.fr        #
+#    Updated: 2022/10/19 12:24:42 by wricky-t         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,6 +54,7 @@ LIB42_SL:= $(LIB42)/lib42.a
 #------------------------------------------------------------------------------#
 RM		:= rm -rf
 NORM	:= norminette
+MAP		?= $(shell bash -c 'read -p "Map > " map; echo $$map')
 
 #------------------------------------------------------------------------------#
 #   STYLING                                                                    #
@@ -70,14 +71,16 @@ BK		:= \033[33;5m
 #------------------------------------------------------------------------------#
 
 all: $(NAME)
-	@echo "  $(WH)┏━┓"
-	@echo "  ┃━╋━┳┓┏━┳━┳┳━┓"
-	@echo "  ┣━┃$(GR)╋$(WH)┃┗┫$(BL)╋$(WH)┃┃┃┃$(YL)╋$(WH)┃"
-	@echo "  ┗━┻━┻━┻━┻┻━╋┓┃"
-	@echo "  ╋╋╋╋╋╋╋╋╋╋╋┗━┛\n$(DF)"
-	@echo "$(GR)=== $(WH)START GAME $(YL)==="
-	@echo "$(WH) ./so_long [map]"
-	@echo "$(GR)======$(BL)======$(YL)======$(DF)"
+	@echo "   $(WH)┏━┓"
+	@echo "   ┃━╋━┳┓┏━┳━┳┳━┓"
+	@echo "   ┣━┃$(GR)╋$(WH)┃┗┫$(BL)╋$(WH)┃┃┃┃$(YL)╋$(WH)┃"
+	@echo "   ┗━┻━┻━┻━┻┻━╋┓┃"
+	@echo "   ╋╋╋╋╋╋╋╋╋╋╋┗━┛\n$(DF)"
+	@echo "$(GR)╔═   $(WH)START GAME$(YL)   ═╗"
+	@echo "$(GR)║ $(WH)./so_long [.ber]$(YL) ║"
+	@echo "$(GR)║        $(BL)OR       $(YL) ║"
+	@echo "$(GR)║     $(WH)make play   $(YL) ║"
+	@echo "$(GR)╚═               $(YL) ═╝$(DF)"
 
 $(NAME): $(OBJS) lib
 	@$(CC) $(CFLAGS) $(MLXFLAGS) $(OBJS) -o $(NAME) $(LIB42_SL)
@@ -111,6 +114,12 @@ check: $(SRCS)
 check_all: check
 	@clear
 	@$(NORM) $(INC) $(LIB42)
+
+play:
+	@clear
+	@echo "$(GR)Launching game...$(DF)"
+	@make
+	@./so_long maps/$(MAP)
 
 # .SILENT:
 .PHONY: all clean fclean re check so_long

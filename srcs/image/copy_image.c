@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 21:56:37 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/10/17 15:15:04 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/10/21 16:56:52 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,21 @@ int	is_blk(char *buffer, int pixel)
 	return (1);
 }
 
+void	copy_pixel(t_data_addr *src, t_data_addr *dst)
+{
+	dst->buffer[dst->pixel + 0] = src->buffer[src->pixel + 0];
+	dst->buffer[dst->pixel + 1] = src->buffer[src->pixel + 1];
+	dst->buffer[dst->pixel + 2] = src->buffer[src->pixel + 2];
+	dst->buffer[dst->pixel + 3] = src->buffer[src->pixel + 3];
+}
+
 /**
- * Copy an image pixel by pixel onto another image.
+ * @brief Copy an image pixel by pixel onto another image.
  * 
  * src	: image source
  * dst	: image destination
  * x,y	: the coordinate of where source should be placed on destination
-**/
+ */
 // src and dst should fully initialized when passing in.
 // This includes the image data address, size, void pointer to the image.
 // x & y should always times the sprite size before passing in.
@@ -39,26 +47,48 @@ void	copy_image(t_image *src, t_image *dst, int x, int y)
 {
 	int	i;
 	int	j;
-	int	src_pixel;
-	int	dst_pixel;
 
+	// check if the image is null or not
 	if (src == 0 || dst == 0)
 		return ;
 	j = -1;
+	// iterate through the pixels of the src image
 	while (++j < src->size.y)
 	{
 		i = -1;
 		while (++i < src->size.x)
 		{
-			src_pixel = (j * src->data->line_size) + (i * 4);
-			dst_pixel = ((y + j) * dst->data->line_size) + ((x + i) * 4);
-			if (!is_blk(src->data->buffer, src_pixel))
-			{
-				dst->data->buffer[dst_pixel + 0] = src->data->buffer[src_pixel + 0];
-				dst->data->buffer[dst_pixel + 1] = src->data->buffer[src_pixel + 1];
-				dst->data->buffer[dst_pixel + 2] = src->data->buffer[src_pixel + 2];
-				dst->data->buffer[dst_pixel + 3] = src->data->buffer[src_pixel + 3];
-			}
+			src->data->pixel = (j * src->data->line_size) + (i * 4);
+			dst->data->pixel = ((y + j) * dst->data->line_size) + ((x + i) * 4);
+			if (!is_blk(src->data->buffer, src->data->pixel))
+				copy_pixel(src->data, dst->data);
 		}
+	}
+}
+
+void	crop_image(t_image *src, t_image *dst, t_vector start)
+{
+	int	x;
+	int	y;
+	int	ori_start_y;
+
+	x = -1;
+	ori_start_y = start.y;
+	while (++x < dst->size.y)
+	{
+		y = -1;
+		start.y = ori_start_y;
+		while (++y < dst->size.x)
+		{
+			// the way to get data pixel is in reverse
+			// dst will use the x, y
+			// src will use the start
+			// to target the correct pixel
+			src->data->pixel = (start.x * src->data->line_size) + (start.y * 4);
+			dst->data->pixel = (x * dst->data->line_size) + (y * 4);
+			copy_pixel(src->data, dst->data);
+			start.y++;
+		}
+		start.x++;
 	}
 }

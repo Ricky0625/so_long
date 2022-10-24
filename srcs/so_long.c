@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 15:21:27 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/10/17 22:00:31 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/10/21 16:46:45 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,8 @@ int	render(t_game *game)
 	mlx_clear_window(game->ref, game->win);
 	update_animation(game);
 	draw_map(game);
-	mlx_put_image_to_window(game->ref, game->win, game->bg->ref, 0, 0);
-	mlx_put_image_to_window(game->ref, game->win, game->final_img.img->ref, game->final_img.position.x, game->final_img.position.y);
-	mlx_destroy_image(game->ref, game->final_img.img->ref);
+	put_to_screen(game, &game->bg);
+	put_to_screen(game, &game->final_img);
 	return (1);
 }
 
@@ -62,7 +61,6 @@ static void	game_init(t_game *game)
 	game->skeletons = NULL;
 	game->collectibles = NULL;
 	game->vwalls = NULL;
-	game->bg = xpm_to_image(game, BG, 1);
 	game->map_img = NULL;
 }
 

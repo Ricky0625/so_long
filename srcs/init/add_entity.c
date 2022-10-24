@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 15:16:18 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/10/17 12:37:56 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/10/22 17:10:52 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	add_player(t_game *game, t_vector loc)
 	ply->collected = 0;
 	ply->moves = 0;
 	ply->loc = loc;
-	anim_init(&ply->anim, 8, game->img_db.player_idle);
+	anim_init(&ply->anim, 18, game->img_db.player_idle);
 }
 
 /**
@@ -63,7 +63,7 @@ void	add_skeleton(t_game *game, t_vector loc)
 	skeletons = &game->skeletons;
 	skely = malloc(sizeof(t_skeleton));
 	skely->collide = 0;
-	anim_init(&skely->anim, 10, game->img_db.skeleton_idle);
+	anim_init(&skely->anim, 18, game->img_db.skeleton_idle);
 	skely->loc = loc;
 	ft_lstadd_back(skeletons, ft_lstnew(skely));
 }
