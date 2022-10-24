@@ -6,11 +6,75 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 15:21:27 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/10/21 16:46:45 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/10/24 18:27:22 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/so_long.h"
+
+/**
+ * @brief Close the game. The process when the user clicked on the red cross
+ * 		  or pressed the 'ESC' key. This function will also free everything
+ * 		  before exit to ensure there's no memory leaks.
+ * 
+ * @param game 
+ * @return int. The return value is useless, it is required for the function
+ * 		   that will be hooked on the mlx function/
+ */
+int	close_game(t_game *game)
+{
+	(void)game;
+	exit(0);
+	return (1);
+}
+
+/**
+ * skeleton movement should be like update_animation. should be passed into loop hook
+ * 
+ * player movement:
+ * 1. check if encounter a skeleton.
+ * 		a. Need a function that takes in player location and check against the list
+ * 		   of skeleton's location. If one matches, means player is dead. quit game.
+ * 2. check if touch the wall, block, vwall
+ * 		a. probably need a function to loop through the location of vwall, since it's a
+ * 		   list. OR, just use method (b). since it's static item as well.
+ * 		b. for static items like block and side walls, get the location of player, and 
+ * 		   get the item on the map. If it's a '1' OR 'V' cannot pass.
+ * 3. check if collected key
+ * 		a. same logic as player movement (1).
+ * 		b. when go pass a key, play effect animation and minus one on t_entity (collectible)
+ * 		c. when t_entity.collectible == 0, play exit animation, clear set to 1. when player is on
+ * 		   exit in this condition, player won the game. exit game.
+ */
+int	key_listener(int key, t_game *game)
+{
+	(void)game;
+	if (key == KEY_W)
+	{
+		game->player.loc.x--;
+		printf("up\n");
+	}
+	if (key == KEY_A)
+	{
+		game->player.loc.y--;
+		printf("left\n");
+	}
+	if (key == KEY_S)
+	{
+		game->player.loc.x++;	
+		printf("down\n");
+	}
+	if (key == KEY_D)
+	{
+		game->player.loc.y++;
+		printf("right\n");
+	}
+	if (key == KEY_F)
+		printf("interact\n");
+	if (key == KEY_ESC)
+		close_game(game);
+	return (0);
+}
 
 /**
  * @brief Render everything to the screen.
@@ -29,22 +93,6 @@ int	render(t_game *game)
 	draw_map(game);
 	put_to_screen(game, &game->bg);
 	put_to_screen(game, &game->final_img);
-	return (1);
-}
-
-/**
- * @brief Close the game. The process when the user clicked on the red cross
- * 		  or pressed the 'ESC' key. This function will also free everything
- * 		  before exit to ensure there's no memory leaks.
- * 
- * @param game 
- * @return int. The return value is useless, it is required for the function
- * 		   that will be hooked on the mlx function/
- */
-int	close_game(t_game *game)
-{
-	(void)game;
-	exit(0);
 	return (1);
 }
 
@@ -103,6 +151,7 @@ int	main(int ac, char **av)
 
 	game = start_game(ac, av);
 	mlx_loop_hook(game->ref, render, game);
+	mlx_key_hook(game->win, key_listener, game);
 	mlx_hook(game->win, 17, 0L, close_game, game);
 	mlx_loop(game->ref);
 	return (0);

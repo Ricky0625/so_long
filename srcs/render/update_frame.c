@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 17:54:13 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/10/17 15:26:38 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/10/24 17:58:27 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	update_animation(t_game *game)
 {
 	update_frame(&game->player.anim);
 	update_frame(&game->ghost.anim);
-	if (game->exit.clear == 1)
+	if (game->exit.clear == 1 && game->exit.anim.current_frame < 5)
 		update_frame(&game->exit.anim);
 	lst_update_frame(game->skeletons, SKELETON, update_frame);
 	lst_update_frame(game->collectibles, COLLECTIBLE, update_frame);

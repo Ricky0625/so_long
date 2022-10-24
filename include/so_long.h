@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 14:46:24 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/10/22 17:07:10 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/10/24 18:10:09 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,13 @@
 # define GN "\033[0;32m"
 # define DEF "\033[0m"
 
+// 64: 576 * 320
+// 128: 1152 * 640
 /** ==== MACROS ==== **/
-# define WIN_WIDTH 960
-# define WIN_HEIGHT 576
+# define WIN_WIDTH 1152
+# define WIN_HEIGHT 640
 # define FILE_EXT ".ber"
-# define SPT_SIZE 64
-# define GNAME "so_long: "
+# define SPT_SIZE 128
 
 /** ==== KEYCODES ==== **/
 # define KEY_W 13
@@ -37,6 +38,7 @@
 # define KEY_S 1
 # define KEY_D 2
 # define KEY_F 3
+# define KEY_ESC 53
 
 /** ==== UTILS STRUCTS ==== **/
 
