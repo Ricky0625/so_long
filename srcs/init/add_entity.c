@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 15:16:18 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/10/24 17:54:40 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/10/25 17:48:04 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	add_player(t_game *game, t_vector loc)
 	ply->collected = 0;
 	ply->moves = 0;
 	ply->loc = loc;
-	anim_init(&ply->anim, 1, game->img_db.player_idle);
+	anim_init(&ply->anim, 1, game->img_db.player_idle_r);
 }
 
 /**
@@ -37,12 +37,19 @@ void	add_player(t_game *game, t_vector loc)
  */
 void	add_ghost(t_game *game, t_vector loc)
 {
-	t_ghost	*ghost;
+	t_ghost		*ghost;
+	t_entity	entity_data;
 
 	ghost = &game->ghost;
-	ghost->appear_counter = 0;
+	entity_data = game->entity;
+	if (entity_data.skely > 0)
+		ghost->appear_counter = entity_data.coll * APPEAR_MULTIPLIER;
+	else
+		ghost->appear_counter = 0;
+	ghost->activate = 0;
 	ghost->loc = loc;
 	anim_init(&ghost->anim, 5, game->img_db.ghost_idle);
+	anim_init(&ghost->effect, 15, game->img_db.ghost_boo);
 }
 
 /**

@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 18:25:39 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/10/04 15:46:43 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/10/25 16:43:06 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,14 @@
 # define SPRITES_H
 
 /** ==== SPRITES ==== **/
-# define PLAYER1 "assets/player/player_idle1.xpm"
-# define PLAYER2 "assets/player/player_idle2.xpm"
-# define PLAYER3 "assets/player/player_idle3.xpm"
-# define PLAYER4 "assets/player/player_idle4.xpm"
+# define PLAYERL1 "assets/player/player_idle_l1.xpm"
+# define PLAYERL2 "assets/player/player_idle_l2.xpm"
+# define PLAYERL3 "assets/player/player_idle_l3.xpm"
+# define PLAYERL4 "assets/player/player_idle_l4.xpm"
+# define PLAYERR1 "assets/player/player_idle_r1.xpm"
+# define PLAYERR2 "assets/player/player_idle_r2.xpm"
+# define PLAYERR3 "assets/player/player_idle_r3.xpm"
+# define PLAYERR4 "assets/player/player_idle_r4.xpm"
 # define SKELY1 "assets/skeleton/skeleton_idle1.xpm"
 # define SKELY2 "assets/skeleton/skeleton_idle2.xpm"
 # define SKELY3 "assets/skeleton/skeleton_idle3.xpm"
@@ -25,6 +29,11 @@
 # define GHOST2 "assets/ghost/ghost_idle2.xpm"
 # define GHOST3 "assets/ghost/ghost_idle3.xpm"
 # define GHOST4 "assets/ghost/ghost_idle4.xpm"
+# define BOO1 "assets/ghost/ghost_boo1.xpm"
+# define BOO2 "assets/ghost/ghost_boo2.xpm"
+# define BOO3 "assets/ghost/ghost_boo3.xpm"
+# define BOO4 "assets/ghost/ghost_boo4.xpm"
+# define BOO5 "assets/ghost/ghost_boo5.xpm"
 # define GHOSTI1 "assets/ghost/ghost_i1.xpm"
 # define KEY1 "assets/key/key_idle1.xpm"
 # define KEY2 "assets/key/key_idle2.xpm"

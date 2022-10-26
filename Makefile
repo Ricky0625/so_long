@@ -6,7 +6,7 @@
 #    By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/02 10:46:26 by wricky-t          #+#    #+#              #
-#    Updated: 2022/10/19 12:24:42 by wricky-t         ###   ########.fr        #
+#    Updated: 2022/10/25 15:58:26 by wricky-t         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ NAME	:= so_long
 #   INGREDIENTS                                                                #
 #------------------------------------------------------------------------------#
 CC		:= gcc
-CFLAGS	:= -Wall -Wextra -Werror -I$(MLX_DIR) -I$(INC) -g3 -fsanitize=address
+CFLAGS	:= -Wall -Wextra -Werror -I$(MLX_DIR) -I$(INC) #-g3 -fsanitize=address
 MLXFLAGS:= -lmlx -framework OpenGL -framework AppKit
 SRC_DIR	:= srcs
 OBJ_DIR	:= objs
@@ -38,6 +38,8 @@ SRCS	:= so_long.c \
 		   image/img_db_init.c \
 		   render/update_frame.c \
 		   render/update_stats.c \
+		   mechanism/player_mechanism.c \
+		   mechanism/skeleton_mechanism.c \
 		   free/free.c
 SRCS	:= $(SRCS:%=$(SRC_DIR)/%)
 OBJS	:= $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)

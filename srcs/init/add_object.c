@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 12:37:10 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/10/24 17:56:07 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/10/25 15:12:03 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,5 +64,5 @@ void	add_exit(t_game *game, t_vector loc)
 	exit = &game->exit;
 	exit->clear = 0;
 	exit->loc = loc;
-	anim_init(&exit->anim, 6, game->img_db.exit);
+	anim_init(&exit->anim, 2, game->img_db.exit);
 }

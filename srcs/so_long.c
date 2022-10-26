@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 15:21:27 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/10/24 18:27:22 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/10/25 15:21:42 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,33 +46,13 @@ int	close_game(t_game *game)
  * 		c. when t_entity.collectible == 0, play exit animation, clear set to 1. when player is on
  * 		   exit in this condition, player won the game. exit game.
  */
+// the problem now is... it's very laggy
 int	key_listener(int key, t_game *game)
 {
-	(void)game;
-	if (key == KEY_W)
-	{
-		game->player.loc.x--;
-		printf("up\n");
-	}
-	if (key == KEY_A)
-	{
-		game->player.loc.y--;
-		printf("left\n");
-	}
-	if (key == KEY_S)
-	{
-		game->player.loc.x++;	
-		printf("down\n");
-	}
-	if (key == KEY_D)
-	{
-		game->player.loc.y++;
-		printf("right\n");
-	}
-	if (key == KEY_F)
-		printf("interact\n");
 	if (key == KEY_ESC)
 		close_game(game);
+	else
+		move_player(game, key);
 	return (0);
 }
 

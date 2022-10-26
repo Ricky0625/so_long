@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 16:29:49 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/10/20 14:59:21 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/10/25 17:17:25 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,8 @@ void	lst_draw_frame(t_image *map_img, t_list *lst, t_enty_type type,
 		else if (type == COLLECTIBLE)
 		{
 			coll = lst->content;
-			draw(map_img, &coll->anim, coll->loc);
+			if (coll->collected == 0)
+				draw(map_img, &coll->anim, coll->loc);
 		}
 		else if (type == VWALL)
 		{
@@ -64,6 +65,9 @@ void	draw_entity(t_game *game)
 	lst_draw_frame(map_img, game->vwalls, VWALL, draw_to_map);
 	draw_to_map(map_img, &game->exit.anim, game->exit.loc);
 	draw_to_map(map_img, &game->player.anim, game->player.loc);
-	if (game->entity.ghost == 1)
+	if (game->entity.ghost == 1 && game->ghost.appear_counter == 0
+		&& game->entity.skely > 0)
 		draw_to_map(map_img, &game->ghost.anim, game->ghost.loc);
+	if (game->ghost.activate == 1)
+		draw_to_map(map_img, &game->ghost.effect, game->ghost.loc);
 }

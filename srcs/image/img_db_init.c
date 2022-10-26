@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 13:39:23 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/10/14 16:03:34 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/10/25 17:14:36 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@ static void	img_db_init(t_game *game)
 	t_img_db	*img_db;
 
 	img_db = &game->img_db;
-	img_db->player_idle = ft_calloc(7, sizeof(t_image *));
+	img_db->player_idle_l = ft_calloc(7, sizeof(t_image *));
+	img_db->player_idle_r = ft_calloc(7, sizeof(t_image *));
 	img_db->ghost_idle = ft_calloc(7, sizeof(t_image *));
-	img_db->ghost_appear = ft_calloc(3, sizeof(t_image *));
-	img_db->ghost_cutscene = ft_calloc(3, sizeof(t_image *));
+	img_db->ghost_boo = ft_calloc(6, sizeof(t_image *));
 	img_db->key_idle = ft_calloc(7, sizeof(t_image *));
 	img_db->key_effect = ft_calloc(3, sizeof(t_image *));
 	img_db->skeleton_idle = ft_calloc(5, sizeof(t_image *));
@@ -77,12 +77,18 @@ static void	fetch_entity_imgs(t_game *game, t_img_db *img_db)
 	img_db->ghost_idle[3] = xpm_to_image(game, GHOST4, 1);
 	img_db->ghost_idle[4] = xpm_to_image(game, GHOST3, 1);
 	img_db->ghost_idle[5] = xpm_to_image(game, GHOST2, 1);
-	img_db->player_idle[0] = xpm_to_image(game, PLAYER1, 1);
-	img_db->player_idle[1] = xpm_to_image(game, PLAYER2, 1);
-	img_db->player_idle[2] = xpm_to_image(game, PLAYER3, 1);
-	img_db->player_idle[3] = xpm_to_image(game, PLAYER4, 1);
-	img_db->player_idle[4] = xpm_to_image(game, PLAYER3, 1);
-	img_db->player_idle[5] = xpm_to_image(game, PLAYER2, 1);
+	img_db->player_idle_l[0] = xpm_to_image(game, PLAYERL1, 1);
+	img_db->player_idle_l[1] = xpm_to_image(game, PLAYERL2, 1);
+	img_db->player_idle_l[2] = xpm_to_image(game, PLAYERL3, 1);
+	img_db->player_idle_l[3] = xpm_to_image(game, PLAYERL4, 1);
+	img_db->player_idle_l[4] = xpm_to_image(game, PLAYERL3, 1);
+	img_db->player_idle_l[5] = xpm_to_image(game, PLAYERL2, 1);
+	img_db->player_idle_r[0] = xpm_to_image(game, PLAYERR1, 1);
+	img_db->player_idle_r[1] = xpm_to_image(game, PLAYERR2, 1);
+	img_db->player_idle_r[2] = xpm_to_image(game, PLAYERR3, 1);
+	img_db->player_idle_r[3] = xpm_to_image(game, PLAYERR4, 1);
+	img_db->player_idle_r[4] = xpm_to_image(game, PLAYERR3, 1);
+	img_db->player_idle_r[5] = xpm_to_image(game, PLAYERR2, 1);
 	img_db->skeleton_idle[0] = xpm_to_image(game, SKELY1, 1);
 	img_db->skeleton_idle[1] = xpm_to_image(game, SKELY2, 1);
 	img_db->skeleton_idle[2] = xpm_to_image(game, SKELY3, 1);
@@ -95,9 +101,12 @@ static void	fetch_entity_imgs(t_game *game, t_img_db *img_db)
  */
 static void	fetch_effect_imgs(t_game *game, t_img_db *img_db)
 {
-	(void)game;
-	img_db->ghost_appear[0] = 0;
-	img_db->ghost_cutscene[0] = 0;
+	// img_db->ghost_appear[0] = 0;
+	img_db->ghost_boo[0] = xpm_to_image(game, BOO1, 1);
+	img_db->ghost_boo[1] = xpm_to_image(game, BOO2, 1);
+	img_db->ghost_boo[2] = xpm_to_image(game, BOO3, 1);
+	img_db->ghost_boo[3] = xpm_to_image(game, BOO4, 1);
+	img_db->ghost_boo[4] = xpm_to_image(game, BOO5, 1);
 	img_db->key_effect[0] = 0;
 	img_db->skeleton_killed[0] = 0;
 }

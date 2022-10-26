@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 14:46:24 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/10/24 18:10:09 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/10/25 19:08:45 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,14 @@
 # define WIN_HEIGHT 640
 # define FILE_EXT ".ber"
 # define SPT_SIZE 128
+# define APPEAR_MULTIPLIER 2
 
 /** ==== KEYCODES ==== **/
 # define KEY_W 13
 # define KEY_A 0
 # define KEY_S 1
 # define KEY_D 2
-# define KEY_F 3
+# define KEY_SP 49
 # define KEY_ESC 53
 
 /** ==== UTILS STRUCTS ==== **/
@@ -139,10 +140,11 @@ typedef struct s_anim
  * array and get the image inside.
  */
 typedef struct s_img_db {
-	t_image	**player_idle;
+	t_image	**player_idle_l;
+	t_image	**player_idle_r;
 	t_image	**ghost_idle;
 	t_image	**ghost_appear;
-	t_image	**ghost_cutscene;
+	t_image	**ghost_boo;
 	t_image	**key_idle;
 	t_image	**key_effect;
 	t_image	**skeleton_idle;
@@ -184,8 +186,10 @@ typedef struct s_vwall
 typedef struct s_ghost
 {
 	int			appear_counter;
+	int			activate;
 	t_vector	loc;
 	t_anim		anim;
+	t_anim		effect;
 }	t_ghost;
 
 /**
@@ -299,6 +303,14 @@ typedef enum e_enty_type
 	EXIT = 'E'
 }	t_enty_type;
 
+typedef enum e_direction
+{
+	UP,
+	DOWN,
+	LEFT,
+	RIGHT
+}	t_direction;
+
 /** ==== FUNCTION PROTOTYPES ==== **/
 
 /** ==== INITIALIZATION & ITS UTILITIES ==== **/
@@ -338,13 +350,8 @@ void		crop_image(t_image *src, t_image *dst, t_vector start);
 void		final_img_init(t_game *game);
 void		fetch_all_imgs(t_game *game);
 
-/** ==== RENDER ==== **/
-
-/** ==== PLAYER MECHANISM ==== **/
-
-/** ==== SKELETON MECHANISM ==== **/
-
-/** ==== GHOST MECHANISM ==== **/
+/** ==== MECHANISM ==== **/
+void	move_player();
 
 /** ==== ANIMATION ==== **/
 void		update_animation(t_game *game);
