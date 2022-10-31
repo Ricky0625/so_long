@@ -1,25 +1,13 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstdelone.c                                     :+:      :+:    :+:   */
+/*   free_object.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/30 20:07:27 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/10/31 17:04:10 by wricky-t         ###   ########.fr       */
+/*   Created: 2022/10/31 16:07:42 by wricky-t          #+#    #+#             */
+/*   Updated: 2022/10/31 16:09:10 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-
-void	ft_lstdelone(t_list *lst, void (*del)(void *))
-{
-	t_list	*temp;
-
-	if (!lst)
-		return ;
-	(*del)(lst->content);
-	temp = lst->next;
-	free(lst);
-	lst = temp;
-}
+#include "../../include/so_long.h"

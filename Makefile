@@ -6,7 +6,7 @@
 #    By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/02 10:46:26 by wricky-t          #+#    #+#              #
-#    Updated: 2022/10/25 15:58:26 by wricky-t         ###   ########.fr        #
+#    Updated: 2022/10/31 12:24:05 by wricky-t         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,6 +38,7 @@ SRCS	:= so_long.c \
 		   image/img_db_init.c \
 		   render/update_frame.c \
 		   render/update_stats.c \
+		   mechanism/general_mechanism.c \
 		   mechanism/player_mechanism.c \
 		   mechanism/skeleton_mechanism.c \
 		   free/free.c

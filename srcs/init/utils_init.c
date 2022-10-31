@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 14:42:41 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/10/06 20:01:03 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/10/26 12:23:10 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,4 +39,9 @@ void	set_vector(t_vector *vector, int x, int y)
 {
 	vector->x = x;
 	vector->y = y;
+}
+
+int	is_same_vector(t_vector a, t_vector b)
+{
+	return (a.x == b.x && a.y == b.y);
 }

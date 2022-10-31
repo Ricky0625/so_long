@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 16:42:20 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/10/22 16:13:42 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/10/26 11:30:15 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,48 +45,6 @@ int	is_big_map(t_game *game)
 		|| (map_size.x < WIN_WIDTH && map_size.y >= WIN_HEIGHT));
 }
 
-/**
- * To get the final map:
- * 
- * 1. initialize the final map using new_image function. size is window size.
- * 2. Get the position of the player
- * 
- * @test print the map, if the index is negative, print space, print character
- * otherwise.
- * 
- * final img will always be placed at (0,0)
- */
-
-void	get_start_end(t_game *game, t_vector ply_loc)
-{
-	t_vector	start;
-	t_vector	end;
-	t_vector	padding;
-	int			start_y_ori;
-	char		**map;
-
-	set_vector(&padding, (WIN_WIDTH / SPT_SIZE - 1) / 2, (WIN_HEIGHT / SPT_SIZE - 1) / 2);
-	set_vector(&start, ply_loc.x - padding.y, ply_loc.y - padding.x);
-	set_vector(&end, ply_loc.x + padding.y, ply_loc.y + padding.x);
-	start_y_ori = start.y;
-	map = game->map_data.map;
-	while (start.x <= end.x)
-	{
-		start.y = start_y_ori;
-		while (start.y <= end.y)
-		{
-			if (start.x < 0 || start.y < 0 || start.y >= game->map_data.size.x || start.x >= game->map_data.size.y)
-				printf("X");
-			else
-				printf("%c", map[start.x][start.y]);
-			start.y++;
-		}
-		start.x++;
-		printf("\n");
-	}
-	printf("\n");
-}
-
 void	set_final_size(t_game *game, t_vector *start, t_vector end)
 {
 	int			map_width;
@@ -103,7 +61,8 @@ void	set_final_size(t_game *game, t_vector *start, t_vector end)
 		end.x = map_height - 1;
 	if (end.y > map_width - 1)
 		end.y = map_width - 1;
-	set_vector(&final_size, (end.y - start->y + 1) * SPT_SIZE, (end.x - start->x + 1) * SPT_SIZE);
+	set_vector(&final_size,
+		(end.y - start->y + 1) * SPT_SIZE, (end.x - start->x + 1) * SPT_SIZE);
 	game->final_img.img = new_image(game, final_size, 1);
 }
 
@@ -111,7 +70,8 @@ void	set_crop_point(t_vector ply_loc, t_vector *start, t_vector *end)
 {
 	t_vector	padding;
 
-	set_vector(&padding, (WIN_WIDTH / SPT_SIZE - 1) / 2, (WIN_HEIGHT / SPT_SIZE - 1) / 2);
+	set_vector(&padding,
+		(WIN_WIDTH / SPT_SIZE - 1) / 2, (WIN_HEIGHT / SPT_SIZE - 1) / 2);
 	set_vector(start, ply_loc.x - padding.y, ply_loc.y - padding.x);
 	set_vector(end, ply_loc.x + padding.y, ply_loc.y + padding.x);
 }

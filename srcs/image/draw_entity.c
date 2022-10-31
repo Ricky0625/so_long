@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 16:29:49 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/10/25 17:17:25 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/10/26 15:08:54 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@ void	lst_draw_frame(t_image *map_img, t_list *lst, t_enty_type type,
 		if (type == SKELETON)
 		{
 			skely = lst->content;
-			draw(map_img, &skely->anim, skely->loc);
+			if (skely->killed == 0)
+				draw(map_img, &skely->anim, skely->loc);
 		}
 		else if (type == COLLECTIBLE)
 		{

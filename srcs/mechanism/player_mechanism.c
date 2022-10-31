@@ -6,65 +6,37 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 18:03:20 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/10/25 17:52:14 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/10/31 12:14:30 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/so_long.h"
 
-void	collect_key(t_game *game, t_vector loc)
+void	ghost_boo(t_game *game)
 {
-	t_list	*collectibles;
-	t_coll	*coll;
+	t_list		*skeletons;
+	// t_skeleton	*skely;
 
-	collectibles = game->collectibles;
-	while (collectibles != NULL)
-	{
-		coll = collectibles->content;
-		if (coll->loc.x == loc.x && coll->loc.y == loc.y
-			&& coll->collected == 0)
-		{
-			coll->collected = 1;
-			game->player.collected++;
-		}
-		collectibles = collectibles->next;
-	}
-}
-
-int	is_collision(t_game *game, t_vector *ply_loc, t_vector dest)
-{
-	char	**map;
-
-	map = game->map_data.map;
-	set_vector(&dest, dest.x + ply_loc->x, dest.y + ply_loc->y);
-	if (map[dest.x][dest.y] == '1' || map[dest.x][dest.y] == 'V')
-		return (1);
-	if (map[dest.x][dest.y] == 'G')
-	{
-		if (game->ghost.appear_counter > 0)
-			game->ghost.appear_counter--;
-	}
-	if (map[dest.x][dest.y] == 'C')
-		collect_key(game, dest);
-	if (map[dest.x][dest.y] == 'E')
-	{
-		if (game->player.collected == game->entity.coll)
-		{
-			// exit game and free here
-			printf("You won!\n");
-			exit(0);
-		}
-	}
-	return (0);
+	skeletons = game->skeletons;
+	if (game->ghost.appear_counter > 0 || game->entity.skely == 0)
+		return ;
+	game->ghost.activate = 1;
+	// just free it here (Skeletons)
+	game->skeletons = NULL;
+	// while (skeletons != NULL)
+	// {
+	// 	skely = skeletons->content;
+	// 	if (skely->killed == 0)
+	// 		skely->killed = 1;
+	// 	skeletons = skeletons->next;
+	// }
 }
 
 void	move_player(t_game *game, int key)
 {
-	t_vector	*ply_loc;
 	t_vector	dest;
 
-	ply_loc = &game->player.loc;
-	vector_init(&dest);
+	set_vector(&dest, game->player.loc.x, game->player.loc.y);
 	if (key == KEY_W)
 		dest.x--;
 	else if (key == KEY_A)
@@ -76,14 +48,14 @@ void	move_player(t_game *game, int key)
 		dest.x++;
 	else if (key == KEY_D)
 	{
-		game->player.anim.frames = game->img_db.player_idle_r;	
+		game->player.anim.frames = game->img_db.player_idle_r;
 		dest.y++;
 	}
-	else if (key == KEY_SP && game->ghost.appear_counter == 0) // also need to check if player is beside it, UDLR
-		game->ghost.activate = 1;
-	if (is_collision(game, ply_loc, dest) == 0)
+	else if (key == KEY_SP)
+		ghost_boo(game);
+	if (detect_collision(game, dest, PLAYER) == 0)
 	{
-		set_vector(ply_loc, ply_loc->x + dest.x, ply_loc->y + dest.y); // redundant
+		set_vector(&game->player.loc, dest.x, dest.y);
 		game->player.moves++;
 	}
 }
