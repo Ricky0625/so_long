@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 12:37:10 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/10/25 15:12:03 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/11/01 11:22:19 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ void	add_collectible(t_game *game, t_vector loc)
 
 	colls = &game->collectibles;
 	coll = malloc(sizeof(t_coll));
-	coll->collected = 0;
 	anim_init(&coll->anim, 1, game->img_db.key_idle);
 	coll->loc = loc;
 	ft_lstadd_back(colls, ft_lstnew(coll));

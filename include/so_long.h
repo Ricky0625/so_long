@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 14:46:24 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/10/31 21:05:38 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/11/01 16:16:33 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,10 +149,12 @@ typedef struct s_img_db
 	t_image **ghost_boo;
 	t_image **key_idle;
 	t_image **key_effect;
-	t_image **skeleton_idle;
-	t_image **skeleton_killed;
+	t_image **skeleton_idle_l;
+	t_image **skeleton_idle_r;
+	t_image **skeleton_scared;
 	t_image **exit;
 	t_image **vwall_idle;
+	t_image **numbers;
 	t_image *corner_up_left;
 	t_image *corner_down_left;
 	t_image *corner_up_right;
@@ -236,7 +238,6 @@ typedef struct s_skeleton
  */
 typedef struct s_coll
 {
-	int collected;
 	t_vector loc;
 	t_anim anim;
 } t_coll;
@@ -327,54 +328,56 @@ typedef enum e_enty_type
 /** ==== FUNCTION PROTOTYPES ==== **/
 
 /** ==== INITIALIZATION & ITS UTILITIES ==== **/
-void add_vwall(t_game *game, t_vector loc);
-void add_skeleton(t_game *game, t_vector loc);
-void add_collectible(t_game *game, t_vector loc);
-void add_ghost(t_game *game, t_vector loc);
-void add_player(t_game *game, t_vector loc);
-void add_exit(t_game *game, t_vector loc);
-void entity_init(t_entity *enty);
-void anim_init(t_anim *anim, int duration, t_image **frames);
-void vector_init(t_vector *vector);
-void set_vector(t_vector *vector, int x, int y);
-int is_same_vector(t_vector a, t_vector b);
+void		add_vwall(t_game *game, t_vector loc);
+void		add_skeleton(t_game *game, t_vector loc);
+void		add_collectible(t_game *game, t_vector loc);
+void		add_ghost(t_game *game, t_vector loc);
+void		add_player(t_game *game, t_vector loc);
+void		add_exit(t_game *game, t_vector loc);
+void		entity_init(t_entity *enty);
+void		anim_init(t_anim *anim, int duration, t_image **frames);
+void		vector_init(t_vector *vector);
+void		set_vector(t_vector *vector, int x, int y);
+int			is_same_vector(t_vector a, t_vector b);
 
 /** ==== MAP PARSER & ITS UTILITIES ==== **/
-void map_validator(t_game *game, char *file);
-void check_map_format(t_game *game);
-void is_rectangular(t_game *game);
-void get_entity(t_game *game, char ch);
-void fill_map(t_vector *start, char **fill);
-void show_path(char **map);
-char **copy_map(t_game *game, char **map);
-char **add_aesthetic(t_game *game);
-int find_entity(t_vector *loc, char **map, char entity);
-void mapiteri(t_game *game, void (*f)(t_game *, int, int));
+void		map_validator(t_game *game, char *file);
+void		check_map_format(t_game *game);
+void		is_rectangular(t_game *game);
+void		get_entity(t_game *game, char ch);
+void		fill_map(t_vector *start, char **fill);
+void		show_path(char **map);
+char		**copy_map(t_game *game, char **map);
+char		**add_aesthetic(t_game *game);
+int			find_entity(t_vector *loc, char **map, char entity);
+void		mapiteri(t_game *game, void (*f)(t_game *, int, int));
 
 /** ==== IMAGE ==== **/
-t_image *xpm_to_image(t_game *game, char *file, int set_data);
-t_image *new_image(t_game *game, t_vector size, int set_data);
-t_data_addr *set_data_addr(t_image *img);
-void put_to_screen(t_game *game, t_img_put *img);
-void draw_base(t_game *game, int x, int y);
-void draw_entity(t_game *game);
-void draw_map(t_game *game);
-void copy_image(t_image *src, t_image *dst, int x, int y);
-void crop_image(t_image *src, t_image *dst, t_vector start);
-void final_img_init(t_game *game);
-void fetch_all_imgs(t_game *game);
+t_image		*xpm_to_image(t_game *game, char *file, int set_data);
+t_image		*new_image(t_game *game, t_vector size, int set_data);
+t_data_addr	*set_data_addr(t_image *img);
+void		put_to_screen(t_game *game, t_img_put *img);
+void		draw_base(t_game *game, int x, int y);
+void		draw_entity(t_game *game);
+void		draw_map(t_game *game);
+void		copy_image(t_image *src, t_image *dst, int x, int y);
+void		crop_image(t_image *src, t_image *dst, t_vector start);
+void		final_img_init(t_game *game);
+void		fetch_all_imgs(t_game *game);
 
 /** ==== MECHANISM ==== **/
-void move_player(t_game *game, int key);
-int detect_collision(t_game *game, t_vector dest, t_enty_type type);
-void skeleton_roaming(t_game *game);
+void		move_player(t_game *game, int key);
+int			detect_collision(t_game *game, t_vector dest, t_enty_type type);
+void		skeleton_roaming(t_game *game);
+void		check_if_skeletons_dead(t_game *game);
 
 /** ==== ANIMATION ==== **/
-void update_animation(t_game *game);
-void update_entity(t_game *game);
+void 		update_animation(t_game *game);
+void 		update_entity(t_game *game);
+void		update_frame(t_anim *anim);
 
 /** ==== FREE ==== **/
-void free_map(char **map);
-void free_game(t_game *game);
+void 		free_map(char **map);
+void 		free_game(t_game *game);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 15:21:27 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/10/28 11:50:21 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/11/01 16:16:55 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ int	render(t_game *game)
 	mlx_clear_window(game->ref, game->win);
 	update_animation(game);
 	skeleton_roaming(game);
+	check_if_skeletons_dead(game);
 	draw_map(game);
 	put_to_screen(game, &game->bg);
 	put_to_screen(game, &game->final_img);

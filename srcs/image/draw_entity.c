@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 16:29:49 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/10/26 15:08:54 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/11/01 12:29:37 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,12 @@ void	lst_draw_frame(t_image *map_img, t_list *lst, t_enty_type type,
 		if (type == SKELETON)
 		{
 			skely = lst->content;
-			if (skely->killed == 0)
-				draw(map_img, &skely->anim, skely->loc);
+			draw(map_img, &skely->anim, skely->loc);
 		}
 		else if (type == COLLECTIBLE)
 		{
 			coll = lst->content;
-			if (coll->collected == 0)
-				draw(map_img, &coll->anim, coll->loc);
+			draw(map_img, &coll->anim, coll->loc);
 		}
 		else if (type == VWALL)
 		{
@@ -50,6 +48,23 @@ void	lst_draw_frame(t_image *map_img, t_list *lst, t_enty_type type,
 			draw(map_img, &vwall->anim, vwall->loc);
 		}
 		lst = lst->next;
+	}
+}
+
+void	draw_scared_skeletons(t_game *game)
+{
+	t_list		*skeletons;
+	t_skeleton	*skely;
+
+	if (game->skeletons == NULL)
+		return ;
+	skeletons = game->skeletons;
+	while (skeletons != NULL)
+	{
+		skely = skeletons->content;
+		if (skely->anim.current_frame < 6)
+			update_frame(&skely->anim);
+		skeletons = skeletons->next;
 	}
 }
 

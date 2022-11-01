@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 15:16:18 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/10/31 15:16:08 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/11/01 16:17:33 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	add_ghost(t_game *game, t_vector loc)
 	ghost->activate = 0;
 	ghost->loc = loc;
 	anim_init(&ghost->anim, 5, game->img_db.ghost_idle);
-	anim_init(&ghost->effect, 15, game->img_db.ghost_boo);
+	anim_init(&ghost->effect, 5, game->img_db.ghost_boo);
 }
 
 /**
@@ -74,6 +74,6 @@ void	add_skeleton(t_game *game, t_vector loc)
 	skely->loc = loc;
 	skely->dir = UNSET;
 	skely->current_tick = 0;
-	anim_init(&skely->anim, 8, game->img_db.skeleton_idle);
+	anim_init(&skely->anim, 6, game->img_db.skeleton_idle_l);
 	ft_lstadd_back(skeletons, ft_lstnew(skely));
 }
