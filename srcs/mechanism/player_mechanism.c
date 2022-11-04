@@ -6,12 +6,23 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 18:03:20 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/11/01 15:43:36 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/11/04 19:41:30 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/so_long.h"
 
+/**
+ * @brief Activate the ghost's skill (kill all the skeletons)
+ * 
+ * 1. If appear counter is greater than 0 OR there's no skeleton, don't run
+ *    the function
+ * 2. If the condition above cannot satisfy (meaning appear counter == 0 &&
+ *    there is a skeleton)
+ * 3. Set the skeleton's frame to skeleton_scared
+ * 
+ * Actually this only change the frame set of the skeletons
+ */
 void	ghost_boo(t_game *game)
 {
 	t_list		*skeletons;
@@ -29,6 +40,19 @@ void	ghost_boo(t_game *game)
 	}
 }
 
+/**
+ * @brief Listen to input and move the player accordingly
+ * 
+ * W  : UP
+ * A  : LEFT
+ * S  : DOWN
+ * D  : RIGHT
+ * SP : Activate ghost
+ * 
+ * Before moving the player, check if the player move to the destination will
+ * cause collision or not. If not, set the player's location to the destination.
+ * Increment the move count as well.
+ */
 void	move_player(t_game *game, int key)
 {
 	t_vector	dest;
@@ -50,7 +74,7 @@ void	move_player(t_game *game, int key)
 	}
 	else if (key == KEY_SP && game->ghost.activate == 0)
 		ghost_boo(game);
-	if (detect_collision(game, dest, PLAYER) == 0)
+	if (detect_collision(game, dest, PLAYER) == 0 && key != KEY_SP)
 	{
 		set_vector(&game->player.loc, dest.x, dest.y);
 		game->player.moves++;

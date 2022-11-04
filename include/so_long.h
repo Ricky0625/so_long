@@ -6,41 +6,82 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 14:46:24 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/11/01 16:16:33 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/11/04 20:16:43 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
-#define SO_LONG_H
+# define SO_LONG_H
 
-#include "../lib42/lib42.h"
-#include "../assets/sprites.h"
-#include "mlx.h"
-#include <stdlib.h>
+# include "../lib42/lib42.h"
+# include "../assets/sprites.h"
+# include "mlx.h"
+# include <stdlib.h>
 
 /** ==== TEXT STYLING ==== **/
-#define RED "\033[0;31m"
-#define YL "\033[0;33m"
-#define GN "\033[0;32m"
-#define DEF "\033[0m"
+# define RED "\033[0;31m"
+# define YL "\033[0;33m"
+# define GN "\033[0;32m"
+# define DEF "\033[0m"
 
 // 64: 576 * 320
 // 128: 1152 * 640
 /** ==== MACROS ==== **/
-#define WIN_WIDTH 1152
-#define WIN_HEIGHT 640
-#define FILE_EXT ".ber"
-#define SPT_SIZE 128
-#define APPEAR_MULTIPLIER 2
-#define ROAMING_COOLDOWN 20
+# define WIN_WIDTH 1152
+# define WIN_HEIGHT 640
+# define FILE_EXT ".ber"
+# define SPT_SIZE 128
+# define APPEAR_MULTIPLIER 2
+# define PATROL_COOLDOWN 20
 
 /** ==== KEYCODES ==== **/
-#define KEY_W 13
-#define KEY_A 0
-#define KEY_S 1
-#define KEY_D 2
-#define KEY_SP 49
-#define KEY_ESC 53
+# define KEY_W 13
+# define KEY_A 0
+# define KEY_S 1
+# define KEY_D 2
+# define KEY_SP 49
+# define KEY_ESC 53
+
+/** ==== UTILS ENUM ==== **/
+
+/**
+ * @brief A enum struct to represent entity
+ */
+typedef enum e_enty_type
+{
+	PLAYER = 'P',
+	GHOST = 'G',
+	SKELETON = 'M',
+	COLLECTIBLE = 'C',
+	VWALL = 'V',
+	EXIT = 'E',
+	WALL = '1'
+}	t_enty_type;
+
+/**
+ * @brief A enum struct to represent the patrolling direction
+ */
+typedef enum e_direction
+{
+	UP,
+	DOWN,
+	LEFT,
+	RIGHT,
+	MAX_DIRECTION,
+	UNSET
+}	t_direction;
+
+/**
+ * @brief A enum struct to represent the message status
+ */
+typedef enum e_msg_status
+{
+	SUCCESS,
+	FAILURE,
+	WARNING,
+	LOSE,
+	QUIT
+}	t_msg_status;
 
 /** ==== UTILS STRUCTS ==== **/
 
@@ -49,21 +90,21 @@
  **/
 typedef struct s_vector
 {
-	int x;
-	int y;
-} t_vector;
+	int	x;
+	int	y;
+}	t_vector;
 
 /**
  * @brief Image data address
  */
 typedef struct s_data_addr
 {
-	char *buffer;
-	int bits_per_pixel;
-	int line_size;
-	int endian;
-	int pixel;
-} t_data_addr;
+	char	*buffer;
+	int		bits_per_pixel;
+	int		line_size;
+	int		endian;
+	int		pixel;
+}	t_data_addr;
 
 /**
  * @brief Image metadata
@@ -76,10 +117,10 @@ typedef struct s_data_addr
  **/
 typedef struct s_image
 {
-	void *ref;
-	t_vector size;
-	t_data_addr *data;
-} t_image;
+	void		*ref;
+	t_vector	size;
+	t_data_addr	*data;
+}	t_image;
 
 /**
  * @brief Basically a summary of all the entities (how many of them)
@@ -87,12 +128,12 @@ typedef struct s_image
  */
 typedef struct s_entity
 {
-	int plyr;
-	int coll;
-	int exit;
-	int skely;
-	int ghost;
-} t_entity;
+	int	plyr;
+	int	coll;
+	int	exit;
+	int	skely;
+	int	ghost;
+}	t_entity;
 
 /**
  * @brief Info about the map
@@ -107,11 +148,11 @@ typedef struct s_entity
  */
 typedef struct s_map
 {
-	char *raw;
-	char **map;
-	char *file;
-	t_vector size;
-} t_map;
+	char		*raw;
+	char		**map;
+	char		*file;
+	t_vector	size;
+}	t_map;
 
 /**
  * @brief Struct for animation
@@ -123,11 +164,11 @@ typedef struct s_map
  */
 typedef struct s_anim
 {
-	int current_tick;
-	int duration;
-	int current_frame;
-	t_image **frames;
-} t_anim;
+	int		current_tick;
+	int		duration;
+	int		current_frame;
+	t_image	**frames;
+}	t_anim;
 
 /**
  * @brief A "database" for the images
@@ -142,30 +183,30 @@ typedef struct s_anim
  */
 typedef struct s_img_db
 {
-	t_image **player_idle_l;
-	t_image **player_idle_r;
-	t_image **ghost_idle;
-	t_image **ghost_appear;
-	t_image **ghost_boo;
-	t_image **key_idle;
-	t_image **key_effect;
-	t_image **skeleton_idle_l;
-	t_image **skeleton_idle_r;
-	t_image **skeleton_scared;
-	t_image **exit;
-	t_image **vwall_idle;
-	t_image **numbers;
-	t_image *corner_up_left;
-	t_image *corner_down_left;
-	t_image *corner_up_right;
-	t_image *corner_down_right;
-	t_image *side_up;
-	t_image *side_down;
-	t_image *side_left;
-	t_image *side_right;
-	t_image *floor;
-	t_image *block;
-} t_img_db;
+	t_image	**player_idle_l;
+	t_image	**player_idle_r;
+	t_image	**ghost_idle;
+	t_image	**ghost_appear;
+	t_image	**ghost_boo;
+	t_image	**key_idle;
+	t_image	**key_effect;
+	t_image	**skeleton_idle_l;
+	t_image	**skeleton_idle_r;
+	t_image	**skeleton_scared;
+	t_image	**exit;
+	t_image	**vwall_idle;
+	t_image	**numbers;
+	t_image	*corner_up_left;
+	t_image	*corner_down_left;
+	t_image	*corner_up_right;
+	t_image	*corner_down_right;
+	t_image	*side_up;
+	t_image	*side_down;
+	t_image	*side_left;
+	t_image	*side_right;
+	t_image	*floor;
+	t_image	*block;
+}	t_img_db;
 
 /**
  * @brief Vertical wall (entity)
@@ -176,9 +217,9 @@ typedef struct s_img_db
  */
 typedef struct s_vwall
 {
-	t_vector loc;
-	t_anim anim;
-} t_vwall;
+	t_vector	loc;
+	t_anim		anim;
+}	t_vwall;
 
 /**
  * @brief Struct for the special entity of the game, ghost or ghosy (not enemy)
@@ -189,22 +230,12 @@ typedef struct s_vwall
  */
 typedef struct s_ghost
 {
-	int appear_counter;
-	int activate;
-	t_vector loc;
-	t_anim anim;
-	t_anim effect;
-} t_ghost;
-
-typedef enum e_direction
-{
-	UP,
-	DOWN,
-	LEFT,
-	RIGHT,
-	MAX_DIRECTION,
-	UNSET
-} t_direction;
+	int			appear_counter;
+	int			activate;
+	t_vector	loc;
+	t_anim		anim;
+	t_anim		effect;
+}	t_ghost;
 
 /**
  * @brief Struct for the enemy of the game, skeleton or skely hehe
@@ -219,14 +250,14 @@ typedef enum e_direction
  */
 typedef struct s_skeleton
 {
-	int killed;
-	int collide;
-	t_vector loc;
-	t_anim anim;
-	t_direction dir;
-	int current_tick;
-	int surrounding[4];
-} t_skeleton;
+	int			killed;
+	int			collide;
+	t_vector	loc;
+	t_anim		anim;
+	t_direction	dir;
+	int			current_tick;
+	int			surrounding[4];
+}	t_skeleton;
 
 /**
  * @brief The collectibles
@@ -238,9 +269,9 @@ typedef struct s_skeleton
  */
 typedef struct s_coll
 {
-	t_vector loc;
-	t_anim anim;
-} t_coll;
+	t_vector	loc;
+	t_anim		anim;
+}	t_coll;
 
 /**
  * @brief Info about the player
@@ -252,11 +283,11 @@ typedef struct s_coll
  */
 typedef struct s_player
 {
-	int moves;
-	int collected;
-	t_vector loc;
-	t_anim anim;
-} t_player;
+	int			moves;
+	int			collected;
+	t_vector	loc;
+	t_anim		anim;
+}	t_player;
 
 /**
  * @brief Struct for the exit
@@ -266,16 +297,16 @@ typedef struct s_player
  */
 typedef struct s_exit
 {
-	int clear;
-	t_anim anim;
-	t_vector loc;
-} t_exit;
+	int			clear;
+	t_anim		anim;
+	t_vector	loc;
+}	t_exit;
 
 typedef struct s_img_put
 {
-	t_image *img;
-	t_vector position;
-} t_img_put;
+	t_image		*img;
+	t_vector	position;
+}	t_img_put;
 
 /**
  * @brief Basically everything the game needs to run
@@ -295,35 +326,21 @@ typedef struct s_img_put
  */
 typedef struct s_game
 {
-	void *ref;
-	void *win;
-	t_map map_data;
-	t_entity entity;
-	t_player player;
-	t_ghost ghost;
-	t_exit exit;
-	t_list *skeletons;
-	t_list *collectibles;
-	t_list *vwalls;
-	t_image *map_img;
-	t_img_put final_img;
-	t_img_put bg;
-	t_img_db img_db;
-} t_game;
-
-/**
- * @brief A enum struct to represent entity
- */
-typedef enum e_enty_type
-{
-	PLAYER = 'P',
-	GHOST = 'G',
-	SKELETON = 'M',
-	COLLECTIBLE = 'C',
-	VWALL = 'V',
-	EXIT = 'E',
-	WALL = '1'
-} t_enty_type;
+	void		*ref;
+	void		*win;
+	t_map		map_data;
+	t_entity	entity;
+	t_player	player;
+	t_ghost		ghost;
+	t_exit		exit;
+	t_list		*skeletons;
+	t_list		*collectibles;
+	t_list		*vwalls;
+	t_image		*map_img;
+	t_img_put	final_img;
+	t_img_put	bg;
+	t_img_db	img_db;
+}	t_game;
 
 /** ==== FUNCTION PROTOTYPES ==== **/
 
@@ -343,9 +360,9 @@ int			is_same_vector(t_vector a, t_vector b);
 /** ==== MAP PARSER & ITS UTILITIES ==== **/
 void		map_validator(t_game *game, char *file);
 void		check_map_format(t_game *game);
-void		is_rectangular(t_game *game);
+void		check_if_rectangular(t_game *game);
 void		get_entity(t_game *game, char ch);
-void		fill_map(t_vector *start, char **fill);
+char		**fill_map(t_game *game, t_vector start);
 void		show_path(char **map);
 char		**copy_map(t_game *game, char **map);
 char		**add_aesthetic(t_game *game);
@@ -360,6 +377,7 @@ void		put_to_screen(t_game *game, t_img_put *img);
 void		draw_base(t_game *game, int x, int y);
 void		draw_entity(t_game *game);
 void		draw_map(t_game *game);
+void		draw_ui(t_game *game);
 void		copy_image(t_image *src, t_image *dst, int x, int y);
 void		crop_image(t_image *src, t_image *dst, t_vector start);
 void		final_img_init(t_game *game);
@@ -368,16 +386,20 @@ void		fetch_all_imgs(t_game *game);
 /** ==== MECHANISM ==== **/
 void		move_player(t_game *game, int key);
 int			detect_collision(t_game *game, t_vector dest, t_enty_type type);
-void		skeleton_roaming(t_game *game);
+void		skeleton_patrol(t_game *game);
 void		check_if_skeletons_dead(t_game *game);
+int			can_continue_patrolling(t_game *game, t_skeleton *skely);
+t_vector	get_skely_dest(t_vector ori, int dir);
 
 /** ==== ANIMATION ==== **/
-void 		update_animation(t_game *game);
-void 		update_entity(t_game *game);
+void		update_animation(t_game *game);
+void		update_entity(t_game *game);
 void		update_frame(t_anim *anim);
 
 /** ==== FREE ==== **/
-void 		free_map(char **map);
-void 		free_game(t_game *game);
+void		free_map(char **map);
+void		free_game(t_game *game);
+void		exit_game(t_game *game, char *str, t_msg_status status);
+int			close_game(t_game *game);
 
 #endif

@@ -6,48 +6,21 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 15:21:27 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/11/01 16:16:55 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/11/04 20:16:05 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/so_long.h"
 
 /**
- * @brief Close the game. The process when the user clicked on the red cross
- * 		  or pressed the 'ESC' key. This function will also free everything
- * 		  before exit to ensure there's no memory leaks.
- * 
- * @param game 
+ * @brief Listen to the key pressed event and based on the key and do what
+ * 		  the program suppose to do.
+ * @param key: the key code of the key
+ * @param game: the struct that stores everything
  * @return int. The return value is useless, it is required for the function
- * 		   that will be hooked on the mlx function/
+ * 		   that will be hooked on the mlx function
  */
-int	close_game(t_game *game)
-{
-	(void)game;
-	exit(0);
-	return (1);
-}
-
-/**
- * skeleton movement should be like update_animation. should be passed into loop hook
- * 
- * player movement:
- * 1. check if encounter a skeleton.
- * 		a. Need a function that takes in player location and check against the list
- * 		   of skeleton's location. If one matches, means player is dead. quit game.
- * 2. check if touch the wall, block, vwall
- * 		a. probably need a function to loop through the location of vwall, since it's a
- * 		   list. OR, just use method (b). since it's static item as well.
- * 		b. for static items like block and side walls, get the location of player, and 
- * 		   get the item on the map. If it's a '1' OR 'V' cannot pass.
- * 3. check if collected key
- * 		a. same logic as player movement (1).
- * 		b. when go pass a key, play effect animation and minus one on t_entity (collectible)
- * 		c. when t_entity.collectible == 0, play exit animation, clear set to 1. when player is on
- * 		   exit in this condition, player won the game. exit game.
- */
-// the problem now is... it's very laggy
-int	key_listener(int key, t_game *game)
+static int	key_listener(int key, t_game *game)
 {
 	if (key == KEY_ESC)
 		close_game(game);
@@ -58,29 +31,36 @@ int	key_listener(int key, t_game *game)
 
 /**
  * @brief Render everything to the screen.
- * 
- * Will start by clear up the screen. After that update each entity's animation
- * if any. Based on their current image, draw a map img. Place the background
- * img first then overlay the map img on it's top. Once the img is on the
- * screen, destroy the map img.
- * 
- * This will run in a loop. (mlx_loop_hook)
+ *
+ * 1. Clear the window so that we can place the new rendered image
+ * 2. Update the animation of each entity, object
+ * 3. Update the enemy patrol data. (If any)
+ * 4. Check if the skeletons are dead, so that we can free the skeletons
+ *    linked list.
+ * 5. Draw the map. This includes the base of the map, all the objects and
+ * 	  entities.
+ * 6. Put the background image
+ * 7. Put the map image (final, after cropped)
+ * 8. Draw the user interface (player move count)
+ *
+ * This will run in a infinite loop. (mlx_loop_hook)
  */
-int	render(t_game *game)
+static int	render(t_game *game)
 {
 	mlx_clear_window(game->ref, game->win);
 	update_animation(game);
-	skeleton_roaming(game);
+	skeleton_patrol(game);
 	check_if_skeletons_dead(game);
 	draw_map(game);
 	put_to_screen(game, &game->bg);
 	put_to_screen(game, &game->final_img);
+	draw_ui(game);
 	return (1);
 }
 
 /**
  * @brief Initialize the t_game struct
- * 
+ *
  * @param game
  */
 static void	game_init(t_game *game)
@@ -96,9 +76,9 @@ static void	game_init(t_game *game)
 
 /**
  * @brief Initialize everything for the game to run
- * 
- * @param ac 
- * @param av 
+ *
+ * @param ac
+ * @param av
  * @return t_game* (pointer to t_game), which will store all the things
  */
 static t_game	*start_game(int ac, char **av)
@@ -107,11 +87,7 @@ static t_game	*start_game(int ac, char **av)
 	char	*file;
 
 	if (ac != 2)
-	{
-		ft_putstr_fd(RED "[ERROR]: Invalid Usage!\n" DEF, 2);
-		ft_putstr_fd(RED "./so_long [name.ber]\n" DEF, 2);
-		exit(EXIT_FAILURE);
-	}
+		exit_game(NULL, "Invalid Usage!\n./so_long file.ber", FAILURE);
 	file = av[1];
 	game = malloc(sizeof(t_game));
 	game_init(game);
@@ -123,8 +99,8 @@ static t_game	*start_game(int ac, char **av)
 
 /**
  * 1. Start game
- * 2. Key hook (input_listener)
- * 3. render
+ * 2. Loop hook (render)
+ * 3. Key hook (input_listener)
  * 4. mlx_loop
  **/
 int	main(int ac, char **av)

@@ -6,12 +6,17 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 13:02:03 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/10/17 12:41:21 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/11/04 20:32:27 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/so_long.h"
 
+/**
+ * @brief Add the entity based on the entity type
+ * 
+ * This will be used while iterating through the map.
+ */
 void	add_entity(t_game *game, t_enty_type type, t_vector loc)
 {
 	if (type == PLAYER)
@@ -28,6 +33,11 @@ void	add_entity(t_game *game, t_enty_type type, t_vector loc)
 		add_exit(game, loc);
 }
 
+/**
+ * @brief Add entity
+ * 
+ * Iterate through the map and add the info of the entity to game struct
+ */
 void	update_entity(t_game *game)
 {
 	t_vector	loc;

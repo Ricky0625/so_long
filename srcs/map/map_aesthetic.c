@@ -6,14 +6,14 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 14:44:03 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/09/13 16:04:28 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/11/04 20:33:59 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/so_long.h"
 
 /**
- * Create a horizontal wall for aesthetic purpose
+ * @brief Create a horizontal wall for aesthetic purpose
  * 
  * Horizontal wall format: "1VVVVVVVVVV1"
  * Start & ends with '1', the rest will be 'V'
@@ -42,8 +42,8 @@ static char	*add_horizontal_wall(t_game *game)
 }
 
 /**
- * Add one more line for horizontal wall to add some aesthetic look
- * for the game.
+ * @brief Add one more line for horizontal wall to add some aesthetic look
+ *        for the game.
  * 
  * Update the map to add a horizontal wall after the wall.
 **/

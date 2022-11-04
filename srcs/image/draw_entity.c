@@ -6,12 +6,15 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 16:29:49 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/11/01 12:29:37 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/11/04 20:39:58 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/so_long.h"
 
+/**
+ * @brief Draw the image to the map_img
+ */
 void	draw_to_map(t_image *map_img, t_anim *anim, t_vector loc)
 {
 	t_image	*frame;
@@ -23,6 +26,9 @@ void	draw_to_map(t_image *map_img, t_anim *anim, t_vector loc)
 		loc.y * SPT_SIZE, loc.x * SPT_SIZE);
 }
 
+/**
+ * @brief Draw the image of each node of a linked list to the screen
+ */
 void	lst_draw_frame(t_image *map_img, t_list *lst, t_enty_type type,
 	void (*draw)(t_image *, t_anim *, t_vector loc))
 {
@@ -51,6 +57,10 @@ void	lst_draw_frame(t_image *map_img, t_list *lst, t_enty_type type,
 	}
 }
 
+/**
+ * @brief Draw scared skeletons, will be run after the ghost
+ *        is activated
+ */
 void	draw_scared_skeletons(t_game *game)
 {
 	t_list		*skeletons;
@@ -69,7 +79,11 @@ void	draw_scared_skeletons(t_game *game)
 }
 
 /**
- * @note this may change (when map is bigger than the screen)
+ * @brief Draw all the entity onto the map image
+ * 
+ * 1. For ghost, only draw it if there's a ghost, and appear counter
+ *    is 0, and there is enemy
+ * 2. For ghost activation effect, only draw if ghost is activated.
  */
 void	draw_entity(t_game *game)
 {

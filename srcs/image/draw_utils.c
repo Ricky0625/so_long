@@ -6,12 +6,15 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 15:42:54 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/10/20 21:05:30 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/11/04 20:43:40 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/so_long.h"
 
+/**
+ * @brief Set the data address
+ */
 t_data_addr	*set_data_addr(t_image *img)
 {
 	t_data_addr	*data;
@@ -23,6 +26,9 @@ t_data_addr	*set_data_addr(t_image *img)
 	return (data);
 }
 
+/**
+ * @brief Create a new image and with a option to set the data address
+ */
 t_image	*new_image(t_game *game, t_vector size, int set_data)
 {
 	t_image	*img;
@@ -37,6 +43,10 @@ t_image	*new_image(t_game *game, t_vector size, int set_data)
 	return (img);
 }
 
+/**
+ * @brief Convert xpm to image, but option to set the data address
+ *        or not
+ */
 t_image	*xpm_to_image(t_game *game, char *file, int set_data)
 {
 	t_image		*img;

@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 12:37:10 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/11/01 11:22:19 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/11/04 20:34:43 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,12 @@ void	add_collectible(t_game *game, t_vector loc)
 	ft_lstadd_back(colls, ft_lstnew(coll));
 }
 
+/**
+ * @brief Initialize and add exit to game
+ * 
+ * @param game 	: the game struct
+ * @param loc	: the location of the exit
+ */
 void	add_exit(t_game *game, t_vector loc)
 {
 	t_exit	*exit;

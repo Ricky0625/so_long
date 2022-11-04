@@ -6,12 +6,15 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:39:23 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/10/31 20:55:25 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/11/04 17:46:15 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/so_long.h"
 
+/**
+ * @brief Check if the destination tile is a key or not
+ */
 int	is_key(t_game *game, t_vector loc)
 {
 	t_list	*collectibles;
@@ -28,7 +31,9 @@ int	is_key(t_game *game, t_vector loc)
 	return (0);
 }
 
-// instead of just set collected to 1, free the node
+/**
+ * @brief Collect the key and free it
+ */
 static void	collect_key(t_game *game, t_vector loc)
 {
 	t_list	*collectibles;
@@ -48,6 +53,11 @@ static void	collect_key(t_game *game, t_vector loc)
 	game->player.collected++;
 }
 
+/**
+ * @brief Check if the player will clash with a skeleton or not.
+ * 
+ * This function will also check if two skeleton will clash tgt or not.
+ */
 int	get_killed(t_game *game, t_vector dest)
 {
 	t_list		*skeletons;
@@ -97,9 +107,9 @@ int	detect_collision(t_game *game, t_vector dest, t_enty_type type)
 		if (enty == GHOST && game->ghost.appear_counter > 0)
 			game->ghost.appear_counter--;
 		if (enty == EXIT && game->player.collected == game->entity.coll)
-			exit(0);
+			exit_game(game, NULL, SUCCESS);
 		if (get_killed(game, dest) == 1)
-			exit(0);
+			exit_game(game, NULL, LOSE);
 	}
 	if (type == SKELETON)
 	{

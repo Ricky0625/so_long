@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 21:56:37 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/10/21 16:56:52 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/11/04 15:43:34 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,9 @@ void	copy_image(t_image *src, t_image *dst, int x, int y)
 	int	i;
 	int	j;
 
-	// check if the image is null or not
 	if (src == 0 || dst == 0)
 		return ;
 	j = -1;
-	// iterate through the pixels of the src image
 	while (++j < src->size.y)
 	{
 		i = -1;
@@ -80,10 +78,6 @@ void	crop_image(t_image *src, t_image *dst, t_vector start)
 		start.y = ori_start_y;
 		while (++y < dst->size.x)
 		{
-			// the way to get data pixel is in reverse
-			// dst will use the x, y
-			// src will use the start
-			// to target the correct pixel
 			src->data->pixel = (start.x * src->data->line_size) + (start.y * 4);
 			dst->data->pixel = (x * dst->data->line_size) + (y * 4);
 			copy_pixel(src->data, dst->data);

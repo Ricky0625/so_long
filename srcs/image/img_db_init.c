@@ -6,12 +6,17 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 13:39:23 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/11/01 15:35:45 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/11/04 20:44:25 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/so_long.h"
 
+/**
+ * @brief Initialize image database
+ * 
+ * TODO: free all these shit before exit
+ */
 static void	img_db_init(t_game *game)
 {
 	t_img_db	*img_db;
@@ -31,14 +36,8 @@ static void	img_db_init(t_game *game)
 	img_db->numbers = ft_calloc(11, sizeof(t_image *));
 }
 
-/**
- * @brief Fetch the other imgs. This includes the corner wall,
- * 		  side walls, vertical wall, exit and block.
- */
 static void	fetch_other_imgs(t_game *game, t_img_db *img_db)
 {
-	img_db->floor = xpm_to_image(game, FLOOR, 1);
-	img_db->block = xpm_to_image(game, BLOCK, 1);
 	img_db->exit[0] = xpm_to_image(game, EXIT1, 1);
 	img_db->exit[1] = xpm_to_image(game, EXIT2, 1);
 	img_db->exit[2] = xpm_to_image(game, EXIT3, 1);
@@ -59,26 +58,16 @@ static void	fetch_other_imgs(t_game *game, t_img_db *img_db)
 	img_db->vwall_idle[3] = xpm_to_image(game, VWALL4, 1);
 	img_db->vwall_idle[4] = xpm_to_image(game, VWALL3, 1);
 	img_db->vwall_idle[5] = xpm_to_image(game, VWALL2, 1);
-}
-
-/**
- * @brief Fetch the imgs of entity. This includes the player,
- * 		  ghost, key, skeleton.
- */
-static void	fetch_entity_imgs(t_game *game, t_img_db *img_db)
-{
 	img_db->key_idle[0] = xpm_to_image(game, KEY1, 1);
 	img_db->key_idle[1] = xpm_to_image(game, KEY2, 1);
 	img_db->key_idle[2] = xpm_to_image(game, KEY3, 1);
 	img_db->key_idle[3] = xpm_to_image(game, KEY4, 1);
 	img_db->key_idle[4] = xpm_to_image(game, KEY3, 1);
+}
+
+static void	fetch_entity_imgs(t_game *game, t_img_db *img_db)
+{
 	img_db->key_idle[5] = xpm_to_image(game, KEY2, 1);
-	img_db->ghost_idle[0] = xpm_to_image(game, GHOST1, 1);
-	img_db->ghost_idle[1] = xpm_to_image(game, GHOST2, 1);
-	img_db->ghost_idle[2] = xpm_to_image(game, GHOST3, 1);
-	img_db->ghost_idle[3] = xpm_to_image(game, GHOST4, 1);
-	img_db->ghost_idle[4] = xpm_to_image(game, GHOST3, 1);
-	img_db->ghost_idle[5] = xpm_to_image(game, GHOST2, 1);
 	img_db->player_idle_l[0] = xpm_to_image(game, PLAYERL1, 1);
 	img_db->player_idle_l[1] = xpm_to_image(game, PLAYERL2, 1);
 	img_db->player_idle_l[2] = xpm_to_image(game, PLAYERL3, 1);
@@ -99,14 +88,16 @@ static void	fetch_entity_imgs(t_game *game, t_img_db *img_db)
 	img_db->skeleton_idle_r[1] = xpm_to_image(game, SKELYR2, 1);
 	img_db->skeleton_idle_r[2] = xpm_to_image(game, SKELYR3, 1);
 	img_db->skeleton_idle_r[3] = xpm_to_image(game, SKELYR2, 1);
+	img_db->ghost_idle[0] = xpm_to_image(game, GHOST1, 1);
+	img_db->ghost_idle[1] = xpm_to_image(game, GHOST2, 1);
+	img_db->ghost_idle[2] = xpm_to_image(game, GHOST3, 1);
 }
 
-/**
- * @brief Fetch the effect imgs. This includes skeleton get killed,
- *        key collected, ghost appear, ghost cutscene.
- */
 static void	fetch_effect_imgs(t_game *game, t_img_db *img_db)
 {
+	img_db->ghost_idle[3] = xpm_to_image(game, GHOST4, 1);
+	img_db->ghost_idle[4] = xpm_to_image(game, GHOST3, 1);
+	img_db->ghost_idle[5] = xpm_to_image(game, GHOST2, 1);
 	img_db->ghost_boo[0] = xpm_to_image(game, BOO1, 1);
 	img_db->ghost_boo[1] = xpm_to_image(game, BOO2, 1);
 	img_db->ghost_boo[2] = xpm_to_image(game, BOO3, 1);
@@ -131,12 +122,17 @@ static void	fetch_effect_imgs(t_game *game, t_img_db *img_db)
 	img_db->numbers[9] = xpm_to_image(game, NINE, 1);
 }
 
+/**
+ * @brief Fetch all the images to get the image database ready
+ */
 void	fetch_all_imgs(t_game *game)
 {
 	t_img_db	*img_db;
 
 	img_db_init(game);
 	img_db = &game->img_db;
+	img_db->floor = xpm_to_image(game, FLOOR, 1);
+	img_db->block = xpm_to_image(game, BLOCK, 1);
 	fetch_other_imgs(game, img_db);
 	fetch_entity_imgs(game, img_db);
 	fetch_effect_imgs(game, img_db);

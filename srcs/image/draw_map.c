@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 16:42:20 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/10/26 11:30:15 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/11/03 20:25:36 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,4 +153,5 @@ void	final_img_init(t_game *game)
 		set_vector(&final->position, (WIN_HEIGHT - map_size.y) / 2,
 			(WIN_WIDTH - map_size.x) / 2);
 	}
+	draw_ui(game);
 }

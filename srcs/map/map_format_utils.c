@@ -6,24 +6,24 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 14:56:13 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/10/25 14:05:07 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/11/04 20:11:05 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/so_long.h"
 
 /**
- * Check if the map is rectangular or not
- * 
+ * @brief Check if the map is rectangular or not. If it's not exit game.
+ *
  * len	: the length of the line that being inspected right now
  * width: width of the map
  * map	: the map
- * 
+ *
  * Iterate through the map, line by line. While iterating, get the length
  * of that line. Check if the length is equal to the expected width. If
  * not exit program.
-**/
-void	is_rectangular(t_game *game)
+ **/
+void	check_if_rectangular(t_game *game)
 {
 	int		len;
 	int		width;
@@ -35,26 +35,23 @@ void	is_rectangular(t_game *game)
 	{
 		len = ft_strlen(*(map++));
 		if (len != width)
-		{
-			ft_putstr_fd(RED"[ERROR]: Map not rectangular!\n"DEF, 2);
-			free_game(game);
-			exit(2);
-		}
+			exit_game(game, "Map not rectangular!", FAILURE);
 	}
 }
 
 /**
- * Count how many entity are there in the map
- * 
- * E	: Exit
- * C	: Collectibles
- * P	: Player
- * M	: Monster
- * 0	: Empty space
- * 1	: Block
- * 
+ * @brief Count how many entity are there in the map and update the entity
+ * 		  stats struct
+ *
+ * E : Exit
+ * C : Collectibles
+ * P : Player
+ * M : Monster
+ * 0 : Empty space
+ * 1 : Block
+ *
  * If detected any unrecognized character, exit program.
-**/
+ */
 void	get_entity(t_game *game, char ch)
 {
 	if (ch == 'E')
@@ -70,22 +67,15 @@ void	get_entity(t_game *game, char ch)
 	else if (ch == '0' || ch == '1')
 		return ;
 	else
-	{
-		ft_putstr_fd(RED"[ERROR]: Invalid character found!\n"DEF, 2);
-		free_game(game);
-		exit(2);
-	}
+		exit_game(game, "Invalid character found!", FAILURE);
 }
 
 /**
- * Locate where is the entity.
- * 
+ * @brief Locate where is the entity.
+ *
  * Iterate through the map, if the current character is the entity we are
  * searching for, set location (x & y).
- * 
- * This function will always return the location of the last occurrence
- * of the entity.
-**/
+ */
 int	find_entity(t_vector *loc, char **map, char entity)
 {
 	int		x;
@@ -104,8 +94,7 @@ int	find_entity(t_vector *loc, char **map, char entity)
 		{
 			if (*(line + y) == entity)
 			{
-				loc->x = x;
-				loc->y = y;
+				set_vector(loc, x, y);
 				found = 1;
 			}
 			y++;
@@ -116,8 +105,8 @@ int	find_entity(t_vector *loc, char **map, char entity)
 }
 
 /**
- * Copy map. Duh.
-**/
+ * @brief Copy map. Duh.
+ **/
 char	**copy_map(t_game *game, char **map)
 {
 	int		i;
