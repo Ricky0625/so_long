@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 14:28:25 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/11/04 20:09:27 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/11/04 22:10:30 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,8 +101,8 @@ static void	check_essential(t_game *game, char **map)
 		|| game->entity.plyr != 1 || game->entity.ghost > 1
 		|| (game->entity.ghost == 0 && game->entity.skely > 0))
 	{
-		ft_putstr_fd(YL "Require 1 (P)layer, 1 (E)xit, 1 (C)ollectible.\n", 2);
-		ft_putstr_fd("If there's enemy, there must be a ghost.\n" DEF, 2);
+		ft_printf(YL "Require 1 (P)layer, 1 (E)xit, 1 (C)ollectible.\n" DEF);
+		ft_printf(YL "If there's enemy, there must be a ghost.\n" DEF);
 		exit_game(game, "Invalid map setup!", FAILURE);
 	}
 }
