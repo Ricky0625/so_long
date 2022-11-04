@@ -6,7 +6,7 @@
 #    By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/03 11:43:30 by wricky-t          #+#    #+#              #
-#    Updated: 2022/11/04 17:42:50 by wricky-t         ###   ########.fr        #
+#    Updated: 2022/11/04 20:57:19 by wricky-t         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -133,8 +133,15 @@ re: fclean all
 
 check: $(SRCS)
 	@clear
-	@$(NORM) $(SRCS) $(INC_PATH) ./assets/*.h
+	@$(NORM) $(SRCS) $(INC_PATH) assets
 
-checkall: check
+checkall: $(SRCS)
 	@clear
-	@$(NORM) $(LIB_PATH)
+	@$(NORM) $(SRCS) $(INC_PATH) $(LIB_PATH)
+
+checkheader:
+	@clear
+	@$(NORM) $(INC_PATH) assets
+
+.PHONY:
+	clean fclean re
