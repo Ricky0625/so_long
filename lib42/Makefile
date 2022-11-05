@@ -6,14 +6,14 @@
 #    By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/03 19:48:16 by wricky-t          #+#    #+#              #
-#    Updated: 2022/09/03 21:19:42 by wricky-t         ###   ########.fr        #
+#    Updated: 2022/11/05 14:13:24 by wricky-t         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	:= lib42.a
 LIBFT	:= libft
 GNL		:= gnl
-GNL_OBJ	:= gnl/get_next_line.o gnl/get_next_line_utils.o
+GNL_OBJ	:= gnl/get_next_line.o
 PRINTF	:= ft_printf
 AR		:= ar rcs
 

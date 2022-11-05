@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 14:20:21 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/07/13 18:54:31 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/11/05 14:13:04 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 // libraries
 # include <unistd.h>
 # include <stdlib.h>
+# include "../libft/libft.h"
 
 // for testing only (must remove after everything is good)
 # include <stdio.h>
