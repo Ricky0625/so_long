@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/28 16:40:19 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/06/08 17:21:40 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/11/05 13:03:39 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,9 @@
 void	ft_striteri(char *s, void (*f)(unsigned int, char *))
 {
 	unsigned int	index;
-	size_t			len;
 
 	if (!s)
 		return ;
-	len = ft_strlen(s);
 	index = 0;
 	while (*(s + index))
 	{
