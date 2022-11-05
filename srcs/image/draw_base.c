@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 17:15:32 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/10/22 16:56:05 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/11/05 13:02:27 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,6 @@
  */
 t_image	*get_base_img(t_game *game, int x, int y, t_vector size)
 {
-	char	**map;
-
-	map = game->map_data.map;
 	if (x == 0 && y == 0)
 		return (game->img_db.corner_up_left);
 	else if (x == 0 && y == size.x - 1)
