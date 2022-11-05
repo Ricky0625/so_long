@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 13:39:23 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/11/04 20:44:25 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/11/04 22:21:27 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ static void	img_db_init(t_game *game)
 	img_db->ghost_idle = ft_calloc(7, sizeof(t_image *));
 	img_db->ghost_boo = ft_calloc(6, sizeof(t_image *));
 	img_db->key_idle = ft_calloc(7, sizeof(t_image *));
-	img_db->key_effect = ft_calloc(3, sizeof(t_image *));
 	img_db->skeleton_idle_l = ft_calloc(5, sizeof(t_image *));
 	img_db->skeleton_idle_r = ft_calloc(5, sizeof(t_image *));
 	img_db->skeleton_scared = ft_calloc(8, sizeof(t_image *));

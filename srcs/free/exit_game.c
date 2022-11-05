@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 11:31:22 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/11/04 22:08:16 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/11/04 22:28:52 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,16 +36,11 @@ void	print_game_stats(t_game *game)
  */
 void	exit_game(t_game *game, char *str, t_msg_status status)
 {
-	(void)game;
+	free_game(game);
 	if (status == SUCCESS)
 		ft_printf(GN "CONGRATS! YOU WIN!\n" DEF);
 	else if (status == FAILURE)
 		ft_printf(RED "[ERROR]: %s\n" DEF, str);
-	else if (status == WARNING)
-	{
-		ft_printf(YL "[WARNING]: %s\n" DEF, str);
-		return ;
-	}
 	else if (status == LOSE)
 		ft_printf(RED "Ahhh man. Try again next time.\n" DEF);
 	else if (status == QUIT)

@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 14:46:24 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/11/04 20:16:43 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/11/04 22:23:23 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,6 @@ typedef enum e_msg_status
 {
 	SUCCESS,
 	FAILURE,
-	WARNING,
 	LOSE,
 	QUIT
 }	t_msg_status;
@@ -189,7 +188,6 @@ typedef struct s_img_db
 	t_image	**ghost_appear;
 	t_image	**ghost_boo;
 	t_image	**key_idle;
-	t_image	**key_effect;
 	t_image	**skeleton_idle_l;
 	t_image	**skeleton_idle_r;
 	t_image	**skeleton_scared;
@@ -399,6 +397,7 @@ void		update_frame(t_anim *anim);
 /** ==== FREE ==== **/
 void		free_map(char **map);
 void		free_game(t_game *game);
+void		free_img_db(t_game *game);
 void		exit_game(t_game *game, char *str, t_msg_status status);
 int			close_game(t_game *game);
 
