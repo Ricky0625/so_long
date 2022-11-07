@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 13:39:23 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/11/04 22:21:27 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/11/07 17:46:05 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,16 +22,16 @@ static void	img_db_init(t_game *game)
 	t_img_db	*img_db;
 
 	img_db = &game->img_db;
-	img_db->player_idle_l = ft_calloc(7, sizeof(t_image *));
-	img_db->player_idle_r = ft_calloc(7, sizeof(t_image *));
-	img_db->ghost_idle = ft_calloc(7, sizeof(t_image *));
+	img_db->player_idle_l = ft_calloc(5, sizeof(t_image *));
+	img_db->player_idle_r = ft_calloc(5, sizeof(t_image *));
+	img_db->ghost_idle = ft_calloc(5, sizeof(t_image *));
 	img_db->ghost_boo = ft_calloc(6, sizeof(t_image *));
-	img_db->key_idle = ft_calloc(7, sizeof(t_image *));
-	img_db->skeleton_idle_l = ft_calloc(5, sizeof(t_image *));
-	img_db->skeleton_idle_r = ft_calloc(5, sizeof(t_image *));
+	img_db->key_idle = ft_calloc(5, sizeof(t_image *));
+	img_db->skeleton_idle_l = ft_calloc(4, sizeof(t_image *));
+	img_db->skeleton_idle_r = ft_calloc(4, sizeof(t_image *));
 	img_db->skeleton_scared = ft_calloc(8, sizeof(t_image *));
 	img_db->exit = ft_calloc(7, sizeof(t_image *));
-	img_db->vwall_idle = ft_calloc(7, sizeof(t_image *));
+	img_db->vwall_idle = ft_calloc(5, sizeof(t_image *));
 	img_db->numbers = ft_calloc(11, sizeof(t_image *));
 }
 
@@ -55,48 +55,36 @@ static void	fetch_other_imgs(t_game *game, t_img_db *img_db)
 	img_db->vwall_idle[1] = xpm_to_image(game, VWALL2, 1);
 	img_db->vwall_idle[2] = xpm_to_image(game, VWALL3, 1);
 	img_db->vwall_idle[3] = xpm_to_image(game, VWALL4, 1);
-	img_db->vwall_idle[4] = xpm_to_image(game, VWALL3, 1);
-	img_db->vwall_idle[5] = xpm_to_image(game, VWALL2, 1);
 	img_db->key_idle[0] = xpm_to_image(game, KEY1, 1);
 	img_db->key_idle[1] = xpm_to_image(game, KEY2, 1);
 	img_db->key_idle[2] = xpm_to_image(game, KEY3, 1);
 	img_db->key_idle[3] = xpm_to_image(game, KEY4, 1);
-	img_db->key_idle[4] = xpm_to_image(game, KEY3, 1);
 }
 
-static void	fetch_entity_imgs(t_game *game, t_img_db *img_db)
+void	fetch_entity_imgs(t_game *game, t_img_db *img_db)
 {
-	img_db->key_idle[5] = xpm_to_image(game, KEY2, 1);
 	img_db->player_idle_l[0] = xpm_to_image(game, PLAYERL1, 1);
 	img_db->player_idle_l[1] = xpm_to_image(game, PLAYERL2, 1);
 	img_db->player_idle_l[2] = xpm_to_image(game, PLAYERL3, 1);
 	img_db->player_idle_l[3] = xpm_to_image(game, PLAYERL4, 1);
-	img_db->player_idle_l[4] = xpm_to_image(game, PLAYERL3, 1);
-	img_db->player_idle_l[5] = xpm_to_image(game, PLAYERL2, 1);
 	img_db->player_idle_r[0] = xpm_to_image(game, PLAYERR1, 1);
 	img_db->player_idle_r[1] = xpm_to_image(game, PLAYERR2, 1);
 	img_db->player_idle_r[2] = xpm_to_image(game, PLAYERR3, 1);
 	img_db->player_idle_r[3] = xpm_to_image(game, PLAYERR4, 1);
-	img_db->player_idle_r[4] = xpm_to_image(game, PLAYERR3, 1);
-	img_db->player_idle_r[5] = xpm_to_image(game, PLAYERR2, 1);
 	img_db->skeleton_idle_l[0] = xpm_to_image(game, SKELYL1, 1);
 	img_db->skeleton_idle_l[1] = xpm_to_image(game, SKELYL2, 1);
 	img_db->skeleton_idle_l[2] = xpm_to_image(game, SKELYL3, 1);
-	img_db->skeleton_idle_l[3] = xpm_to_image(game, SKELYL2, 1);
 	img_db->skeleton_idle_r[0] = xpm_to_image(game, SKELYR1, 1);
 	img_db->skeleton_idle_r[1] = xpm_to_image(game, SKELYR2, 1);
 	img_db->skeleton_idle_r[2] = xpm_to_image(game, SKELYR3, 1);
-	img_db->skeleton_idle_r[3] = xpm_to_image(game, SKELYR2, 1);
 	img_db->ghost_idle[0] = xpm_to_image(game, GHOST1, 1);
 	img_db->ghost_idle[1] = xpm_to_image(game, GHOST2, 1);
 	img_db->ghost_idle[2] = xpm_to_image(game, GHOST3, 1);
+	img_db->ghost_idle[3] = xpm_to_image(game, GHOST4, 1);
 }
 
 static void	fetch_effect_imgs(t_game *game, t_img_db *img_db)
 {
-	img_db->ghost_idle[3] = xpm_to_image(game, GHOST4, 1);
-	img_db->ghost_idle[4] = xpm_to_image(game, GHOST3, 1);
-	img_db->ghost_idle[5] = xpm_to_image(game, GHOST2, 1);
 	img_db->ghost_boo[0] = xpm_to_image(game, BOO1, 1);
 	img_db->ghost_boo[1] = xpm_to_image(game, BOO2, 1);
 	img_db->ghost_boo[2] = xpm_to_image(game, BOO3, 1);
@@ -130,6 +118,8 @@ void	fetch_all_imgs(t_game *game)
 
 	img_db_init(game);
 	img_db = &game->img_db;
+	game->bg.img = xpm_to_image(game, BG, 0);
+	vector_init(&game->bg.position);
 	img_db->floor = xpm_to_image(game, FLOOR, 1);
 	img_db->block = xpm_to_image(game, BLOCK, 1);
 	fetch_other_imgs(game, img_db);

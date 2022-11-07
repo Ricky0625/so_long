@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 14:42:41 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/11/04 20:36:27 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/11/07 13:48:16 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,31 +34,16 @@ void	anim_init(t_anim *anim, int duration, t_image **frames)
 	anim->current_tick = 0;
 	anim->duration = duration;
 	anim->current_frame = 0;
+	anim->picker = 1;
 	anim->frames = frames;
 }
 
 /**
- * @brief Initialize the vector
+ * @brief Initialize the map_data struct
  */
-void	vector_init(t_vector *vector)
+void	map_data_init(t_map *map_data)
 {
-	vector->x = 0;
-	vector->y = 0;
-}
-
-/**
- * @brief Set the vector based on the given input
- */
-void	set_vector(t_vector *vector, int x, int y)
-{
-	vector->x = x;
-	vector->y = y;
-}
-
-/**
- * @brief Check if two vector has the same value
- */
-int	is_same_vector(t_vector a, t_vector b)
-{
-	return (a.x == b.x && a.y == b.y);
+	map_data->file = NULL;
+	map_data->raw = NULL;
+	map_data->map = NULL;
 }

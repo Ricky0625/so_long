@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:39:23 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/11/04 17:46:15 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/11/07 18:05:49 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int	get_killed(t_game *game, t_vector dest)
 	while (skeletons != NULL)
 	{
 		skely = skeletons->content;
-		if (is_same_vector(skely->loc, dest) == 1 && skely->killed == 0)
+		if (is_same_vector(skely->loc, dest) == 1)
 			return (1);
 		skeletons = skeletons->next;
 	}

@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 15:16:18 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/11/01 16:17:33 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/11/07 13:51:19 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,6 @@ void	add_skeleton(t_game *game, t_vector loc)
 
 	skeletons = &game->skeletons;
 	skely = malloc(sizeof(t_skeleton));
-	skely->killed = 0;
-	skely->collide = 0;
 	skely->loc = loc;
 	skely->dir = UNSET;
 	skely->current_tick = 0;

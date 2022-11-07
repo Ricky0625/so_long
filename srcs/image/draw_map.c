@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 16:42:20 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/11/04 21:00:45 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/11/07 19:03:16 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ void	draw_map(t_game *game)
 
 	size = game->map_data.size;
 	set_vector(&size, size.x * SPT_SIZE, size.y * SPT_SIZE);
+	if (game->map_img != NULL)
+		free_img(game->map_img);
 	game->map_img = new_image(game, size, 1);
 	mapiteri(game, draw_base);
 	draw_entity(game);
@@ -63,6 +65,8 @@ void	set_final_size(t_game *game, t_vector *start, t_vector end)
 		end.y = map_width - 1;
 	set_vector(&final_size,
 		(end.y - start->y + 1) * SPT_SIZE, (end.x - start->x + 1) * SPT_SIZE);
+	if (game->final_img.img != NULL)
+		free_img(game->final_img.img);
 	game->final_img.img = new_image(game, final_size, 1);
 }
 
@@ -140,13 +144,8 @@ void	final_img_init(t_game *game)
 	map_size = game->map_data.size;
 	set_vector(&map_size, map_size.x * SPT_SIZE, map_size.y * SPT_SIZE);
 	vector_init(&final->position);
-	game->bg.img = xpm_to_image(game, BG, 1);
-	vector_init(&game->bg.position);
 	if (is_big_map(game) == 1)
-	{
 		get_final_img(game);
-		mlx_destroy_image(game->ref, game->map_img->ref);
-	}
 	else
 	{
 		final->img = game->map_img;

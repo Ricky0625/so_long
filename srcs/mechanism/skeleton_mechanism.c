@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 17:50:01 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/11/04 17:41:37 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/11/07 13:27:02 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,16 +123,15 @@ void	check_if_skeletons_dead(t_game *game)
 	if (game->ghost.activate == 0 || game->skeletons == NULL)
 		return ;
 	skeletons = game->skeletons;
-	while (skeletons != NULL)
+	if (skeletons == NULL)
+		return ;
+	skely = skeletons->content;
+	if (skely->anim.current_frame < 6)
+		return ;
+	if (skely->anim.current_frame == 6)
 	{
-		skely = skeletons->content;
-		if (skely->anim.current_frame == 6)
-		{
-			ft_lstdelall(game->skeletons);
-			game->skeletons = NULL;
-			break ;
-		}
-		skeletons = skeletons->next;
+		ft_lstdelall(game->skeletons);
+		game->skeletons = NULL;
 	}
 }
 

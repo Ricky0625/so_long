@@ -6,7 +6,7 @@
 #    By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/03 11:43:30 by wricky-t          #+#    #+#              #
-#    Updated: 2022/11/04 20:57:19 by wricky-t         ###   ########.fr        #
+#    Updated: 2022/11/07 18:51:44 by wricky-t         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -65,6 +65,7 @@ BK		:= \033[33;5m
 
 SRCS		:= so_long.c \
 			   init/utils_init.c \
+			   init/vector_helper.c \
 			   init/add_entity.c \
 		   	   init/add_object.c \
 		   	   map/map_aesthetic.c \
@@ -103,9 +104,9 @@ all: $(NAME)
 	@echo "   ┗━┻━┻━┻━┻┻━╋┓┃"
 	@echo "   ╋╋╋╋╋╋╋╋╋╋╋┗━┛\n$(DF)"
 	@echo "$(GR)╔═   $(WH)START GAME$(YL)   ═╗"
+	@echo "$(GR)║ $(WH)                $(YL) ║"
 	@echo "$(GR)║ $(WH)./so_long [.ber]$(YL) ║"
-	@echo "$(GR)║        $(BL)OR       $(YL) ║"
-	@echo "$(GR)║     $(WH)make play   $(YL) ║"
+	@echo "$(GR)║ $(WH)                $(YL) ║"
 	@echo "$(GR)╚═               $(YL) ═╝$(DF)"
 
 $(NAME): $(OBJS)

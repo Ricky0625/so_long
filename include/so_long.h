@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 14:46:24 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/11/04 22:23:23 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/11/07 17:42:58 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,6 +166,7 @@ typedef struct s_anim
 	int		current_tick;
 	int		duration;
 	int		current_frame;
+	int		picker;
 	t_image	**frames;
 }	t_anim;
 
@@ -248,8 +249,6 @@ typedef struct s_ghost
  */
 typedef struct s_skeleton
 {
-	int			killed;
-	int			collide;
 	t_vector	loc;
 	t_anim		anim;
 	t_direction	dir;
@@ -354,6 +353,7 @@ void		anim_init(t_anim *anim, int duration, t_image **frames);
 void		vector_init(t_vector *vector);
 void		set_vector(t_vector *vector, int x, int y);
 int			is_same_vector(t_vector a, t_vector b);
+void		map_data_init(t_map *map_data);
 
 /** ==== MAP PARSER & ITS UTILITIES ==== **/
 void		map_validator(t_game *game, char *file);
@@ -371,7 +371,7 @@ void		mapiteri(t_game *game, void (*f)(t_game *, int, int));
 t_image		*xpm_to_image(t_game *game, char *file, int set_data);
 t_image		*new_image(t_game *game, t_vector size, int set_data);
 t_data_addr	*set_data_addr(t_image *img);
-void		put_to_screen(t_game *game, t_img_put *img);
+void		put_to_screen(t_game *game, t_img_put *img, int destroy);
 void		draw_base(t_game *game, int x, int y);
 void		draw_entity(t_game *game);
 void		draw_map(t_game *game);
@@ -396,7 +396,9 @@ void		update_frame(t_anim *anim);
 
 /** ==== FREE ==== **/
 void		free_map(char **map);
+void		free_map_data(t_game *game);
 void		free_game(t_game *game);
+void		free_img(t_image *img);
 void		free_img_db(t_game *game);
 void		exit_game(t_game *game, char *str, t_msg_status status);
 int			close_game(t_game *game);

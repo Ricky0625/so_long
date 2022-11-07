@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 15:42:54 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/11/04 20:43:40 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/11/07 17:11:22 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,11 +65,12 @@ t_image	*xpm_to_image(t_game *game, char *file, int set_data)
  * @brief Put image onto the screen. Destroy the image afterward
  * 		  to prevent the img to stack onto each other in a loop.
  */
-void	put_to_screen(t_game *game, t_img_put *img)
+void	put_to_screen(t_game *game, t_img_put *img, int destroy)
 {
 	t_vector	pos;
 
 	pos = img->position;
 	mlx_put_image_to_window(game->ref, game->win, img->img->ref, pos.y, pos.x);
-	mlx_destroy_image(game->ref, img->img->ref);
+	if (destroy == 1)
+		mlx_destroy_image(game->ref, img->img->ref);
 }

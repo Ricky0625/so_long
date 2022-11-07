@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 15:36:27 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/11/04 22:18:47 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/11/05 15:23:09 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,12 @@
 void	draw_ui(t_game *game)
 {
 	char		*str;
+	char		*tmp;
 	t_image		*num;
 	int			loc_y;
 
 	str = ft_itoa(game->player.moves);
+	tmp = str;
 	loc_y = 32;
 	while (*str != '\0')
 	{
@@ -36,4 +38,5 @@ void	draw_ui(t_game *game)
 		loc_y += 64;
 		str++;
 	}
+	free(tmp);
 }

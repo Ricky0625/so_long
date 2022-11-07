@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 17:54:13 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/11/04 15:29:48 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/11/07 14:27:30 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,14 @@ void	update_frame(t_anim *anim)
 	anim->current_tick++;
 	if (anim->current_tick == anim->duration)
 	{
-		anim->current_frame++;
-		if (frames[anim->current_frame] == 0)
-			anim->current_frame = 0;
+		anim->current_frame += anim->picker;
+		if (frames[anim->current_frame] == NULL)
+		{
+			anim->current_frame--;
+			anim->picker = -1;
+		}
+		if (anim->current_frame == 0 && anim->picker == -1)
+			anim->picker = 1;
 		anim->current_tick = 0;
 	}
 }

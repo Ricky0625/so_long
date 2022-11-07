@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 15:21:27 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/11/04 20:16:05 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/11/07 19:23:13 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ static int	key_listener(int key, t_game *game)
 {
 	if (key == KEY_ESC)
 		close_game(game);
-	else
+	else if (key == KEY_W || key == KEY_A || key == KEY_S || key == KEY_D
+		|| key == KEY_SP)
 		move_player(game, key);
 	return (0);
 }
@@ -52,8 +53,8 @@ static int	render(t_game *game)
 	skeleton_patrol(game);
 	check_if_skeletons_dead(game);
 	draw_map(game);
-	put_to_screen(game, &game->bg);
-	put_to_screen(game, &game->final_img);
+	put_to_screen(game, &game->bg, 0);
+	put_to_screen(game, &game->final_img, 1);
 	draw_ui(game);
 	return (1);
 }
@@ -68,10 +69,13 @@ static void	game_init(t_game *game)
 	game->ref = mlx_init();
 	game->win = mlx_new_window(game->ref, WIN_WIDTH, WIN_HEIGHT, "so_long");
 	entity_init(&game->entity);
+	map_data_init(&game->map_data);
 	game->skeletons = NULL;
 	game->collectibles = NULL;
 	game->vwalls = NULL;
 	game->map_img = NULL;
+	game->bg.img = NULL;
+	game->final_img.img = NULL;
 }
 
 /**
@@ -109,7 +113,7 @@ int	main(int ac, char **av)
 
 	game = start_game(ac, av);
 	mlx_loop_hook(game->ref, render, game);
-	mlx_key_hook(game->win, key_listener, game);
+	mlx_hook(game->win, 2, 1L<<0, key_listener, game);
 	mlx_hook(game->win, 17, 0L, close_game, game);
 	mlx_loop(game->ref);
 	return (0);
