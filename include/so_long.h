@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 14:46:24 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/11/07 17:42:58 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/11/15 10:13:29 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,8 @@ typedef enum e_msg_status
 	SUCCESS,
 	FAILURE,
 	LOSE,
-	QUIT
+	QUIT,
+	INVALID
 }	t_msg_status;
 
 /** ==== UTILS STRUCTS ==== **/

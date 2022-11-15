@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 14:05:05 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/11/05 17:19:00 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/11/15 10:35:55 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static void	check_map_name(t_game *game)
 	cmp_len = ft_strlen(FILE_EXT);
 	if (ext == NULL || ft_strlen(ext) > cmp_len
 		|| ft_strncmp(ext, FILE_EXT, cmp_len) != 0)
-		exit_game(game, "File extension not supported!", FAILURE);
+		exit_game(game, "File extension not supported!", INVALID);
 }
 
 /**
@@ -103,7 +103,7 @@ static void	get_map_size(t_game *game, char *raw)
 	if (raw == NULL)
 	{
 		free(game->map_data.raw);
-		exit_game(game, "Empty map!", FAILURE);
+		exit_game(game, "Empty map!", INVALID);
 	}
 	while (*raw != '\n' && *raw != '\0')
 	{
@@ -141,7 +141,7 @@ void	map_validator(t_game *game, char *file)
 	check_map_name(game);
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
-		exit_game(game, "File does not exist!", FAILURE);
+		exit_game(game, "File does not exist!", INVALID);
 	get_raw_map(game, fd);
 	get_map_size(game, game->map_data.raw);
 	map = ft_split(game->map_data.raw, '\n');

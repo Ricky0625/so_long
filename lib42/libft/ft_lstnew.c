@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 11:23:34 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/11/07 13:49:57 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/11/15 10:26:06 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 // return the node (address of the node)
 
 #include "libft.h"
-#include <stdio.h>
+
 t_list	*ft_lstnew(void *content)
 {
 	t_list	*node;

@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 15:21:27 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/11/07 19:23:13 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/11/15 10:29:13 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ static t_game	*start_game(int ac, char **av)
 	char	*file;
 
 	if (ac != 2)
-		exit_game(NULL, "Invalid Usage!\n./so_long file.ber", FAILURE);
+		exit_game(NULL, "Invalid Usage!\n./so_long file.ber", INVALID);
 	file = av[1];
 	game = malloc(sizeof(t_game));
 	game_init(game);
@@ -113,7 +113,7 @@ int	main(int ac, char **av)
 
 	game = start_game(ac, av);
 	mlx_loop_hook(game->ref, render, game);
-	mlx_hook(game->win, 2, 1L<<0, key_listener, game);
+	mlx_hook(game->win, 2, 1L << 0, key_listener, game);
 	mlx_hook(game->win, 17, 0L, close_game, game);
 	mlx_loop(game->ref);
 	return (0);

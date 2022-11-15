@@ -6,7 +6,7 @@
 #    By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/03 11:43:30 by wricky-t          #+#    #+#              #
-#    Updated: 2022/11/07 18:51:44 by wricky-t         ###   ########.fr        #
+#    Updated: 2022/11/15 10:47:04 by wricky-t         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -108,6 +108,10 @@ all: $(NAME)
 	@echo "$(GR)║ $(WH)./so_long [.ber]$(YL) ║"
 	@echo "$(GR)║ $(WH)                $(YL) ║"
 	@echo "$(GR)╚═               $(YL) ═╝$(DF)"
+
+ifeq ($(DB), 1)
+	@echo "     $(GR)DEBUG MODE$(DEF)"
+endif
 
 $(NAME): $(OBJS)
 	@clear
