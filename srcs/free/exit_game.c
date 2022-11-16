@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 11:31:22 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/11/15 10:39:33 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/11/16 19:40:57 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	free_stuff(t_game *game, t_msg_status status)
 	if (game->collectibles != NULL)
 		ft_lstdelall(game->collectibles);
 	if (status == SUCCESS || status == LOSE)
-		free_img(game->final_img.img);
+		free_img(game->final.img);
 }
 
 /**
@@ -64,7 +64,7 @@ void	exit_game(t_game *game, char *str, t_msg_status status)
 		ft_printf(GN "Thanks for playing!\n" DEF);
 	if (status == SUCCESS || status == LOSE)
 		print_game_stats(game);
-	// system("leaks -q so_long");
+	system("leaks -q so_long");
 	if (status == SUCCESS)
 		exit(EXIT_SUCCESS);
 	exit(EXIT_FAILURE);

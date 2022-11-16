@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 17:15:32 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/11/05 13:02:27 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/11/16 19:16:05 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,11 @@
  * @brief Get the base images, specially for image that belongs to layer i.
  * 		  Check the definition of layer i at the comment of draw_base().
  */
-t_image	*get_base_img(t_game *game, int x, int y, t_vector size)
+t_image	*get_base_img(t_game *game, int x, int y)
 {
+	t_vector	size;
+
+	size = game->map_data.size;
 	if (x == 0 && y == 0)
 		return (game->img_db.corner_up_left);
 	else if (x == 0 && y == size.x - 1)
@@ -51,41 +54,55 @@ t_image	*get_base_img(t_game *game, int x, int y, t_vector size)
  * 		  that when drawing the vertical wall, we will replace the whole image
  * 		  to vertical wall again. So, the drawing here is unecessary.
  */
-void	draw_base(t_game *game, int x, int y)
+void	draw_base(t_game *game, t_vector index)
 {
 	char		**map;
-	t_vector	map_size;
 	t_image		*base;
-	t_image		*block;
+	t_vector	pos;
+	t_vector	map_size;
 
+	// printf("index: %d %d\n", index.x, index.y);
 	map = game->map_data.map;
-	map_size = game->map_data.size;
-	if (map[x][y] == 'V')
+	if (map[index.x][index.y] == 'V')
 		return ;
-	base = get_base_img(game, x, y, map_size);
-	block = game->img_db.block;
-	copy_image(base, game->map_img, y * SPT_SIZE, x * SPT_SIZE);
-	if ((x > 0 && x < map_size.y - 1) && (y > 0 && y < map_size.x - 1)
-		&& map[x][y] == '1')
-		copy_image(block, game->map_img, y * SPT_SIZE, x * SPT_SIZE);
+	pos = game->final.start_pixel;
+	map_size = game->map_data.size;
+	set_vector(&pos, (index.y * SPT_SIZE) + pos.x,
+		(index.x * SPT_SIZE) + pos.y);
+	base = get_base_img(game, index.x, index.y);
+	copy_image(base, game->final.img, pos.x, pos.y);
+	if ((index.x > 0 && index.x < map_size.y - 1)
+		&& (index.y > 0 && index.y < map_size.x - 1)
+		&& map[index.x][index.y] == '1')
+	{
+		base = game->img_db.block;
+		copy_image(base, game->final.img, pos.x, pos.y);
+	}
 }
 
 /**
- * @brief Helper function to iterate through the map and run (fun *) on
+ * @brief Helper function to iterate through the map and run (draw *) on
  * 		  each of the character.
  */
-void	mapiteri(t_game *game, void (*fun)(t_game *, int, int))
+void	mapiteri(t_game *game, void (*draw)(t_game *, t_vector))
 {
-	char	**map;
-	int		x;
-	int		y;
+	char		**map;
+	int			ori_start_y;
+	t_vector	start;
+	t_vector	end;
 
+	start = game->final.start_index;
+	end = game->final.end_index;
+	ori_start_y = start.y;
 	map = game->map_data.map;
-	x = -1;
-	while (map[++x] != NULL)
+	while (start.x <= end.x)
 	{
-		y = -1;
-		while (map[x][++y] != '\0')
-			fun(game, x, y);
+		start.y = ori_start_y;
+		while (start.y <= end.y)
+		{
+			draw(game, start);
+			start.y++;
+		}
+		start.x++;
 	}
 }

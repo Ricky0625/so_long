@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 14:46:24 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/11/15 10:13:29 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/11/16 13:56:02 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -303,7 +303,10 @@ typedef struct s_exit
 typedef struct s_img_put
 {
 	t_image		*img;
-	t_vector	position;
+	t_vector	start_pixel;
+	t_vector	start_index;
+	t_vector	end_index;
+	t_vector	on_screen_pos;
 }	t_img_put;
 
 /**
@@ -335,8 +338,7 @@ typedef struct s_game
 	t_list		*collectibles;
 	t_list		*vwalls;
 	t_image		*map_img;
-	t_img_put	final_img;
-	t_img_put	bg;
+	t_img_put	final;
 	t_img_db	img_db;
 }	t_game;
 
@@ -366,18 +368,20 @@ void		show_path(char **map);
 char		**copy_map(t_game *game, char **map);
 char		**add_aesthetic(t_game *game);
 int			find_entity(t_vector *loc, char **map, char entity);
-void		mapiteri(t_game *game, void (*f)(t_game *, int, int));
+// void		mapiteri(t_game *game, void (*f)(t_game *, int, int));
 
 /** ==== IMAGE ==== **/
 t_image		*xpm_to_image(t_game *game, char *file, int set_data);
 t_image		*new_image(t_game *game, t_vector size, int set_data);
 t_data_addr	*set_data_addr(t_image *img);
 void		put_to_screen(t_game *game, t_img_put *img, int destroy);
-void		draw_base(t_game *game, int x, int y);
+void		draw_base(t_game *game, t_vector index);
 void		draw_entity(t_game *game);
 void		draw_map(t_game *game);
 void		draw_ui(t_game *game);
+void		copy_pixel(t_data_addr *src, t_data_addr *dst);
 void		copy_image(t_image *src, t_image *dst, int x, int y);
+int			is_blk(char *buffer, int pixel);
 void		crop_image(t_image *src, t_image *dst, t_vector start);
 void		final_img_init(t_game *game);
 void		fetch_all_imgs(t_game *game);
@@ -403,5 +407,7 @@ void		free_img(t_image *img);
 void		free_img_db(t_game *game);
 void		exit_game(t_game *game, char *str, t_msg_status status);
 int			close_game(t_game *game);
+
+void		mapiteri(t_game *game, void (*draw)(t_game *, t_vector));
 
 #endif

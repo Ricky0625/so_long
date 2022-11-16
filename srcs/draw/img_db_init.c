@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 13:39:23 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/11/07 17:46:05 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/11/15 18:57:32 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,8 +118,6 @@ void	fetch_all_imgs(t_game *game)
 
 	img_db_init(game);
 	img_db = &game->img_db;
-	game->bg.img = xpm_to_image(game, BG, 0);
-	vector_init(&game->bg.position);
 	img_db->floor = xpm_to_image(game, FLOOR, 1);
 	img_db->block = xpm_to_image(game, BLOCK, 1);
 	fetch_other_imgs(game, img_db);

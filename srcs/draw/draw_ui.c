@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 15:36:27 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/11/05 15:23:09 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/11/15 19:21:00 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	draw_ui(t_game *game)
 	while (*str != '\0')
 	{
 		num = game->img_db.numbers[(*str - '0')];
-		mlx_put_image_to_window(game->ref, game->win, num->ref, loc_y, 32);
+		copy_image(num, game->final.img, loc_y, 32);
 		loc_y += 64;
 		str++;
 	}

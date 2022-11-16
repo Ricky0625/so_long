@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 15:21:27 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/11/15 10:29:13 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/11/15 19:22:33 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,7 @@ static int	render(t_game *game)
 	skeleton_patrol(game);
 	check_if_skeletons_dead(game);
 	draw_map(game);
-	put_to_screen(game, &game->bg, 0);
-	put_to_screen(game, &game->final_img, 1);
-	draw_ui(game);
+	put_to_screen(game, &game->final, 1);
 	return (1);
 }
 
@@ -74,8 +72,7 @@ static void	game_init(t_game *game)
 	game->collectibles = NULL;
 	game->vwalls = NULL;
 	game->map_img = NULL;
-	game->bg.img = NULL;
-	game->final_img.img = NULL;
+	game->final.img = NULL;
 }
 
 /**
