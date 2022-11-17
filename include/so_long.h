@@ -35,12 +35,20 @@
 # define PATROL_COOLDOWN 20
 
 /** ==== KEYCODES ==== **/
-# define KEY_W 13
-# define KEY_A 0
-# define KEY_S 1
-# define KEY_D 2
-# define KEY_SP 49
-# define KEY_ESC 53
+// # define KEY_W 13
+// # define KEY_A 0
+// # define KEY_S 1
+// # define KEY_D 2
+// # define KEY_SP 49
+// # define KEY_ESC 53
+
+/** ==== KEYCODES (LINUX) ==== **/
+# define KEY_W 'w'
+# define KEY_A 'a'
+# define KEY_S 's'
+# define KEY_D 'd'
+# define KEY_SP 32
+# define KEY_ESC 65307
 
 /** ==== UTILS ENUM ==== **/
 

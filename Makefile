@@ -41,6 +41,13 @@ STATLIB		:= $(LIB_PATH)/*.a
 
 MLXFLAGS	:= -Lmlx -lmlx -framework OpenGL -framework AppKit
 
+UNAME		:= $(shell uname)
+
+ifeq ($(UNAME), Linux)
+	MLXFLAGS	:= -Lmlx_linux -lmlx_Linux -L/usr/lib -I/usr/include -Imlx_linux -lXext -lX11 -lm -lz
+	CFLAGS		+= -I/usr/include -Imlx_linux -O3
+endif
+
 #------------------------------------------------------------------------------#
 #   UTILS                                                                      #
 #------------------------------------------------------------------------------#
