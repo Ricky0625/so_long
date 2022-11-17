@@ -86,7 +86,6 @@ void	draw_base(t_game *game, t_vector index)
  */
 void	mapiteri(t_game *game, void (*draw)(t_game *, t_vector))
 {
-	char		**map;
 	int			ori_start_y;
 	t_vector	start;
 	t_vector	end;
@@ -94,7 +93,6 @@ void	mapiteri(t_game *game, void (*draw)(t_game *, t_vector))
 	start = game->final.start_index;
 	end = game->final.end_index;
 	ori_start_y = start.y;
-	map = game->map_data.map;
 	while (start.x <= end.x)
 	{
 		start.y = ori_start_y;
