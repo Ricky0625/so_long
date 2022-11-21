@@ -48,6 +48,46 @@ void	draw_small(t_game *game)
 	draw_entity(game);
 }
 
+void	draw_big(t_game *game)
+{
+	t_player	ply;
+	t_vector	padding;
+
+	ply = game->player;
+	set_vector(&padding, ((WIN_HEIGHT / SPT_SIZE - 1) / 2),
+		((WIN_WIDTH / SPT_SIZE - 1) / 2));
+	set_vector(&game->final.start_index, ply.loc.x - padding.x,
+		ply.loc.y - padding.y);
+	set_vector(&game->final.end_index, ply.loc.x + padding.x,
+		ply.loc.y + padding.y);
+	vector_init(&game->final.start_pixel);
+	while (game->final.start_index.y < 0)
+	{
+		game->final.start_index.y++;
+		game->final.start_pixel.x += SPT_SIZE;
+	}
+	while (game->final.start_index.x < 0)
+	{
+		game->final.start_index.x++;
+		game->final.start_pixel.y += SPT_SIZE;
+	}
+	if (game->final.end_index.x > game->map_data.size.y - 1)
+		game->final.end_index.x = game->map_data.size.y - 1;
+	if (game->final.end_index.y > game->map_data.size.x - 1)
+		game->final.end_index.y = game->map_data.size.x - 1;
+	mapiteri(game, draw_base);
+	draw_entity(game);
+	// printf("end: %d %d\n", game->final.end_index.x, game->final.end_index.y);
+	/**
+	 * For start, if if there is a negative value, start pixel + SPT_SIZE
+	 * - For width, start pixel's width + SPT_SIZE
+	 * - For height, start pixel's height + SPT_SIZE
+	 * To calibrate,
+	 * - For start,if it's negative, set to 0
+	 * - For end, if it exceed the map size, set to maximum width and height
+	*/
+}
+
 /**
  * @brief Draw the map based on the map
  */
@@ -72,6 +112,7 @@ void	draw_map(t_game *game)
 		 * 
 		 * The memory part should already be handled by the small map. So, no worry I guess?
 		 */
+		draw_big(game);
 	}
 	else
 		draw_small(game);

@@ -48,7 +48,7 @@ static int	key_listener(int key, t_game *game)
  */
 static int	render(t_game *game)
 {
-	mlx_clear_window(game->ref, game->win);
+	// mlx_clear_window(game->ref, game->win);
 	update_animation(game);
 	skeleton_patrol(game);
 	check_if_skeletons_dead(game);
