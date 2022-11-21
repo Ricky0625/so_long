@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 12:37:10 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/11/04 20:34:43 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/11/21 18:23:44 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	add_vwall(t_game *game, t_vector loc)
 
 	vwalls = &game->vwalls;
 	vwall = malloc(sizeof(t_vwall));
-	anim_init(&vwall->anim, 1, game->img_db.vwall_idle);
+	anim_init(&vwall->anim, 12, game->img_db.vwall_idle);
 	vwall->loc = loc;
 	ft_lstadd_back(vwalls, ft_lstnew(vwall));
 }
@@ -51,7 +51,7 @@ void	add_collectible(t_game *game, t_vector loc)
 
 	colls = &game->collectibles;
 	coll = malloc(sizeof(t_coll));
-	anim_init(&coll->anim, 1, game->img_db.key_idle);
+	anim_init(&coll->anim, 10, game->img_db.key_idle);
 	coll->loc = loc;
 	ft_lstadd_back(colls, ft_lstnew(coll));
 }
@@ -69,5 +69,5 @@ void	add_exit(t_game *game, t_vector loc)
 	exit = &game->exit;
 	exit->clear = 0;
 	exit->loc = loc;
-	anim_init(&exit->anim, 2, game->img_db.exit);
+	anim_init(&exit->anim, 4, game->img_db.exit);
 }

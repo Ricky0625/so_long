@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 16:29:49 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/11/16 19:41:55 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/11/21 16:28:55 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,14 @@ void	draw_to_map(t_game *game, t_anim *anim, t_vector loc)
 		return ;
 	frame = anim->frames[anim->current_frame];
 	pos = game->final.start_pixel;
-	set_vector(&pos, (loc.y * SPT_SIZE) + pos.x,
-		(loc.x * SPT_SIZE) + pos.y);
+	if (game->final.is_big == 0)
+		set_vector(&pos, (loc.y * SPT_SIZE) + pos.x,
+			(loc.x * SPT_SIZE) + pos.y);
+	else
+	{
+		set_vector(&pos, (loc.y - game->final.start_index.y) * SPT_SIZE + pos.x,
+			(loc.x - game->final.start_index.x) * SPT_SIZE + pos.y);
+	}
 	copy_image(frame, game->final.img, pos.x, pos.y);
 }
 

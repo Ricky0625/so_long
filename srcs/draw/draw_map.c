@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 16:42:20 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/11/16 19:47:01 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/11/21 18:15:29 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	draw_small(t_game *game)
 
 	start = &game->final.start_index;
 	end = &game->final.end_index;
-	dst_pos = &game->final.start_pixel; 
+	dst_pos = &game->final.start_pixel;
 	vector_init(start);
 	set_vector(end, game->map_data.size.y - 1, game-> map_data.size.x - 1);
 	set_vector(dst_pos, (WIN_WIDTH - game->map_data.size.x * SPT_SIZE) / 2,
@@ -77,15 +77,6 @@ void	draw_big(t_game *game)
 		game->final.end_index.y = game->map_data.size.x - 1;
 	mapiteri(game, draw_base);
 	draw_entity(game);
-	// printf("end: %d %d\n", game->final.end_index.x, game->final.end_index.y);
-	/**
-	 * For start, if if there is a negative value, start pixel + SPT_SIZE
-	 * - For width, start pixel's width + SPT_SIZE
-	 * - For height, start pixel's height + SPT_SIZE
-	 * To calibrate,
-	 * - For start,if it's negative, set to 0
-	 * - For end, if it exceed the map size, set to maximum width and height
-	*/
 }
 
 /**
@@ -99,22 +90,13 @@ void	draw_map(t_game *game)
 	vector_init(&game->final.on_screen_pos);
 	if (is_big_map(game) == 1)
 	{
-		/**
-		 * IDEAS:
-		 * 
-		 * Start counting from the location of player, find the starting & ending index
-		 * Based on starting and ending index, get the starting pixel (place the image at where?)
-		 * Recalibrate, if there is anything that is negative or out of map.
-		 * 
-		 * Draw the base first, need to think how to use the is_in_range to see which base
-		 * needs to be draw on the screen.
-		 * Draw the entity afterward.
-		 * 
-		 * The memory part should already be handled by the small map. So, no worry I guess?
-		 */
+		game->final.is_big = 1;
 		draw_big(game);
 	}
 	else
+	{
+		game->final.is_big = 0;
 		draw_small(game);
+	}
 	draw_ui(game);
 }

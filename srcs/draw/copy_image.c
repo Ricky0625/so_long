@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 21:56:37 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/11/15 18:26:14 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/11/21 18:13:19 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,9 @@ void	copy_image(t_image *src, t_image *dst, int x, int y)
 			src->data->pixel = (j * src->data->line_size) + (i * 4);
 			dst->data->pixel = ((y + j) * dst->data->line_size) + ((x + i) * 4);
 			if (!is_blk(src->data->buffer, src->data->pixel))
+			{
 				copy_pixel(src->data, dst->data);
+			}
 		}
 	}
 }

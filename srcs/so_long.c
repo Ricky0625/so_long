@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 15:21:27 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/11/15 19:22:33 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/11/21 18:15:47 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static int	key_listener(int key, t_game *game)
  */
 static int	render(t_game *game)
 {
-	// mlx_clear_window(game->ref, game->win);
+	mlx_clear_window(game->ref, game->win);
 	update_animation(game);
 	skeleton_patrol(game);
 	check_if_skeletons_dead(game);

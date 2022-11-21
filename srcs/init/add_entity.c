@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 15:16:18 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/11/07 13:51:19 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/11/21 18:22:26 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	add_player(t_game *game, t_vector loc)
 	ply->collected = 0;
 	ply->moves = 0;
 	ply->loc = loc;
-	anim_init(&ply->anim, 1, game->img_db.player_idle_r);
+	anim_init(&ply->anim, 6, game->img_db.player_idle_r);
 }
 
 /**
@@ -48,8 +48,8 @@ void	add_ghost(t_game *game, t_vector loc)
 		ghost->appear_counter = 0;
 	ghost->activate = 0;
 	ghost->loc = loc;
-	anim_init(&ghost->anim, 5, game->img_db.ghost_idle);
-	anim_init(&ghost->effect, 5, game->img_db.ghost_boo);
+	anim_init(&ghost->anim, 10, game->img_db.ghost_idle);
+	anim_init(&ghost->effect, 4, game->img_db.ghost_boo);
 }
 
 /**
@@ -72,6 +72,6 @@ void	add_skeleton(t_game *game, t_vector loc)
 	skely->loc = loc;
 	skely->dir = UNSET;
 	skely->current_tick = 0;
-	anim_init(&skely->anim, 6, game->img_db.skeleton_idle_l);
+	anim_init(&skely->anim, 16, game->img_db.skeleton_idle_l);
 	ft_lstadd_back(skeletons, ft_lstnew(skely));
 }

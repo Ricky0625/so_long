@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 15:42:54 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/11/16 19:35:43 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/11/21 18:14:37 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,5 @@ void	put_to_screen(t_game *game, t_img_put *img, int destroy)
 	pos = img->on_screen_pos;
 	mlx_put_image_to_window(game->ref, game->win, img->img->ref, pos.y, pos.x);
 	if (destroy == 1)
-	{
-		// free_img(game->final.img);
 		mlx_destroy_image(game->ref, img->img->ref);
-	}
 }

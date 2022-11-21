@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 17:15:32 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/11/16 19:16:05 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/11/21 18:13:47 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,14 +61,18 @@ void	draw_base(t_game *game, t_vector index)
 	t_vector	pos;
 	t_vector	map_size;
 
-	// printf("index: %d %d\n", index.x, index.y);
 	map = game->map_data.map;
 	if (map[index.x][index.y] == 'V')
 		return ;
 	pos = game->final.start_pixel;
 	map_size = game->map_data.size;
-	set_vector(&pos, (index.y * SPT_SIZE) + pos.x,
-		(index.x * SPT_SIZE) + pos.y);
+	if (game->final.is_big == 0)
+		set_vector(&pos, (index.y * SPT_SIZE) + pos.x,
+			(index.x * SPT_SIZE) + pos.y);
+	else
+		set_vector(&pos,
+			(index.y - game->final.start_index.y) * SPT_SIZE + pos.x,
+			(index.x - game->final.start_index.x) * SPT_SIZE + pos.y);
 	base = get_base_img(game, index.x, index.y);
 	copy_image(base, game->final.img, pos.x, pos.y);
 	if ((index.x > 0 && index.x < map_size.y - 1)
@@ -78,6 +82,32 @@ void	draw_base(t_game *game, t_vector index)
 		base = game->img_db.block;
 		copy_image(base, game->final.img, pos.x, pos.y);
 	}
+}
+
+void	print_mini(t_game *game, t_vector start, t_vector end)
+{
+	char	**map;
+	int		ori_start_y;
+
+	ori_start_y = start.y;
+	map = game->map_data.map;
+	while (start.x <= end.x)
+	{
+		start.y = ori_start_y;
+		while (start.y <= end.y)
+		{
+			if (is_same_vector(game->player.loc, start))
+				printf("P");
+			else if (map[start.x][start.y] == 'P')
+				printf("0");
+			else
+				printf("%c", map[start.x][start.y]);
+			start.y++;
+		}
+		start.x++;
+		printf("\n");
+	}
+	printf("\n");
 }
 
 /**

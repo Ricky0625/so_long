@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 14:46:24 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/11/16 13:56:02 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/11/21 18:23:16 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,23 +32,23 @@
 # define FILE_EXT ".ber"
 # define SPT_SIZE 128
 # define APPEAR_MULTIPLIER 2
-# define PATROL_COOLDOWN 20
+# define PATROL_COOLDOWN 60
 
 /** ==== KEYCODES ==== **/
-// # define KEY_W 13
-// # define KEY_A 0
-// # define KEY_S 1
-// # define KEY_D 2
-// # define KEY_SP 49
-// # define KEY_ESC 53
+# define KEY_W 13
+# define KEY_A 0
+# define KEY_S 1
+# define KEY_D 2
+# define KEY_SP 49
+# define KEY_ESC 53
 
 /** ==== KEYCODES (LINUX) ==== **/
-# define KEY_W 'w'
-# define KEY_A 'a'
-# define KEY_S 's'
-# define KEY_D 'd'
-# define KEY_SP 32
-# define KEY_ESC 65307
+// # define KEY_W 'w'
+// # define KEY_A 'a'
+// # define KEY_S 's'
+// # define KEY_D 'd'
+// # define KEY_SP 32
+// # define KEY_ESC 65307
 
 /** ==== UTILS ENUM ==== **/
 
@@ -315,6 +315,7 @@ typedef struct s_img_put
 	t_vector	start_index;
 	t_vector	end_index;
 	t_vector	on_screen_pos;
+	int			is_big;
 }	t_img_put;
 
 /**
