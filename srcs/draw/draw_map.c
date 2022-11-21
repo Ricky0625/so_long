@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 16:42:20 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/11/21 18:15:29 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/11/21 22:03:32 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,15 +61,15 @@ void	draw_big(t_game *game)
 	set_vector(&game->final.end_index, ply.loc.x + padding.x,
 		ply.loc.y + padding.y);
 	vector_init(&game->final.start_pixel);
-	while (game->final.start_index.y < 0)
+	if (game->final.start_index.y < 0)
 	{
-		game->final.start_index.y++;
-		game->final.start_pixel.x += SPT_SIZE;
+		game->final.start_pixel.x = ft_abs(game->final.start_index.y) * SPT_SIZE;
+		game->final.start_index.y = 0;
 	}
-	while (game->final.start_index.x < 0)
+	if (game->final.start_index.y < 0)
 	{
-		game->final.start_index.x++;
-		game->final.start_pixel.y += SPT_SIZE;
+		game->final.start_pixel.y = ft_abs(game->final.start_index.x) * SPT_SIZE;
+		game->final.start_index.x = 0;
 	}
 	if (game->final.end_index.x > game->map_data.size.y - 1)
 		game->final.end_index.x = game->map_data.size.y - 1;
