@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 11:31:22 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/11/16 19:40:57 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/11/22 19:45:02 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,9 @@ void	print_game_stats(t_game *game)
 	}
 }
 
+/**
+ * @brief Free the game struct and others based on the exit status
+ */
 void	free_stuff(t_game *game, t_msg_status status)
 {
 	if (status == INVALID)
@@ -64,7 +67,6 @@ void	exit_game(t_game *game, char *str, t_msg_status status)
 		ft_printf(GN "Thanks for playing!\n" DEF);
 	if (status == SUCCESS || status == LOSE)
 		print_game_stats(game);
-	system("leaks -q so_long");
 	if (status == SUCCESS)
 		exit(EXIT_SUCCESS);
 	exit(EXIT_FAILURE);

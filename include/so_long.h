@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 14:46:24 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/11/21 18:23:16 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/11/22 19:41:02 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -346,7 +346,6 @@ typedef struct s_game
 	t_list		*skeletons;
 	t_list		*collectibles;
 	t_list		*vwalls;
-	t_image		*map_img;
 	t_img_put	final;
 	t_img_db	img_db;
 }	t_game;
@@ -377,7 +376,7 @@ void		show_path(char **map);
 char		**copy_map(t_game *game, char **map);
 char		**add_aesthetic(t_game *game);
 int			find_entity(t_vector *loc, char **map, char entity);
-// void		mapiteri(t_game *game, void (*f)(t_game *, int, int));
+void		mapiteri(t_game *game, void (*draw)(t_game *, t_vector));
 
 /** ==== IMAGE ==== **/
 t_image		*xpm_to_image(t_game *game, char *file, int set_data);
@@ -388,10 +387,7 @@ void		draw_base(t_game *game, t_vector index);
 void		draw_entity(t_game *game);
 void		draw_map(t_game *game);
 void		draw_ui(t_game *game);
-void		copy_pixel(t_data_addr *src, t_data_addr *dst);
 void		copy_image(t_image *src, t_image *dst, int x, int y);
-int			is_blk(char *buffer, int pixel);
-void		crop_image(t_image *src, t_image *dst, t_vector start);
 void		final_img_init(t_game *game);
 void		fetch_all_imgs(t_game *game);
 
@@ -410,13 +406,8 @@ void		update_frame(t_anim *anim);
 
 /** ==== FREE ==== **/
 void		free_map(char **map);
-void		free_map_data(t_game *game);
-void		free_game(t_game *game);
 void		free_img(t_image *img);
-void		free_img_db(t_game *game);
 void		exit_game(t_game *game, char *str, t_msg_status status);
 int			close_game(t_game *game);
-
-void		mapiteri(t_game *game, void (*draw)(t_game *, t_vector));
 
 #endif

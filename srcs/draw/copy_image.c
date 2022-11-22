@@ -6,13 +6,19 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 21:56:37 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/11/21 18:13:19 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/11/22 19:42:14 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/so_long.h"
 
-int	is_blk(char *buffer, int pixel)
+/**
+ * @brief Check if the pixel is a black pixel. As we know, black in RGB is
+ * 		  (0, 0, 0). So, check if each of the value (RGB) is 0, if there's
+ * 		  one that is not, meaning that it's not a black color. Hence, return
+ * 		  0, else return 1.
+ */
+static int	is_blk(char *buffer, int pixel)
 {
 	int	i;
 
@@ -25,7 +31,13 @@ int	is_blk(char *buffer, int pixel)
 	return (1);
 }
 
-void	copy_pixel(t_data_addr *src, t_data_addr *dst)
+/**
+ * @brief Copy the pixel from destination to src. Basically to replace the
+ * 	      pixel of src at [position] to the pixel of dst at [position].
+ * 		  Since color is store in this way, RGBA / ABGR, we have to copy
+ * 		  based on the order as well.
+ */
+static void	copy_pixel(t_data_addr *src, t_data_addr *dst)
 {
 	dst->buffer[dst->pixel + 0] = src->buffer[src->pixel + 0];
 	dst->buffer[dst->pixel + 1] = src->buffer[src->pixel + 1];
@@ -40,9 +52,6 @@ void	copy_pixel(t_data_addr *src, t_data_addr *dst)
  * dst	: image destination
  * x,y	: the coordinate of where source should be placed on destination
  */
-// src and dst should fully initialized when passing in.
-// This includes the image data address, size, void pointer to the image.
-// x & y should always times the sprite size before passing in.
 void	copy_image(t_image *src, t_image *dst, int x, int y)
 {
 	int	i;
@@ -63,28 +72,5 @@ void	copy_image(t_image *src, t_image *dst, int x, int y)
 				copy_pixel(src->data, dst->data);
 			}
 		}
-	}
-}
-
-void	crop_image(t_image *src, t_image *dst, t_vector start)
-{
-	int	x;
-	int	y;
-	int	ori_start_y;
-
-	x = -1;
-	ori_start_y = start.y;
-	while (++x < dst->size.y)
-	{
-		y = -1;
-		start.y = ori_start_y;
-		while (++y < dst->size.x)
-		{
-			src->data->pixel = (start.x * src->data->line_size) + (start.y * 4);
-			dst->data->pixel = (x * dst->data->line_size) + (y * 4);
-			copy_pixel(src->data, dst->data);
-			start.y++;
-		}
-		start.x++;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 15:21:27 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/11/21 18:15:47 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/11/22 19:41:00 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,6 @@ static void	game_init(t_game *game)
 	game->skeletons = NULL;
 	game->collectibles = NULL;
 	game->vwalls = NULL;
-	game->map_img = NULL;
 	game->final.img = NULL;
 }
 

@@ -6,12 +6,15 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 16:29:49 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/11/21 16:28:55 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/11/22 19:40:43 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/so_long.h"
 
+/**
+ * @brief Check if a set of index is within the range of two set of index
+ */
 int	is_in_range(t_vector start, t_vector end, t_vector index)
 {
 	return ((index.x >= start.x && index.x <= end.x)
@@ -19,7 +22,7 @@ int	is_in_range(t_vector start, t_vector end, t_vector index)
 }
 
 /**
- * @brief Draw the image to the map_img
+ * @brief Draw the image to the final image
  */
 void	draw_to_map(t_game *game, t_anim *anim, t_vector loc)
 {
