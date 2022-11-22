@@ -6,12 +6,21 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 18:25:39 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/11/01 15:32:25 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/11/22 14:18:10 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SPRITES_H
 # define SPRITES_H
+
+/** ==== ANIMATION DURATION ==== **/
+# define PLAYER_AD 5
+# define GHOST_AD 8
+# define GHOST_BOO_AD 4
+# define SKELY_AD 8
+# define VWALL_AD 12
+# define KEY_AD 10
+# define EXIT_AD 4
 
 /** ==== SPRITES ==== **/
 # define PLAYERL1 "assets/player/player_idle_l1.xpm"
