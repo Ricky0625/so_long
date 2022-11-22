@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 16:42:20 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/11/22 13:38:56 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/11/22 16:55:36 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,24 @@ void	draw_small(t_game *game)
 	draw_entity(game);
 }
 
+void	calibrate_pixel_index(t_game *game)
+{
+	while (game->final.start_index.y < 0)
+	{
+		game->final.start_index.y++;
+		game->final.start_pixel.x += SPT_SIZE;
+	}
+	while (game->final.start_index.x < 0)
+	{
+		game->final.start_index.x++;
+		game->final.start_pixel.y += SPT_SIZE;
+	}
+	if (game->final.end_index.x > game->map_data.size.y - 1)
+		game->final.end_index.x = game->map_data.size.y - 1;
+	if (game->final.end_index.y > game->map_data.size.x - 1)
+		game->final.end_index.y = game->map_data.size.x - 1;
+}
+
 /**
  * Draw big map
  * 
@@ -85,51 +103,9 @@ void	draw_big(t_game *game)
 	set_vector(&game->final.end_index, ply.loc.x + padding.x,
 		ply.loc.y + padding.y);
 	vector_init(&game->final.start_pixel);
-	if (game->final.start_index.y < 0)
-	{
-		game->final.start_pixel.x = ft_abs(game->final.start_index.y) * SPT_SIZE;
-		game->final.start_index.y = 0;
-	}
-	if (game->final.start_index.y < 0)
-	{
-		game->final.start_pixel.y = ft_abs(game->final.start_index.x) * SPT_SIZE;
-		game->final.start_index.x = 0;
-	}
-	if (game->final.end_index.x > game->map_data.size.y - 1)
-		game->final.end_index.x = game->map_data.size.y - 1;
-	if (game->final.end_index.y > game->map_data.size.x - 1)
-		game->final.end_index.y = game->map_data.size.x - 1;
+	calibrate_pixel_index(game);
 	mapiteri(game, draw_base);
 	draw_entity(game);
-}
-
-/**
- * @brief Place the image of the numbers onto the screen
- * 
- * The numbers are stored in a array. Like 0 is at index 0, 1 at index 1, etc.
- * So, just itoa the player's moves count and iterate through the str.
- * For each character, minus it with '0' and we can get the index number.
- * Use that to access which image to display. After that just draw the number
- * onto the screen
- */
-void	draw_ui(t_game *game)
-{
-	char		*str;
-	char		*tmp;
-	t_image		*num;
-	int			loc_y;
-
-	str = ft_itoa(game->player.moves);
-	tmp = str;
-	loc_y = 32;
-	while (*str != '\0')
-	{
-		num = game->img_db.numbers[(*str - '0')];
-		copy_image(num, game->final.img, loc_y, 32);
-		loc_y += 64;
-		str++;
-	}
-	free(tmp);
 }
 
 /**
