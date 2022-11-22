@@ -6,7 +6,7 @@
 #    By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/03 11:43:30 by wricky-t          #+#    #+#              #
-#    Updated: 2022/11/15 18:53:50 by wricky-t         ###   ########.fr        #
+#    Updated: 2022/11/22 14:01:09 by wricky-t         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -84,11 +84,9 @@ SRCS		:= so_long.c \
 		   	   draw/draw_base.c \
 		   	   draw/draw_entity.c \
 		   	   draw/draw_map.c \
-		   	   draw/draw_ui.c \
 		   	   draw/draw_utils.c \
 		   	   draw/img_db_init.c \
-		   	   render/update_frame.c \
-		   	   render/update_stats.c \
+		   	   draw/update_frame.c \
 		   	   mechanism/general_mechanism.c \
 		   	   mechanism/player_mechanism.c \
 		   	   mechanism/skeleton_mechanism.c \

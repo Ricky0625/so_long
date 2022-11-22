@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 16:42:20 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/11/21 22:03:32 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/11/22 13:38:56 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,19 @@ int	is_big_map(t_game *game)
 		|| (map_size.x <= WIN_WIDTH && map_size.y > WIN_HEIGHT));
 }
 
-// copy from 0,0 to end of the map
+/**
+ * Draw small map
+ * 
+ * @brief The procedure to draw small map. The start & end index will
+ * 		  be set first. Start index will always be 0,0. For end index,
+ * 		  it will always be the max height & max width of the map.
+ * 		  Based on the start & end index, set the starting pixel
+ * 		  (paste the image from what pixel).
+ * 		  For small map, the formula to calculate the starting pixel is:
+ * 		  x: [Window width - (map's width * Sprite size)] / 2
+ * 		  y: [Window height - (map's height * Sprite size)] / 2
+ * 		  After the starting pixel is set, draw the base and entity.
+ */
 void	draw_small(t_game *game)
 {
 	t_vector	*start;
@@ -48,6 +60,18 @@ void	draw_small(t_game *game)
 	draw_entity(game);
 }
 
+/**
+ * Draw big map
+ * 
+ * @brief The procedure to draw big map. The start & end index must also be
+ * 		  initialize before this function runs. Based on the start &
+ * 		  end index, set the starting pixel (paste the image from what
+ * 		  pixel). For small map, the formula to calculate the starting
+ * 		  pixel is:
+ * 		  x: [Window width - (map's width * Sprite size)] / 2
+ * 		  y: [Window height - (map's height * Sprite size)] / 2
+ * 		  After the starting pixel is set, draw the base and entity.
+ */
 void	draw_big(t_game *game)
 {
 	t_player	ply;
@@ -80,7 +104,43 @@ void	draw_big(t_game *game)
 }
 
 /**
+ * @brief Place the image of the numbers onto the screen
+ * 
+ * The numbers are stored in a array. Like 0 is at index 0, 1 at index 1, etc.
+ * So, just itoa the player's moves count and iterate through the str.
+ * For each character, minus it with '0' and we can get the index number.
+ * Use that to access which image to display. After that just draw the number
+ * onto the screen
+ */
+void	draw_ui(t_game *game)
+{
+	char		*str;
+	char		*tmp;
+	t_image		*num;
+	int			loc_y;
+
+	str = ft_itoa(game->player.moves);
+	tmp = str;
+	loc_y = 32;
+	while (*str != '\0')
+	{
+		num = game->img_db.numbers[(*str - '0')];
+		copy_image(num, game->final.img, loc_y, 32);
+		loc_y += 64;
+		str++;
+	}
+	free(tmp);
+}
+
+/**
  * @brief Draw the map based on the map
+ * 
+ * Since I'm using one pointer to store the address of the final img, before
+ * creating a blank image to draw on, I need to free the previous pointer to
+ * the final img first. After that, based on the size of the map (small / big),
+ * draw the final img.
+ * Small: The map can fit inside the window size
+ * Big	: The map exceed the window size
  */
 void	draw_map(t_game *game)
 {
