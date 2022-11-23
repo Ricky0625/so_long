@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 21:56:37 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/11/22 19:42:14 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/11/23 12:00:24 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 /**
  * @brief Check if the pixel is a black pixel. As we know, black in RGB is
- * 		  (0, 0, 0). So, check if each of the value (RGB) is 0, if there's
- * 		  one that is not, meaning that it's not a black color. Hence, return
- * 		  0, else return 1.
+ * 		  (0, 0, 0). So, check if each of the value (RGB) is 0 (in binary),
+ * 		  if there's one that is not, meaning that it's not a black color.
+ * 		  Hence, return 0, else return 1.
  */
 static int	is_blk(char *buffer, int pixel)
 {
@@ -25,7 +25,7 @@ static int	is_blk(char *buffer, int pixel)
 	i = -1;
 	while (++i < 4)
 	{
-		if ((buffer[pixel + i] | 0x00) != 0x00)
+		if ((buffer[pixel + i] | 0x000000) != 0x00)
 			return (0);
 	}
 	return (1);
@@ -34,7 +34,7 @@ static int	is_blk(char *buffer, int pixel)
 /**
  * @brief Copy the pixel from destination to src. Basically to replace the
  * 	      pixel of src at [position] to the pixel of dst at [position].
- * 		  Since color is store in this way, RGBA / ABGR, we have to copy
+ * 		  Since color is store in this way, RGBA / BGRA, we have to copy
  * 		  based on the order as well.
  */
 static void	copy_pixel(t_data_addr *src, t_data_addr *dst)
