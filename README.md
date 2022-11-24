@@ -136,4 +136,4 @@ You can check the maps in the `maps` folder to see some examples.
 
 Have fun! I hope you enjoy playing the game!
 
-By *Ricky Wong (wricky-t on intra)*, on 24th Nov 2022.
+By *Ricky Wong (`wricky-t` on intra)*, on 24th Nov 2022.
