@@ -6,7 +6,7 @@
 /*   By: wricky-t <wricky-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 21:56:37 by wricky-t          #+#    #+#             */
-/*   Updated: 2022/11/23 12:00:24 by wricky-t         ###   ########.fr       */
+/*   Updated: 2022/11/24 14:19:07 by wricky-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static int	is_blk(char *buffer, int pixel)
 /**
  * @brief Copy the pixel from destination to src. Basically to replace the
  * 	      pixel of src at [position] to the pixel of dst at [position].
- * 		  Since color is store in this way, RGBA / BGRA, we have to copy
+ * 		  Since color is store in this way, RGBA / ABGR, we have to copy
  * 		  based on the order as well.
  */
 static void	copy_pixel(t_data_addr *src, t_data_addr *dst)
